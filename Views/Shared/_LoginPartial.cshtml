@@ -24,6 +24,13 @@
                 <a class="nav-link active" asp-area="RecruiterJ" asp-controller="Recruiter" asp-action="RecruiterDashboard">Hello @User.Identity?.Name!</a>
             </li>
         }
+
+        else if (roles.Contains(SD.Approver))
+        {
+            <li class="nav-item">
+                <a class="nav-link active" asp-area="ApproverJ" asp-controller="Approver" asp-action="ApproverDashboard">Hello @User.Identity?.Name!</a>
+            </li>
+        }
         // Add additional else if statements for other user roles
 
         <li class="nav-item">

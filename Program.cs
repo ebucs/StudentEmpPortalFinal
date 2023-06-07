@@ -62,7 +62,8 @@ app.UseEndpoints(endpoints =>
     endpoints.MapRazorPages();
 });
 
-app.Run();
-
 // Seed the data
 await app.SeedDataAsync();
+
+app.Run();
+
