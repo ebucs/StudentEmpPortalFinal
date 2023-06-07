@@ -1,0 +1,102 @@
+﻿@model StudentEmploymentPortal.ViewModels.ManageStudentProfileViewModel
+@using System.ComponentModel.DataAnnotations
+@using StudentEmploymentPortal.Areas.studentj.Models
+@using StudentEmploymentPortal.Utility
+
+@{
+    ViewData["Title"] = "Manage Profile";
+}
+
+<h1 class="pt-4">@ViewData["Title"]</h1>
+
+<div class="row pt-4">
+    <div class="col-md-7">
+        <form id="profileForm" class="row" method="post" asp-controller="Student" asp-action="SaveProfile">
+            <hr />
+            <div class="form-floating py-2 col-12">
+                <label asp-for="Email" class="col-form-label-sm"></label>
+                <input asp-for="Email" class="form-control" aria-required="true" readonly />
+            </div>
+            <!-- Display fields as text for non-editable values -->
+            <div class="form-floating py-2 col-6">
+                <label asp-for="FirstName" class="col-form-label-sm"></label>
+                <input asp-for="FirstName" class="form-control" aria-required="true" readonly />
+            </div>
+            <div class="form-floating py-2 col-6">
+                <label asp-for="Surname" class="col-form-label-sm"></label>
+                <input asp-for="Surname" class="form-control" aria-required="true" readonly />
+            </div>
+            <div class="form-floating py-2 col-6">
+                <label asp-for="Address" class="col-form-label-sm"></label>
+                <input asp-for="Address" class="form-control" aria-required="true" />
+            </div>
+            <div class="form-floating py-2 col-6">
+                <label asp-for="PhoneNumber" class="col-form-label-sm"></label>
+                <input asp-for="PhoneNumber" class="form-control" aria-required="true" />
+            </div>
+            <div class="form-floating py-2 col-6">
+                <label asp-for="Telephone" class="col-form-label-sm"></label>
+                <input asp-for="Telephone" class="form-control" aria-required="true" />
+            </div>
+            <div class="form-floating py-2 col-6">
+                @if (string.IsNullOrEmpty(Model.IDNumber))
+                {
+                    <label asp-for="IDNumber" class="col-form-label-sm"></label>
+                    <input asp-for="IDNumber" class="form-control" aria-required="true" />
+                }
+                else
+                {
+                    <label asp-for="IDNumber" class="col-form-label-sm"></label>
+                    <input asp-for="IDNumber" class="form-control" aria-required="true" readonly />
+                }
+            </div>
+            <!-- Add dropdowns for all selectable fields -->
+            <div class="form-floating py-2 col-6">
+                <label asp-for="SelectedRace" class="col-form-label-sm"></label>
+                <select asp-for="SelectedRace" asp-items="Model.RaceOptions" class="form-select"></select>
+            </div>
+            <div class="form-floating py-2 col-6">
+                <label asp-for="SelectedNationality" class="col-form-label-sm"></label>
+                <select asp-for="SelectedNationality" asp-items="Model.NationalityOptions" class="form-select"></select>
+            </div>
+            <div class="form-floating py-2 col-6">
+                <label asp-for="SelectedCurrentYearOfStudy" class="col-form-label-sm"></label>
+                <select asp-for="SelectedCurrentYearOfStudy" asp-items="Model.CurrentYearOfStudyOptions" class="form-select"></select>
+            </div>
+            <div class="form-floating py-2 col-6">
+                <label asp-for="SelectedFaculty" class="col-form-label-sm"></label>
+                <select asp-for="SelectedFaculty" asp-items="Model.FacultyOptions" class="form-select" id="facultyDropdown"></select>
+            </div>
+            <div class="form-floating py-2 col-6">
+                <label asp-for="SelectedDepartment" class="col-form-label-sm"></label>
+                <select asp-for="SelectedDepartment" asp-items="Model.DepartmentOptions" class="form-select" id="departmentDropdown"></select>
+                <span asp-validation-for="SelectedDepartment" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-6">
+                <label asp-for="SelectedDriversLicense" class="col-form-label-sm"></label>
+                <select asp-for="SelectedDriversLicense" asp-items="Model.DriversLicenseOptions" class="form-select"></select>
+            </div>
+            <div class="form-floating py-2 col-6">
+                <label asp-for="SelectedGender" class="col-form-label-sm"></label>
+                <select asp-for="SelectedGender" asp-items="Model.GenderOptions" class="form-select"></select>
+            </div>
+            <div class="form-floating py-2 col-12">
+                <label asp-for="CareerObjective" class="col-form-label-sm"></label>
+                <textarea asp-for="CareerObjective" class="form-control"></textarea>
+            </div>
+            <div class="form-floating py-2 col-12">
+                <label asp-for="Skills" class="col-form-label-sm"></label>
+                <textarea asp-for="Skills" class="form-control"></textarea>
+            </div>
+            <div class="form-floating py-2 col-12">
+                <label asp-for="Achievements" class="col-form-label-sm"></label>
+                <textarea asp-for="Achievements" class="form-control"></textarea>
+            </div>
+            <div class="form-floating py-2 col-12">
+                <label asp-for="Interests" class="col-form-label-sm"></label>
+                <textarea asp-for="Interests" class="form-control"></textarea>
+            </div>
+            <button id="profileSubmit" type="submit" class="w-100 btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>

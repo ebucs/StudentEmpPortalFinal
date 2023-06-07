@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "StudentDashboard";
+}
+
+<h1 class="pt-3">Welcome @ViewData["FirstName"]</h1>
+
+<div class="row pt-4">
+    <div class="col-md-12 text-center">
+        <div class="btn-group" role="group">
+            <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="StudentJ" asp-controller="Student" asp-action="ManageProfile">Manage Profile</a>
+            <a href="#" class="btn btn-primary custom-btn mx-2 mb-2 rounded">Search and Apply</a>
+            <a href="#" class="btn btn-primary custom-btn mx-2 mb-2 rounded">Applications History</a>
+        </div>
+    </div>
+</div>
+
+<div class="pt-4">
+    <h3>Links</h3>
+    <div>
+        <!-- Add your PDF document links here -->
+        <!-- Example: <a href="link-to-pdf" target="_blank">Document Name</a> -->
+    </div>
+</div>

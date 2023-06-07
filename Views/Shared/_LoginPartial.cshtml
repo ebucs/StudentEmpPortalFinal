@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using StudentEmploymentPortal.Areas.Identity
+@using StudentEmploymentPortal.Areas.studentj
+@using StudentEmploymentPortal.Utility
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var user = await UserManager.GetUserAsync(User);
+        var roles = await UserManager.GetRolesAsync(user);
+
+        if (roles.Contains(SD.Student))
+        {
+            <li class="nav-item">
+                <a class="nav-link active" asp-area="StudentJ" asp-controller="Student" asp-action="StudentDashboard">Hello @User.Identity?.Name!</a>
+            </li>
+        }
+        
+        else if (roles.Contains(SD.Recruiter))
+        {
+            <li class="nav-item">
+                <a class="nav-link active" asp-area="RecruiterJ" asp-controller="Recruiter" asp-action="RecruiterDashboard">Hello @User.Identity?.Name!</a>
+            </li>
+        }
+        // Add additional else if statements for other user roles
+
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link active" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

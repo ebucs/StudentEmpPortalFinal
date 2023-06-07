@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "RecruiterDashboard";
+    var ApprovalStatus = ViewData["ApprovalStatus"];
+}
+
+<h1 class="pt-3">Welcome @ViewData["FirstName"]</h1>
+
+
+@if (ApprovalStatus != null && !(bool)ApprovalStatus)
+{
+    <h4>Your registration is currently waiting for approval</h4>
+}
+ else
+{
+    <div class="row pt-4">
+        <div class="col-md-12 text-center">
+            <div class="btn-group" role="group">
+                <a href="#" class="btn btn-primary custom-btn mx-2 mb-2 rounded">Manage Post</a>
+                <a href="#" class="btn btn-primary custom-btn mx-2 mb-2 rounded">Manage Profile</a>
+            </div>
+        </div>          
+    </div>
+}
