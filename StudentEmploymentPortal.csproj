@@ -34,6 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\approverj\Data\" />
+    <Folder Include="Areas\approverj\Models\" />
     <Folder Include="Areas\recruiterj\Data\" />
     <Folder Include="Areas\studentj\Data\" />
   </ItemGroup>

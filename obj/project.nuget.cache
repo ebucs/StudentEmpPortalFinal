@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ig+w3neYfZWWO+QLtVjFHFUqcFfywohSoqEYCAjmaz1TkHNx7qftO3M75QNYpfVQSPwsxkOU7sphoOkmRBEKpA==",
+  "dgSpecHash": "GlEXnXEThSxDkXcskxFfIUxlK++VggSMR/zFHC2mFagJQPItybDJ5raq/9mu09xCoUxZc2xCDFH6bjHw3kAgOg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmploymentPortal\\StudentEmploymentPortal.csproj",
+  "projectFilePath": "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\A0080350\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\A0080350\\.nuget\\packages\\jquery\\1.6.3\\jquery.1.6.3.nupkg.sha512",

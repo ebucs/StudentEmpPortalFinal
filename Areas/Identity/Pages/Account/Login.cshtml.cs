@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using StudentEmploymentPortal.Utility;
 using Microsoft.EntityFrameworkCore;
-using StudentEmploymentPortal.Data;
+using StudentEmploymentPortal;
 
 namespace StudentEmploymentPortal.Areas.Identity.Pages.Account
 {
@@ -132,6 +132,10 @@ namespace StudentEmploymentPortal.Areas.Identity.Pages.Account
                     else if (await _userManager.IsInRoleAsync(user, SD.Recruiter))
                     {
                         return RedirectToAction("RecruiterDashboard", "Recruiter", new { area = "RecruiterJ" });
+                    }
+                    else if(await _userManager.IsInRoleAsync(user, SD.Approver))
+                    {
+                        return RedirectToAction("ApproverDashboard", "Approver", new { area = "ApproverJ" });
                     }
                     else
                     {

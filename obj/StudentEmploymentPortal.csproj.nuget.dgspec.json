@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmploymentPortal\\StudentEmploymentPortal.csproj": {}
+    "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmploymentPortal\\StudentEmploymentPortal.csproj": {
+    "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmploymentPortal\\StudentEmploymentPortal.csproj",
+        "projectUniqueName": "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
         "projectName": "StudentEmploymentPortal",
-        "projectPath": "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmploymentPortal\\StudentEmploymentPortal.csproj",
+        "projectPath": "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
         "packagesPath": "C:\\Users\\A0080350\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmploymentPortal\\obj\\",
+        "outputPath": "C:\\Users\\A0080350\\Downloads\\Student Employment Portal\\StudentEmpPortalFinal\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
