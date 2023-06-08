@@ -37,11 +37,11 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
             return View("ApproverDashboard");
         }
 
-        public async Task<IActionResult> ManageRecruiterRegistration()
-        {
-            var user = _userManager.GetUserAsync(User);
+        //public async Task<IActionResult> ManageRecruiterRegistration()
+        //{
+        //    var user = _userManager.GetUserAsync(User);
 
-        }
+        //}
     }
 
 }
