@@ -1,0 +1,93 @@
+﻿@model List<StudentEmploymentPortal.Areas.recruiterj.Models.Recruiter>
+@using StudentEmploymentPortal.Areas.Identity
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Manage Recruiter Registration";
+}
+
+<h1 class="mb-4 mt-3">Manage Recruiter Registration</h1>
+
+<form method="post" action="">
+    <div class="input-group mb-3">
+        <label class="sr-only" for="searchInput">Search</label>
+        <input class="form-control" type="text" name="search" id="searchInput" placeholder="Search">
+    </div>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-default">
+            <thead>
+                <tr class="table-primary">
+                    <th>First Name</th>
+                    <th>Registered Name</th>
+                    <th>Trading Name</th>
+                    <th>Registration Number</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var recruiter in Model)
+                {
+                    var user = await ViewBag.UserManager.FindByIdAsync(recruiter.RecruiterId);
+
+                    <tr onclick="openPartialView('@Url.Action("PartialRecruiterDetails", "Approver", new { area = "ApproverJ", id = recruiter.RecruiterId })')">
+                        <td>@user.FirstName</td>
+                        <td>@recruiter.RegisteredName</td>
+                        <td>@recruiter.TradingName</td>
+                        <td>@recruiter.RegistrationNumber</td>
+                        <td>@recruiter.OutcomeStatus</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>No pending registrations found.</p>
+}
+
+<div class="partial-view-overlay"></div> <!-- Overlay div to cover the page -->
+
+<div class="partial-view-container"></div> <!-- Container for the partial view -->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#searchInput').on('input', function () {
+                var searchText = $(this).val().toLowerCase();
+                $('tbody tr').each(function () {
+                    var firstName = $(this).find('td:first-child').text().toLowerCase();
+                    var registeredName = $(this).find('td:nth-child(2)').text().toLowerCase();
+                    var tradingName = $(this).find('td:nth-child(3)').text().toLowerCase();
+                    var regNumber = $(this).find('td:nth-child(4)').text().toLowerCase();
+
+                    if (firstName.includes(searchText) ||
+                        registeredName.includes(searchText) ||
+                        tradingName.includes(searchText) ||
+                        regNumber.includes(searchText)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+
+        function openPartialView(url) {
+            $(".partial-view-container").empty(); // Clear the container before loading the partial view
+            $(".partial-view-container").load(url, function () {
+                $(".partial-view-overlay").fadeIn();
+                $(".partial-view-container").fadeIn();
+            });
+        }
+
+
+        function closePartialView() {
+            $(".partial-view-container").fadeOut();
+            $(".partial-view-overlay").fadeOut();
+        }
+    </script>
+}

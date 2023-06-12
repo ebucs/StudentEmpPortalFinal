@@ -1,4 +1,9 @@
-﻿using StudentEmploymentPortal.Areas.recruiterj.Models;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using StudentEmploymentPortal.Areas.recruiterj.Models;
+using StudentEmploymentPortal.Areas.studentj.Models;
+
+using StudentEmploymentPortal.Utility;
+
 namespace StudentEmploymentPortal.ViewModels.RecruiterViewModels
 {
     public class CompleteRegisterViewModel
@@ -20,6 +25,24 @@ namespace StudentEmploymentPortal.ViewModels.RecruiterViewModels
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
-       
+
+        // Additional properties for the approver
+        public string ApproverNote { get; set; }
+        public Recruiter.outcomeStatus Outcome { get; set; }
+
+        public IEnumerable<SelectListItem> StatusOptions => GetEnumSelectList<Recruiter.outcomeStatus>();
+
+        // Helper method to populate dropdown options from enum values
+        private IEnumerable<SelectListItem> GetEnumSelectList<T>() where T : struct, Enum
+        {
+            return Enum.GetValues(typeof(T))
+                .Cast<T>()
+                .Select(e => new SelectListItem
+                {
+                    Value = e.ToString(),
+                    Text = e.GetDisplayName()
+                });
+        }
+
     }
 }

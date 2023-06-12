@@ -35,6 +35,10 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Models
 
         public bool Approved { get; set; }
 
+        public string ApproversNote { get; set; }
+
+        public outcomeStatus OutcomeStatus { get; set; }
+
         // Navigation property
         public virtual ApplicationUser User { get; set; }
 
@@ -51,6 +55,14 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Models
             RegisteredAddress = string.Empty;
             ConfirmDetails = false;
             Approved = false;
+            ApproversNote = string.Empty;
+        }
+
+        public enum outcomeStatus
+        {
+            Pending,
+            Approved,
+            Rejected
         }
     }
 

@@ -1,0 +1,127 @@
+﻿@model StudentEmploymentPortal.ViewModels.RecruiterViewModels.CompleteRegisterViewModel
+
+@{
+    ViewData["Title"] = "Recruiter Details";
+}
+
+<style>
+    /.partial-view-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px); /* Add blur effect */
+        z-index: 9999;
+        display: none;
+        outline: none; /* Remove the outline */
+    }
+
+    .partial-view-container .container {
+        position: absolute; /* Change to absolute position */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 80%;
+        max-width: 100%; /* Allow the container to shrink if needed */
+        max-height: 100%; /* Allow the container to shrink if needed */
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 10000;
+        display: none;
+    }
+
+
+        .partial-view-container h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .partial-view-container .recruiter-details {
+            margin-bottom: 20px;
+        }
+
+        .partial-view-container .input-fields {
+            margin-top: 20px;
+        }
+
+        .partial-view-container .close-button {
+            margin-top: 10px;
+        }
+
+    /* Additional styles */
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+        .button-container button {
+            margin-left: 10px;
+        }
+</style>
+
+<!-- Add necessary CSS and JavaScript for styling and functionality -->
+
+<div class="partial-view-overlay"></div> <!-- Overlay div to cover the page -->
+
+<div class="partial-view-container container">
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="recruiter-details">
+        <p><strong>Title:</strong> @Model.Title</p>
+        <p><strong>First Name:</strong> @Model.FirstName</p>
+        <p><strong>Surname:</strong> @Model.Surname</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+        <p><strong>Telephone:</strong> @Model.Telephone</p>
+        <p><strong>Registered Address:</strong> @Model.RegisteredAddress</p>
+        <p><strong>Job Title:</strong> @Model.JobTitle</p>
+        <p><strong>Registration Number:</strong> @Model.RegistrationNumber</p>
+        <p><strong>Registered Name:</strong> @Model.RegisteredName</p>
+        <p><strong>Trading Name:</strong> @Model.TradingName</p>
+        <p><strong>Business Type:</strong> @Model.BusinessType</p>
+        <!-- Add any additional fields here -->
+    </div>
+
+    <!-- Display the approver's note and outcome -->
+    @if (User.IsInRole("Approver"))
+    {
+        <div class="approver-details">
+            <p><strong>Approver's Note:</strong> @Model.ApproverNote</p>
+            <p><strong>Outcome:</strong> @Model.Outcome</p>
+        </div>
+    }
+
+    <!-- Add input fields for adding a note and changing the outcome -->
+    <div class="input-fields">
+        <div class="form-floating py-2">
+            <label asp-for="ApproverNote" class="form-label">Add Note</label>
+            <textarea asp-for="ApproverNote" class="form-control"></textarea>
+        </div>
+
+        <div class="form-floating py-2 col-6">
+            <label asp-for="Outcome" class="form-label">Nationality</label>
+            <select asp-for="Outcome" asp-items="Model.StatusOptions" class="form-select"></select>
+        </div>
+
+        <!-- Add a submit button to save the changes -->
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button class="btn btn-primary close-button" onclick="closePartialView()">Close</button>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    // JavaScript function to close the partial view
+    function closePartialView() {
+        $(".partial-view-container").fadeOut();
+        $(".partial-view-overlay").fadeOut();
+    }
+</script>

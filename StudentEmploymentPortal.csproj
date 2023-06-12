@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\approverj\Data\**" />
+    <Compile Remove="Areas\approverj\Models\**" />
+    <Content Remove="Areas\approverj\Data\**" />
+    <Content Remove="Areas\approverj\Models\**" />
+    <EmbeddedResource Remove="Areas\approverj\Data\**" />
+    <EmbeddedResource Remove="Areas\approverj\Models\**" />
+    <None Remove="Areas\approverj\Data\**" />
+    <None Remove="Areas\approverj\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\css\font-awesome\all.min.css" />
     <Content Remove="wwwroot\js\font-awesome\all.min.js" />
   </ItemGroup>
@@ -34,8 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\approverj\Data\" />
-    <Folder Include="Areas\approverj\Models\" />
     <Folder Include="Areas\recruiterj\Data\" />
     <Folder Include="Areas\studentj\Data\" />
   </ItemGroup>

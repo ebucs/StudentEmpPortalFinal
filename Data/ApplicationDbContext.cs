@@ -54,6 +54,10 @@ namespace StudentEmploymentPortal.Data
 
 
             // Add additional enums here...
+
+            modelBuilder.Entity<Recruiter>()
+                .Property(s => s.OutcomeStatus)
+                .HasConversion<string>();
         }
     }
 }

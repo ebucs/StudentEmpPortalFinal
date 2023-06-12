@@ -7,6 +7,7 @@ using StudentEmploymentPortal.Data;
 using StudentEmploymentPortal.Utility;
 using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
 using System.Net;
+using static StudentEmploymentPortal.Areas.recruiterj.Models.Recruiter;
 
 namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
 {
@@ -60,7 +61,7 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
                     var viewModel = new CompleteRegisterViewModel
                     {
                         // Editable fields
-                      
+
                         Title = recruiter.Title,
                         JobTitle = recruiter.JobTitle,
                         RegistrationNumber = recruiter.RegistrationNumber,
@@ -77,7 +78,9 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
                         FirstName = user.FirstName,
                         Surname = user.Surname,
                         Email = user.Email,
-                     };
+                        ApproverNote = string.Empty,
+                        Outcome = recruiter.OutcomeStatus
+                    };
 
                     return View(viewModel);
                 }
@@ -103,6 +106,8 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
                         FirstName = user.FirstName,
                         Surname = user.Surname,
                         Email = user.Email,
+                        ApproverNote = string.Empty,
+                        Outcome = default
                     };
 
                     return View(viewModel);

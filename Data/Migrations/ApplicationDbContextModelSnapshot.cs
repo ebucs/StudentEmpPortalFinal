@@ -242,6 +242,10 @@ namespace StudentEmploymentPortal.Migrations
                     b.Property<bool>("Approved")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ApproversNote")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("BusinessType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -250,6 +254,10 @@ namespace StudentEmploymentPortal.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OutcomeStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
