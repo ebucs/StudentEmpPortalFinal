@@ -45,7 +45,7 @@ namespace StudentEmploymentPortal.Controllers
 
             }
 
-            return View("CreateJobPost");
+            return View();
         }
 
         [HttpPost]
@@ -54,6 +54,9 @@ namespace StudentEmploymentPortal.Controllers
             if (ModelState.IsValid)
             {
                 // Add the jobPost to the context
+                jobPost.ApprovalStatus = JobPost.EnumApprovalStatus.Pending;
+                jobPost.StartDate = jobPost.StartDate.Date;
+                
                 _context.JobPost.Add(jobPost);
 
                 // Save the changes

@@ -60,8 +60,8 @@ namespace StudentEmploymentPortal.Data
                .HasConversion<string>();
 
             modelBuilder.Entity<JobPost>()
-                .Property(s => s.YearsOfStudy)
-                .HasConversion<string>();
+    .Property(s => s.YearsOfStudy)
+    .HasColumnType("varchar(255)");
 
             modelBuilder.Entity<JobPost>()
                 .Property(s => s.Faculty)

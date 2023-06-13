@@ -1,4 +1,4 @@
-﻿@using static StudentEmploymentPortal.Models.JobPost
+﻿﻿@using static StudentEmploymentPortal.Models.JobPost
 @using StudentEmploymentPortal.Utility
 @model StudentEmploymentPortal.Models.JobPost
 
@@ -29,13 +29,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="Faculty" class="control-label"></label>
-                <input asp-for="Faculty" class="form-control" />
-                <span asp-validation-for="Faculty" class="text-danger"></span>
+                <select class="form-control" id="Faculty" name="Faculty">
+                    <option disabled selected>select faculty</option>
+                    @foreach (var Faculty in Enum.GetValues(typeof(EnumFaculty)))
+                    {
+                        <option value="@Faculty">@Faculty</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Department" class="control-label"></label>
-                <input asp-for="Department" class="form-control" />
-                <span asp-validation-for="Department" class="text-danger"></span>
+                <select class="form-control" id="Department" name="Department">
+                    <option disabled selected>select department</option>
+                    @foreach (var Department in Enum.GetValues(typeof(EnumDepartment)))
+                    {
+                        <option value="@Department">@Department</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="JobTitle" class="control-label">Job Title</label>
@@ -67,16 +77,16 @@
                     }
                 </select>
             </div>
-                <div class="form-group">
+            <div class="form-group">
                 <label asp-for="PartTimeNumberOfHours" class="control-label">Part time number of hours</label>
                 <select class="form-control" id="PartTimeNumberOfHours" name="PartTimeNumberOfHours">
-                        <option disabled selected>select number of hours</option>
+                    <option disabled selected>select number of hours</option>
                     @foreach (var PartTimeNumberOfHours in Enum.GetValues(typeof(EnumPartTimeNumberOfHours)))
-                        {
+                    {
                         <option value="@PartTimeNumberOfHours">@PartTimeNumberOfHours</option>
-                        }
-                    </select>
-                </div>
+                    }
+                </select>
+            </div>
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label">Start Date</label>
                 <input asp-for="StartDate" type="date" class="form-control" />
@@ -93,14 +103,14 @@
                 <span asp-validation-for="HourlyRate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="YearOfStudy">Years Of Study</label>
-                <select class="form-control" id="YearOfStudy" name="YearOfStudy">
-                    <option disabled selected>select years of study</option>
-                    @foreach (var YearsOfStudy in Enum.GetValues(typeof(EnumYearsOfStudy)))
-                    {
-                        <option value="@YearsOfStudy">@YearsOfStudy</option>
-                    }
-                </select>
+                <label>Years of Study</label>
+                @foreach (var year in Enum.GetValues(typeof(EnumYearsOfStudy)))
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="@year" name="YearsOfStudy" value="@year">
+                        <label class="form-check-label" for="@year">@year</label>
+                    </div>
+                }
             </div>
             <div class="form-group">
                 <label for="nationality">Nationality</label>

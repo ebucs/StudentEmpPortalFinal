@@ -352,7 +352,7 @@ namespace StudentEmploymentPortal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ApprovalStatus")
+                    b.Property<int>("ApprovalStatus")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ClosingDate")
@@ -427,7 +427,7 @@ namespace StudentEmploymentPortal.Migrations
 
                     b.Property<string>("YearsOfStudy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("JobPostId");
 

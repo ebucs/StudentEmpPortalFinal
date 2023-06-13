@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using StudentEmploymentPortal.Areas.studentj.Models;
 using StudentEmploymentPortal.Utility;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
 
 namespace StudentEmploymentPortal.Models
 {
@@ -18,9 +22,9 @@ namespace StudentEmploymentPortal.Models
         [Required(ErrorMessage = "InternalOrExternal is required.")]
         public EnumInternalOrExternal InternalOrExternal { get; set; }
         [Required(ErrorMessage = "Faculty field is required.")]
-        public String Faculty { get; set; }
+        public EnumFaculty Faculty { get; set; }
         [Required(ErrorMessage = "Department field is required.")]
-        public String Department { get; set; }
+        public EnumDepartment Department { get; set; }
         [Required(ErrorMessage = "JobTitle field is required.")]
         public String JobTitle { get; set; }
         [Required(ErrorMessage = "Location field is required.")]
@@ -40,7 +44,19 @@ namespace StudentEmploymentPortal.Models
         [Required(ErrorMessage = "Hourly Rate field is required.")]
         public String HourlyRate { get; set; }
         [Required(ErrorMessage = "Years of Study field is required.")]
-        public EnumYearsOfStudy YearsOfStudy { get; set; }
+        [Column(TypeName = "varchar(255)")]
+        public string YearsOfStudy { get; set; }
+        [NotMapped]
+        public List<EnumYearsOfStudy> YearsOfStudyList
+        {
+            get => YearsOfStudy.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                              .Select(s => Enum.Parse<EnumYearsOfStudy>(s))
+                              .ToList();
+            set => YearsOfStudy = string.Join(",", value.Select(y => y.ToString()));
+        }
+        // Other code
+
+
         [Required(ErrorMessage = "Nationality field is required.")]
         public EnumNationality Nationality { get; set; }
         [Required(ErrorMessage = "Minimum Requirements field is required.")]
@@ -55,14 +71,15 @@ namespace StudentEmploymentPortal.Models
         public String Email { get; set; }
         [Required(ErrorMessage = "Contact No field is required.")]
         public String ContactNo { get; set; }
-        public EnumApprovalStatus? ApprovalStatus { get; set; }
+        public EnumApprovalStatus ApprovalStatus { get; set; }
+
 
         public JobPost()
         {
-            RecruiterId= string.Empty;
+            RecruiterId = string.Empty;
             InternalOrExternal = EnumInternalOrExternal.Internal;
-            Faculty = string.Empty;
-            Department = string.Empty;
+            Faculty = EnumFaculty.Science;
+            Department = EnumDepartment.ComputerScience;
             JobTitle = string.Empty;
             Location = string.Empty;
             JobDecription = string.Empty;
@@ -72,7 +89,7 @@ namespace StudentEmploymentPortal.Models
             StartDate = DateTime.Now.Date;
             EndDate = DateTime.Now.Date;
             HourlyRate = string.Empty;
-            YearsOfStudy = EnumYearsOfStudy.FirstYear;
+            YearsOfStudy = string.Empty;
             Nationality = EnumNationality.SouthAfricanCitizens;
             MinRequirements = string.Empty;
             ApplicationInstruction = string.Empty;
@@ -80,7 +97,7 @@ namespace StudentEmploymentPortal.Models
             ContactPerson = string.Empty;
             Email = string.Empty;
             ContactNo = string.Empty;
-           
+
         }
 
         // Enums
@@ -125,7 +142,7 @@ namespace StudentEmploymentPortal.Models
 
         public enum EnumNationality
         {
-           
+
             [Display(Name = "South African citizens")]
             SouthAfricanCitizens,
 
@@ -158,6 +175,111 @@ namespace StudentEmploymentPortal.Models
 
             [Display(Name = "Postdoc")]
             Postdoc
+        }
+
+        public enum EnumFaculty
+        {
+            [Display(Name = "Commerce, Law and Management")]
+            CommerceLawAndManagement,
+
+            [Display(Name = "Engineering and the Built Environment")]
+            EngineeringAndBuiltEnvironment,
+
+            [Display(Name = "Health Sciences")]
+            HealthSciences,
+
+            [Display(Name = "Humanities")]
+            Humanities,
+
+            [Display(Name = "Science")]
+            Science
+        }
+
+        public enum EnumDepartment
+        {
+            // Commerce, Law and Management
+            [Display(Name = "Accounting")]
+            Accounting,
+
+            [Display(Name = "Economic and Business Sciences")]
+            EconomicAndBusinessSciences,
+
+            [Display(Name = "Finance and Investment Management")]
+            FinanceAndInvestmentManagement,
+
+            [Display(Name = "Industrial Psychology and People Management")]
+            IndustrialPsychologyAndPeopleManagement,
+
+            [Display(Name = "Law")]
+            Law,
+
+            // Engineering and the Built Environment
+            [Display(Name = "Chemical Engineering")]
+            ChemicalEngineering,
+
+            [Display(Name = "Civil and Environmental Engineering")]
+            CivilAndEnvironmentalEngineering,
+
+            [Display(Name = "Electrical and Information Engineering")]
+            ElectricalAndInformationEngineering,
+
+            [Display(Name = "Mechanical, Industrial and Aeronautical Engineering")]
+            MechanicalIndustrialAndAeronauticalEngineering,
+
+            // Health Sciences
+            [Display(Name = "Anatomy")]
+            Anatomy,
+
+            [Display(Name = "Dentistry")]
+            Dentistry,
+
+            [Display(Name = "Medicine")]
+            Medicine,
+
+            [Display(Name = "Pharmacy and Pharmacology")]
+            PharmacyAndPharmacology,
+
+            // Humanities
+            [Display(Name = "Archaeology and Anthropology")]
+            ArchaeologyAndAnthropology,
+
+            [Display(Name = "English")]
+            English,
+
+            [Display(Name = "Geography, Archaeology and Environmental Studies")]
+            GeographyArchaeologyAndEnvironmentalStudies,
+
+            [Display(Name = "Political Studies and International Relations")]
+            PoliticalStudiesAndInternationalRelations,
+
+            // Science
+            [Display(Name = "Chemistry")]
+            Chemistry,
+
+            [Display(Name = "Mathematics")]
+            Mathematics,
+
+            [Display(Name = "Physics")]
+            Physics,
+
+            [Display(Name = "Zoology and Entomology")]
+            ZoologyAndEntomology,
+
+            // Additional Departments
+            [Display(Name = "Computer Science")]
+            ComputerScience,
+
+            [Display(Name = "Geosciences")]
+            Geosciences,
+
+            [Display(Name = "Human Physiology")]
+            HumanPhysiology,
+
+            [Display(Name = "Molecular Medicine and Haematology")]
+            MolecularMedicineAndHaematology,
+
+            [Display(Name = "School of Accountancy")]
+            SchoolOfAccountancy
         }
 
         private IEnumerable<SelectListItem> GetEnumSelectList<T>() where T : struct, Enum
