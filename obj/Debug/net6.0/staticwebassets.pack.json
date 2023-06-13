@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\css\\Toast\\toastr.css"
     },
     {
+      "Id": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\css\\partialView.css",
+      "PackagePath": "staticwebassets\\css\\partialView.css"
+    },
+    {
       "Id": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -35,6 +39,10 @@
     {
       "Id": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\js\\Toast\\toastr.js",
       "PackagePath": "staticwebassets\\js\\Toast\\toastr.js"
+    },
+    {
+      "Id": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\js\\partialView.js",
+      "PackagePath": "staticwebassets\\js\\partialView.js"
     },
     {
       "Id": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\js\\site.js",

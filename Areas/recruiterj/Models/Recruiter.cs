@@ -35,7 +35,7 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Models
 
         public bool Approved { get; set; }
 
-        public string ApproversNote { get; set; }
+        public string? ApproversNote { get; set; }
 
         public outcomeStatus OutcomeStatus { get; set; }
 
@@ -56,6 +56,7 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Models
             ConfirmDetails = false;
             Approved = false;
             ApproversNote = string.Empty;
+            OutcomeStatus = outcomeStatus.Pending;
         }
 
         public enum outcomeStatus

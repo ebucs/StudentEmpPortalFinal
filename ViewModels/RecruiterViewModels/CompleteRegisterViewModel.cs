@@ -27,7 +27,7 @@ namespace StudentEmploymentPortal.ViewModels.RecruiterViewModels
         public string Email { get; set; }
 
         // Additional properties for the approver
-        public string ApproverNote { get; set; }
+        public string? ApproverNote { get; set; }
         public Recruiter.outcomeStatus Outcome { get; set; }
 
         public IEnumerable<SelectListItem> StatusOptions => GetEnumSelectList<Recruiter.outcomeStatus>();

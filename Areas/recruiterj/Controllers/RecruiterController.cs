@@ -122,6 +122,7 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveRecruiter(CompleteRegisterViewModel viewModel)
         {
+
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -164,7 +165,9 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
                             BusinessType = viewModel.BusinessType,
                             RegisteredAddress = viewModel.RegisteredAddress,
                             ConfirmDetails = viewModel.ConfirmDetails,
-                            Approved = viewModel.Approved
+                            Approved = viewModel.Approved,
+                            ApproversNote = viewModel.ApproverNote,
+                            OutcomeStatus = viewModel.Outcome
                         };
 
                         // Add the student to the context

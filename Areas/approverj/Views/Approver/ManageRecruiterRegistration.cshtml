@@ -52,42 +52,4 @@ else
 
 <div class="partial-view-overlay"></div> <!-- Overlay div to cover the page -->
 
-<div class="partial-view-container"></div> <!-- Container for the partial view -->
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $('#searchInput').on('input', function () {
-                var searchText = $(this).val().toLowerCase();
-                $('tbody tr').each(function () {
-                    var firstName = $(this).find('td:first-child').text().toLowerCase();
-                    var registeredName = $(this).find('td:nth-child(2)').text().toLowerCase();
-                    var tradingName = $(this).find('td:nth-child(3)').text().toLowerCase();
-                    var regNumber = $(this).find('td:nth-child(4)').text().toLowerCase();
-
-                    if (firstName.includes(searchText) ||
-                        registeredName.includes(searchText) ||
-                        tradingName.includes(searchText) ||
-                        regNumber.includes(searchText)) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                });
-            });
-        });
-
-        function openPartialView(url) {
-            $(".partial-view-container").empty(); // Clear the container before loading the partial view
-            $(".partial-view-container").load(url, function () {
-                $(".partial-view-overlay").fadeIn();
-                $(".partial-view-container").fadeIn();
-            });
-        }
-
-
-        function closePartialView() {
-            $(".partial-view-container").fadeOut();
-            $(".partial-view-overlay").fadeOut();
-        }
-    </script>
-}
+<div class="partial-view-container container pt-4"></div>

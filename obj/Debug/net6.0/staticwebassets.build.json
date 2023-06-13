@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "X4RF6TO4NeG/BEeXBOjLjbdpYc8+ekFOKZt8dKO56Ys=",
+  "Hash": "nK3rrTGwiE3tmc7Bz193cBwk17ORAxrHeAzOabT2DO0=",
   "Source": "StudentEmploymentPortal",
   "BasePath": "_content/StudentEmploymentPortal",
   "Mode": "Default",
@@ -1105,6 +1105,23 @@
       "OriginalItemSpec": "wwwroot\\css\\AppTheme\\darkly.css"
     },
     {
+      "Identity": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\css\\partialView.css",
+      "SourceId": "StudentEmploymentPortal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\",
+      "BasePath": "_content/StudentEmploymentPortal",
+      "RelativePath": "css/partialView.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\partialView.css"
+    },
+    {
       "Identity": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\css\\site.css",
       "SourceId": "StudentEmploymentPortal",
       "SourceType": "Discovered",
@@ -1188,6 +1205,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\js\\partialView.js",
+      "SourceId": "StudentEmploymentPortal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\",
+      "BasePath": "_content/StudentEmploymentPortal",
+      "RelativePath": "js/partialView.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\partialView.js"
     },
     {
       "Identity": "C:\\Users\\A0080350\\Desktop\\StudentEmpPortalFinal\\wwwroot\\js\\site.js",

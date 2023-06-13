@@ -243,7 +243,6 @@ namespace StudentEmploymentPortal.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ApproversNote")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BusinessType")

@@ -103,6 +103,43 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
             return PartialView(viewModel);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> PartialRecruiterDetails(string id, CompleteRegisterViewModel viewModel)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // Retrieve the recruiter based on the id
+            var recruiter = await _context.Recruiter.FirstOrDefaultAsync(r => r.RecruiterId == id);
+
+            if (recruiter == null)
+            {
+                return NotFound();
+            }
+
+            // Update the recruiter's note and outcome based on the submitted data
+            recruiter.ApproversNote = viewModel.ApproverNote;
+            recruiter.OutcomeStatus = viewModel.Outcome;
+
+            // Update the Approved property based on the Outcome
+            if (viewModel.Outcome.ToString() == "Approved")
+            {
+                recruiter.Approved = true;
+            }
+            else
+            {
+                recruiter.Approved = false;
+            }
+
+            // Save the changes to the database
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ManageRecruiterRegistration");
+        }
+
+
 
 
     }
