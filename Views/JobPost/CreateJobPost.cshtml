@@ -1,0 +1,164 @@
+﻿@using static StudentEmploymentPortal.Models.JobPost
+@using StudentEmploymentPortal.Utility
+@model StudentEmploymentPortal.Models.JobPost
+
+@{
+    ViewData["Title"] = "CreateJobPost";
+}
+
+<h1>CreateJobPost</h1>
+
+<h4>JobPost</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="JobPost" asp-action="SaveJobPost" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden>
+                <input asp-for="RecruiterId" value=@ViewData["RecruiterId"] class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="InternalOrExternal" class="control-label">Internal or External</label>
+                <select class="form-control" id="InternalOrExternal" name="InternalOrExternal">
+                    <option disabled selected>select recruiter type</option>
+                    @foreach (var InternalOrExternal in Enum.GetValues(typeof(EnumInternalOrExternal)))
+                    {
+                        <option value="@InternalOrExternal">@InternalOrExternal</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Faculty" class="control-label"></label>
+                <input asp-for="Faculty" class="form-control" />
+                <span asp-validation-for="Faculty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Department" class="control-label"></label>
+                <input asp-for="Department" class="form-control" />
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobTitle" class="control-label">Job Title</label>
+                <input asp-for="JobTitle" class="form-control" />
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" placeholder="building, campus, etc or  an address" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobDecription" class="control-label">Job Decription</label>
+                <input asp-for="JobDecription" class="form-control" />
+                <span asp-validation-for="JobDecription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KeyResponsibilities" class="control-label">Key Responsibilities</label>
+                <input asp-for="KeyResponsibilities" class="form-control" />
+                <span asp-validation-for="KeyResponsibilities" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FullTimeOrPartTime" class="control-label">Full time or Part time</label>
+                <select class="form-control" id="FullTimeOrPartTime" name="FullTimeOrPartTime">
+                    <option disabled selected>select job type</option>
+                    @foreach (var FullTimeOrPartTime in Enum.GetValues(typeof(EnumFullTimeOrPartTime)))
+                    {
+                        <option value="@FullTimeOrPartTime">@FullTimeOrPartTime</option>
+                    }
+                </select>
+            </div>
+                <div class="form-group">
+                <label asp-for="PartTimeNumberOfHours" class="control-label">Part time number of hours</label>
+                <select class="form-control" id="PartTimeNumberOfHours" name="PartTimeNumberOfHours">
+                        <option disabled selected>select number of hours</option>
+                    @foreach (var PartTimeNumberOfHours in Enum.GetValues(typeof(EnumPartTimeNumberOfHours)))
+                        {
+                        <option value="@PartTimeNumberOfHours">@PartTimeNumberOfHours</option>
+                        }
+                    </select>
+                </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label">Start Date</label>
+                <input asp-for="StartDate" type="date" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label">End Date</label>
+                <input asp-for="EndDate" type="date" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HourlyRate" class="control-label">Hourly Rate</label>>
+                <input asp-for="HourlyRate" class="form-control" />
+                <span asp-validation-for="HourlyRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="YearOfStudy">Years Of Study</label>
+                <select class="form-control" id="YearOfStudy" name="YearOfStudy">
+                    <option disabled selected>select years of study</option>
+                    @foreach (var YearsOfStudy in Enum.GetValues(typeof(EnumYearsOfStudy)))
+                    {
+                        <option value="@YearsOfStudy">@YearsOfStudy</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nationality">Nationality</label>
+                <select class="form-control" id="nationality" name="Nationality">
+                    <option disabled selected>select nationality</option>
+                    @foreach (var Nationality in Enum.GetValues(typeof(EnumNationality)))
+                    {
+                        <option value="@Nationality">@Nationality</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinRequirements" class="control-label">Minimum Requirements</label>>
+                <input asp-for="MinRequirements" class="form-control" />
+                <span asp-validation-for="MinRequirements" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationInstruction" class="control-label">Application Instruction</label>
+                <input asp-for="ApplicationInstruction" class="form-control" />
+                <span asp-validation-for="ApplicationInstruction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClosingDate" class="control-label">Closing Date</label>
+                <input asp-for="ClosingDate" type="date" class="form-control" />
+                <span asp-validation-for="ClosingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactPerson" class="control-label">Contact Person</label>
+                <input asp-for="ContactPerson" class="form-control" />
+                <span asp-validation-for="ContactPerson" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactNo" class="control-label"></label>
+                <input asp-for="ContactNo" class="form-control" />
+                <span asp-validation-for="ContactNo" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <select class="form-control" id="ApprovalStatus" name="ApprovalStatus">
+                    <option disabled selected>select approval status</option>
+                    @foreach (var ApprovalStatus in Enum.GetValues(typeof(EnumApprovalStatus)))
+                    {
+                        <option value="@ApprovalStatus">@ApprovalStatus</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

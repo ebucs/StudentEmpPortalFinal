@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentEmploymentPortal.Areas.studentj.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel.DataAnnotations;
 using StudentEmploymentPortal.Utility;
+
 
 
 namespace StudentEmploymentPortal.ViewModels
@@ -32,7 +29,7 @@ namespace StudentEmploymentPortal.ViewModels
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Address { get; set; }
-
+        
         // Dropdown options
         public IEnumerable<SelectListItem> DriversLicenseOptions => GetEnumSelectList<Student.driversLicense>();
         public IEnumerable<SelectListItem> GenderOptions => GetEnumSelectList<Student.gender>();

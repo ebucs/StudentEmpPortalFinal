@@ -1,0 +1,54 @@
+﻿@model List<StudentEmploymentPortal.Models.JobPost>
+
+@{
+    ViewData["Title"] = "Manage Recruiter Registration";
+}
+
+<h1 class="mb-4 mt-3">Manage Job Posts</h1>
+
+
+
+<form method="post" action="">
+    <div class="input-group mb-3">
+        <label class="sr-only" for="searchInput">Search</label>
+        <input class="form-control" type="text" name="search" id="searchInput" placeholder="Search">
+    </div>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-default">
+            <thead>
+                <tr class="table-primary">
+                    <th>Job title</th>
+                    <th>Department</th>
+                    <th>FT/PT</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var jobPost in ViewBag.JobPosts)
+                {
+                    <tr>
+                        <td>@jobPost.JobTitle</td>
+                        <td>@jobPost.Department</td>
+                        <td>@jobPost.FullTimeOrPartTime</td>
+                        <td>@jobPost.StartDate</td>
+                        <td>@jobPost.EndDate</td>
+                        <td>@jobPost.ApprovalStatus</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>You currently dont have any job posts.</p>
+}
+
+<p></p>
+<a href="/JobPost/CreateJobPost" class="btn btn-primary custom-btn mx-2 mb-2 rounded">Create job post</a>
