@@ -6,6 +6,7 @@ using StudentEmploymentPortal.Areas.Identity;
 using StudentEmploymentPortal.Data;
 using StudentEmploymentPortal.Areas.recruiterj.Models;
 using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
+using StudentEmploymentPortal.Areas.jobpostA.Models;
 
 namespace StudentEmploymentPortal.Areas.approverj.Controllers
 {
@@ -48,7 +49,7 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
             {
                 // Retrieve the list of recruiters with Approved = false
                 var recruiters = await _context.Recruiter
-                    .Where(r => r.Approved == false)
+                    .Where(r => r.Approved == false || r.Approved == true)
                     .ToListAsync();
 
                 // Pass the recruiters and UserManager to the view
@@ -56,6 +57,27 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
                 ViewBag.UserManager = _userManager;
 
                 return View(recruiters);
+            }
+
+            return NotFound();
+        }
+
+        public async Task<IActionResult> ManageRecruiterJobPosts()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                // Retrieve the list of recruiters with Approved = false
+                var jobPosts = await _context.JobPost
+                    .Where(r => r.Approved == false || r.Approved == true)
+                    .ToListAsync();
+
+                // Pass the recruiters and UserManager to the view
+                ViewBag.jobPosts = jobPosts;
+                ViewBag.UserManager = _userManager;
+
+                return View(jobPosts);
             }
 
             return NotFound();
@@ -139,6 +161,115 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
             return RedirectToAction("ManageRecruiterRegistration");
         }
 
+
+        public async Task<IActionResult> PartialJobPostDetails(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // Retrieve the jobpost based on the id
+            var jobPost = await _context.JobPost.FirstOrDefaultAsync(r => r.JobPostId == id);
+
+            if (jobPost == null)
+            {
+                return NotFound();
+            }
+
+            var yearsOfStudy = await _context.YearsOfStudy.FirstOrDefaultAsync(y =>
+                y.JobPostId == jobPost.JobPostId &&
+                (y.IsFirstYear || y.IsSecondYear || y.IsThirdYear || y.IsHonours || y.IsGraduates || y.IsMasters || y.IsPhD || y.IsPostdoc)
+            );
+
+            var yearsOfStudyOptions = new List<string>();
+            if (yearsOfStudy != null)
+            {
+                if (yearsOfStudy.IsFirstYear)
+                    yearsOfStudyOptions.Add("First Year");
+                if (yearsOfStudy.IsSecondYear)
+                    yearsOfStudyOptions.Add("Second Year");
+                if (yearsOfStudy.IsThirdYear)
+                    yearsOfStudyOptions.Add("Third Year");
+                if (yearsOfStudy.IsHonours)
+                    yearsOfStudyOptions.Add("Honours");
+                if (yearsOfStudy.IsGraduates)
+                    yearsOfStudyOptions.Add("Graduates");
+                if (yearsOfStudy.IsMasters)
+                    yearsOfStudyOptions.Add("Masters");
+                if (yearsOfStudy.IsPhD)
+                    yearsOfStudyOptions.Add("PhD");
+                if (yearsOfStudy.IsPostdoc)
+                    yearsOfStudyOptions.Add("Postdoc");
+            }
+
+            // Create a new instance of JobPostViewModel and populate it with the data
+            var viewModel = new JobPostViewModel
+            {
+                RecruiterType = jobPost.RecruiterType,
+                Faculty = (JobPost.EnumFaculty)jobPost.Faculty,
+                Department = (JobPost.EnumDepartment)jobPost.Department,
+                JobTitle = jobPost.JobTitle,
+                Location = jobPost.Location,
+                JobDescription = jobPost.JobDescription,
+                KeyResponsibilities = jobPost.KeyResponsibilities,
+                JobType = jobPost.JobType,
+                PartTimeNumberOfHours = (JobPost.EnumWeekHours)jobPost.PartTimeNumberOfHours,
+                StartDate = jobPost.StartDate,
+                EndDate = jobPost.EndDate,
+                HourlyRate = jobPost.HourlyRate,
+                Nationality = jobPost.Nationality,
+                MinRequirements = jobPost.MinRequirements,
+                ApplicationInstruction = jobPost.ApplicationInstruction,
+                ClosingDate = jobPost.ClosingDate,
+                ContactPerson = jobPost.ContactPerson,
+                Email = jobPost.Email,
+                ContactNo = jobPost.ContactNo,
+                ApprovalStatus = jobPost.ApprovalStatus,
+                Approved = jobPost.Approved,
+                ApproversNote = jobPost.ApproversNote,
+
+                YearsOfStudyOptions = yearsOfStudyOptions
+            };
+
+            return PartialView(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PartialJobPostDetails(string id, JobPostViewModel viewModel)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // Retrieve the jobpost based on the id
+            var jobPost = await _context.JobPost.FirstOrDefaultAsync(r => r.JobPostId == id);
+
+            if (jobPost == null)
+            {
+                return NotFound();
+            }
+
+            // Update the recruiter's note and outcome based on the submitted data
+            jobPost.ApproversNote = viewModel.ApproversNote;
+            jobPost.ApprovalStatus = viewModel.ApprovalStatus;
+
+            // Update the Approved property based on the Outcome
+            if (viewModel.ApprovalStatus.ToString() == "Approved")
+            {
+                jobPost.Approved = true;
+            }
+            else
+            {
+                jobPost.Approved = false;
+            }
+
+            // Save the changes to the database
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ManageRecruiterJobPosts");
+        }
 
 
 

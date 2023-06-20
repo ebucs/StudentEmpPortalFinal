@@ -1,0 +1,188 @@
+﻿@model StudentEmploymentPortal.ViewModels.RecruiterViewModels.JobPostViewModel
+
+@{
+    ViewData["Title"] = "Create Job Post";
+}
+
+<h1 class="pt-4">@ViewData["Title"]</h1>
+
+<hr class="col-md-7" />
+
+<div class="row pt-4">
+    <div class="col-md-7">
+        <form id="jobPostForm" method="post" asp-controller="JobPost" asp-action="SaveJobPost">
+            @Html.AntiForgeryToken()
+
+            <div class="form-floating py-2">
+                <label asp-for="RecruiterType" class="col-form-label-sm">Recruiter Type</label>
+                <select asp-for="RecruiterType" asp-items="Model.RecruiterTypeOptions" class="form-select"></select>
+            </div>
+
+            <div class="form-floating py-2 facultyDeptDiv">
+                <label asp-for="Faculty" class="col-form-label-sm">Faculty</label>
+                <select asp-for="Faculty" asp-items="Model.FacultyOptions" class="form-select"></select>
+            </div>
+
+            <div class="form-floating py-2 facultyDeptDiv">
+                <label asp-for="Department" class="col-form-label-sm">Department</label>
+                <select asp-for="Department" asp-items="Model.DepartmentOptions" class="form-select"></select>
+            </div>
+
+
+            <div class="form-floating py-2">
+                <label asp-for="JobTitle" class="col-form-label-sm">Job Title</label>
+                <input asp-for="JobTitle" class="form-control" />
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="Location" class="col-form-label-sm">Location</label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="JobDescription" class="col-form-label-sm">Job Description</label>
+                <textarea asp-for="JobDescription" class="form-control textarea-height"></textarea>
+                <span asp-validation-for="JobDescription" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="KeyResponsibilities" class="col-form-label-sm">Key Responsibilities</label>
+                <textarea asp-for="KeyResponsibilities" class="form-control  textarea-height"></textarea>
+                <span asp-validation-for="KeyResponsibilities" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="JobType" class="col-form-label-sm">Job Type</label>
+                <select asp-for="JobType" asp-items="Model.JobTypeOptions" class="form-select"></select>
+            </div>
+
+            <div class="form-floating py-2 offpt">
+                <label asp-for="PartTimeNumberOfHours" class="col-form-label-sm">Part-Time Hours</label>
+                <select asp-for="PartTimeNumberOfHours" asp-items="Model.WeekHourOptions" class="form-select"></select>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="StartDate" class="col-form-label-sm">Start Date</label>
+                <input asp-for="StartDate" class="form-control custom-height" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="EndDate" class="col-form-label-sm">End Date</label>
+                <input asp-for="EndDate" class="form-control custom-height" type ="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="HourlyRate" class="col-form-label-sm">Hourly Rate</label>
+                <div class="input-group">
+                    <input asp-for="HourlyRate" class="form-control  custom-height" type="number" min="0" />
+                    <span class="input-group-text">$</span>
+                </div>
+                <span asp-validation-for="HourlyRate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Years of Study</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" asp-for="IsFirstYear" class="form-check-input" id="chkFirstYear" />
+                        <label class="form-check-label" for="chkFirstYear">1st Year</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" asp-for="IsSecondYear" class="form-check-input" id="chkSecondYear" />
+                        <label class="form-check-label" for="chkSecondYear">2nd Year</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" asp-for="IsThirdYear" class="form-check-input" id="chkThirdYear" />
+                        <label class="form-check-label" for="chkThirdYear">3rd Year</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" asp-for="IsHonours" class="form-check-input" id="chkHonours" />
+                        <label class="form-check-label" for="chkHonours">Honours</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" asp-for="IsGraduates" class="form-check-input" id="chkGraduates" />
+                        <label class="form-check-label" for="chkGraduates">Graduates</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" asp-for="IsMasters" class="form-check-input" id="chkMasters" />
+                        <label class="form-check-label" for="chkMasters">Masters</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" asp-for="IsPhD" class="form-check-input" id="chkPhD" />
+                        <label class="form-check-label" for="chkPhD">PhD</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" asp-for="IsPostdoc" class="form-check-input" id="chkPostdoc" />
+                        <label class="form-check-label" for="chkPostdoc">Postdoc</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-floating py-2">
+                <label asp-for="Nationality" class="col-form-label-sm">Nationality</label>
+                <select asp-for="Nationality" asp-items="Model.NationalityOptions" class="form-select"></select>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="MinRequirements" class="col-form-label-sm">Minimum Requirements</label>
+                <textarea asp-for="MinRequirements" class="form-control  textarea-height"></textarea>
+                <span asp-validation-for="MinRequirements" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="ApplicationInstruction" class="col-form-label-sm">Application Instructions</label>
+                <textarea asp-for="ApplicationInstruction" class="form-control textarea-height"></textarea>
+                <span asp-validation-for="ApplicationInstruction" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="ClosingDate" class="col-form-label-sm">Closing Date</label>
+                <input asp-for="ClosingDate" class="form-control custom-height" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                <span asp-validation-for="ClosingDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="ContactPerson" class="col-form-label-sm">Contact Person</label>
+                <input asp-for="ContactPerson" class="form-control" />
+                <span asp-validation-for="ContactPerson" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="Email" class="col-form-label-sm">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="ContactNo" class="col-form-label-sm">Contact No</label>
+                <input asp-for="ContactNo" class="form-control" />
+                <span asp-validation-for="ContactNo" class="text-danger"></span>
+            </div>
+
+           @* <div class="form-floating py2">
+                <label asp-for="ApprovalStatus" class="col-form-label-sm">Approval Status</label>
+                <select asp-for="ApprovalStatus" asp-items="Model.ApprovalStatusOptions" class="form-select  custom-height"></select>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="ApproversNote" class="col-form-label-sm">Approver's Note</label>
+                <textarea asp-for="ApproversNote" class="form-control textarea-height"></textarea>
+                <span asp-validation-for="ApproversNote" class="text-danger"></span>
+            </div>*@
+
+            <div class="pt-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-controller="Recruiter" asp-action="RecruiterDashboard" asp-area="RecruiterJ" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

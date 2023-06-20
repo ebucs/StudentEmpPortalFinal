@@ -6,8 +6,6 @@ using StudentEmploymentPortal.Areas.recruiterj.Models;
 using StudentEmploymentPortal.Data;
 using StudentEmploymentPortal.Utility;
 using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
-using System.Net;
-using static StudentEmploymentPortal.Areas.recruiterj.Models.Recruiter;
 
 namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
 {

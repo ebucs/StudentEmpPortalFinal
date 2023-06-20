@@ -234,6 +234,148 @@ namespace StudentEmploymentPortal.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.jobpostA.Models.JobPost", b =>
+                {
+                    b.Property<string>("JobPostId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApplicationInstruction")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ApprovalStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Approved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ApproversNote")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ClosingDate")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("ContactNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPerson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Department")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("Faculty")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HourlyRate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("JobDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KeyResponsibilities")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MinRequirements")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartTimeNumberOfHours")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RecruiterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RecruiterType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("Date");
+
+                    b.HasKey("JobPostId");
+
+                    b.HasIndex("RecruiterId");
+
+                    b.ToTable("JobPost");
+                });
+
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.jobpostA.Models.YearsOfStudy", b =>
+                {
+                    b.Property<string>("YearsOfStudyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsFirstYear")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsGraduates")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsHonours")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMasters")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPhD")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPostdoc")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSecondYear")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsThirdYear")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("JobPostId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("YearsOfStudyId");
+
+                    b.HasIndex("JobPostId")
+                        .IsUnique();
+
+                    b.ToTable("YearsOfStudy");
+                });
+
             modelBuilder.Entity("StudentEmploymentPortal.Areas.recruiterj.Models.Recruiter", b =>
                 {
                     b.Property<string>("RecruiterId")
@@ -398,6 +540,28 @@ namespace StudentEmploymentPortal.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.jobpostA.Models.JobPost", b =>
+                {
+                    b.HasOne("StudentEmploymentPortal.Areas.recruiterj.Models.Recruiter", "Recruiter")
+                        .WithMany("JobPosts")
+                        .HasForeignKey("RecruiterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Recruiter");
+                });
+
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.jobpostA.Models.YearsOfStudy", b =>
+                {
+                    b.HasOne("StudentEmploymentPortal.Areas.jobpostA.Models.JobPost", "JobPost")
+                        .WithOne("YearsOfStudy")
+                        .HasForeignKey("StudentEmploymentPortal.Areas.jobpostA.Models.YearsOfStudy", "JobPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JobPost");
+                });
+
             modelBuilder.Entity("StudentEmploymentPortal.Areas.recruiterj.Models.Recruiter", b =>
                 {
                     b.HasOne("StudentEmploymentPortal.Areas.Identity.ApplicationUser", "User")
@@ -427,6 +591,17 @@ namespace StudentEmploymentPortal.Migrations
 
                     b.Navigation("Student")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.jobpostA.Models.JobPost", b =>
+                {
+                    b.Navigation("YearsOfStudy")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.recruiterj.Models.Recruiter", b =>
+                {
+                    b.Navigation("JobPosts");
                 });
 #pragma warning restore 612, 618
         }

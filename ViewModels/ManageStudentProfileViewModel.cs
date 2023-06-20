@@ -20,7 +20,7 @@ namespace StudentEmploymentPortal.ViewModels
         public Student.race SelectedRace { get; set; }
         public Student.gender SelectedGender { get; set; }
         public Student.driversLicense SelectedDriversLicense { get; set; }
-        public Student.nationality SelectedNationality { get; set; }
+        public Student.EnumNationality SelectedNationality { get; set; }
         public Student.currentYearOfStudy SelectedCurrentYearOfStudy { get; set; }
         public Student.faculty SelectedFaculty { get; set; }
         public Student.department SelectedDepartment { get; set; }
@@ -37,7 +37,7 @@ namespace StudentEmploymentPortal.ViewModels
         public IEnumerable<SelectListItem> DriversLicenseOptions => GetEnumSelectList<Student.driversLicense>();
         public IEnumerable<SelectListItem> GenderOptions => GetEnumSelectList<Student.gender>();
         public IEnumerable<SelectListItem> RaceOptions => GetEnumSelectList<Student.race>();
-        public IEnumerable<SelectListItem> NationalityOptions => GetEnumSelectList<Student.nationality>();
+        public IEnumerable<SelectListItem> NationalityOptions => GetEnumSelectList<Student.EnumNationality>();
         public IEnumerable<SelectListItem> CurrentYearOfStudyOptions => GetEnumSelectList<Student.currentYearOfStudy>();
         public IEnumerable<SelectListItem> FacultyOptions => GetEnumSelectList<Student.faculty>();
         public IEnumerable<SelectListItem> DepartmentOptions => GetEnumSelectList<Student.department>();

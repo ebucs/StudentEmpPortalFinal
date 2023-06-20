@@ -1,5 +1,13 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(document).ready(function () {
+    // Toggle visibility of Faculty and Department based on the selected RecruiterType
+    $("#RecruiterType").on("change", function () {
+        var recruiterType = $(this).val();
+        $(".facultyDeptDiv").toggle(recruiterType === "Internal");
+    }).trigger("change");
 
-// Write your JavaScript code.
-
+    // Toggle visibility of Part-Time Hours based on the selected JobType
+    $("#JobType").on("change", function () {
+        var jobType = $(this).val();
+        $(".offpt").toggle(jobType === "PartTime");
+    }).trigger("change");
+});

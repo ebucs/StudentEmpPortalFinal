@@ -1,0 +1,57 @@
+﻿@model List<StudentEmploymentPortal.Areas.jobpostA.Models.JobPost>
+@using StudentEmploymentPortal.Areas.Identity
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Manage Job Posts";
+}
+
+<h1 class="mb-4 mt-3">Manage Job Posts</h1>
+
+
+
+<form method="post" action="">
+    <div class="input-group mb-3">
+        <label class="sr-only" for="searchInput">Search</label>
+        <input class="form-control" type="text" name="search" id="searchInput" placeholder="Search">
+    </div>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-default">
+            <thead>
+                <tr class="table-primary">
+                    <th>Job title</th>
+                    <th>Department</th>
+                    <th>FT/PT</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var jobPost in Model)
+                {
+                    <tr onclick="openPartialView('@Url.Action("PartialJobPostDetails", "Approver", new { area = "ApproverJ", id = jobPost.JobPostId })')">
+                        <td>@jobPost.JobTitle</td>
+                        <td>@jobPost.Department</td>
+                        <td>@jobPost.JobType</td>
+                        <td>@jobPost.StartDate.ToString("MM/dd/yyyy")</td>
+                        <td>@jobPost.EndDate.ToString("MM/dd/yyyy")</td>
+                        <td>@jobPost.ApprovalStatus</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>You currently dont have any job posts.</p>
+}
+
+<div class="partial-view-overlay"></div> <!-- Overlay div to cover the page -->
+
+<div class="partial-view-container container pt-4"></div>

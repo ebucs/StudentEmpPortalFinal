@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StudentEmploymentPortal.Areas.Identity;
+using StudentEmploymentPortal.Areas.jobpostA.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -41,6 +42,9 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Models
 
         // Navigation property
         public virtual ApplicationUser User { get; set; }
+
+        // Collection navigation property for JobPosts
+        public virtual ICollection<JobPost> JobPosts { get; set; }
 
         //constructor
 

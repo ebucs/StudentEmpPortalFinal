@@ -33,7 +33,7 @@ namespace StudentEmploymentPortal.ViewModels.RecruiterViewModels
         public IEnumerable<SelectListItem> StatusOptions => GetEnumSelectList<Recruiter.outcomeStatus>();
 
         // Helper method to populate dropdown options from enum values
-        private IEnumerable<SelectListItem> GetEnumSelectList<T>() where T : struct, Enum
+        private static IEnumerable<SelectListItem> GetEnumSelectList<T>() where T : struct, Enum
         {
             return Enum.GetValues(typeof(T))
                 .Cast<T>()

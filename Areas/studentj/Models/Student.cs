@@ -21,7 +21,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
         public string IDNumber { get; set; }
 
-        public nationality Nationality { get; set; }
+        public EnumNationality Nationality { get; set; }
 
         [Required(ErrorMessage = "Current year of study is required.")]
         public currentYearOfStudy CurrentYearOfStudy { get; set; }
@@ -51,7 +51,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
             CareerObjective = string.Empty;
             Gender = gender.Male;
             Race = race.Black;
-            Nationality = nationality.SouthAfrican;
+            Nationality = EnumNationality.SouthAfrican;
             CurrentYearOfStudy = currentYearOfStudy.FirstYear;
             Faculty = faculty.Science;
             Department = department.ComputerScience;
@@ -95,163 +95,14 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
             Other
         }
 
-        public enum nationality
+        public enum EnumNationality
         {
-            [Display(Name = "Algerian")]
-            Algerian,
-
-            [Display(Name = "Angolan")]
-            Angolan,
-
-            [Display(Name = "Beninese")]
-            Beninese,
-
-            [Display(Name = "Botswanan")]
-            Botswanan,
-
-            [Display(Name = "Burkinabe")]
-            Burkinabe,
-
-            [Display(Name = "Burundian")]
-            Burundian,
-
-            [Display(Name = "Cameroonian")]
-            Cameroonian,
-
-            [Display(Name = "Cape Verdean")]
-            CapeVerdean,
-
-            [Display(Name = "Central African")]
-            CentralAfrican,
-
-            [Display(Name = "Chadian")]
-            Chadian,
-
-            [Display(Name = "Comoran")]
-            Comoran,
-
-            [Display(Name = "Congolese")]
-            Congolese,
-
-            [Display(Name = "Djiboutian")]
-            Djiboutian,
-
-            [Display(Name = "Egyptian")]
-            Egyptian,
-
-            [Display(Name = "Equatorial Guinean")]
-            EquatorialGuinean,
-
-            [Display(Name = "Eritrean")]
-            Eritrean,
-
-            [Display(Name = "Ethiopian")]
-            Ethiopian,
-
-            [Display(Name = "Gabonese")]
-            Gabonese,
-
-            [Display(Name = "Gambian")]
-            Gambian,
-
-            [Display(Name = "Ghanaian")]
-            Ghanaian,
-
-            [Display(Name = "Guinean")]
-            Guinean,
-
-            [Display(Name = "Ivorian")]
-            Ivorian,
-
-            [Display(Name = "Kenyan")]
-            Kenyan,
-
-            [Display(Name = "Lesotho")]
-            Basotho,
-
-            [Display(Name = "Liberian")]
-            Liberian,
-
-            [Display(Name = "Libyan")]
-            Libyan,
-
-            [Display(Name = "Malagasy")]
-            Malagasy,
-
-            [Display(Name = "Malawian")]
-            Malawian,
-
-            [Display(Name = "Malian")]
-            Malian,
-
-            [Display(Name = "Mauritanian")]
-            Mauritanian,
-
-            [Display(Name = "Mauritian")]
-            Mauritian,
-
-            [Display(Name = "Moroccan")]
-            Moroccan,
-
-            [Display(Name = "Mozambican")]
-            Mozambican,
-
-            [Display(Name = "Namibian")]
-            Namibian,
-
-            [Display(Name = "Nigerian")]
-            Nigerian,
-
-            [Display(Name = "Nigerien")]
-            Nigerien,
-
-            [Display(Name = "Rwandan")]
-            Rwandan,
-
-            [Display(Name = "Sao Tomean")]
-            SaoTomean,
-
-            [Display(Name = "Senegalese")]
-            Senegalese,
-
-            [Display(Name = "Seychellois")]
-            Seychellois,
-
-            [Display(Name = "Sierra Leonean")]
-            SierraLeonean,
-
-            [Display(Name = "Somali")]
-            Somali,
 
             [Display(Name = "South African")]
             SouthAfrican,
 
-            [Display(Name = "South Sudanese")]
-            SouthSudanese,
-
-            [Display(Name = "Sudanese")]
-            Sudanese,
-
-            [Display(Name = "Swazi")]
-            Swazi,
-
-            [Display(Name = "Tanzanian")]
-            Tanzanian,
-
-            [Display(Name = "Togolese")]
-            Togolese,
-
-            [Display(Name = "Tunisian")]
-            Tunisian,
-
-            [Display(Name = "Ugandan")]
-            Ugandan,
-
-            [Display(Name = "Zambian")]
-            Zambian,
-
-            [Display(Name = "Zimbabwean")]
-            Zimbabwean
+            [Display(Name = "Not South African")]
+            NotSouthAfrican
         }
 
         public enum currentYearOfStudy

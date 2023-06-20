@@ -1,0 +1,77 @@
+﻿@model StudentEmploymentPortal.ViewModels.RecruiterViewModels.JobPostViewModel
+
+@{
+    ViewData["Title"] = "Job Post Details";
+}
+
+<div class="partial-view-overlay"></div> <!-- Overlay div to cover the page -->
+
+<div class="partial-view-container container pt-4">
+    <h1>@ViewData["Title"]</h1>
+
+    <form id="ApproveRecruiter" method="post" asp-controller="Approver" asp-action="PartialJobPostDetails">
+        <div class="recruiter-details pb-4">
+            <p><strong>Recruiter Type:</strong> @Model.RecruiterType</p>
+            <p><strong>Faculty:</strong> @Model.Faculty</p>
+            <p><strong>Department:</strong> @Model.Department</p>
+            <p><strong>Job Title:</strong> @Model.JobTitle</p>
+            <p><strong>Location:</strong> @Model.Location</p>
+            <p><strong>Job Description:</strong> @Model.JobDescription</p>
+            <p><strong>Key Responsibilities:</strong> @Model.KeyResponsibilities</p>
+            <p><strong>Job Type:</strong> @Model.JobType</p>
+            <p><strong>Part-Time Number of Hours:</strong> @Model.PartTimeNumberOfHours</p>
+            <p><strong>Start Date:</strong> @Model.StartDate.ToString("MM/dd/yyyy")</p>
+            <p><strong>End Date:</strong> @Model.EndDate.ToString("MM/dd/yyyy")</p>
+            <p><strong>Hourly Rate:</strong> @Model.HourlyRate</p>
+            <p><strong>Nationality:</strong> @Model.Nationality</p>
+            <p><strong>Minimum Requirements:</strong> @Model.MinRequirements</p>
+            <p><strong>Application Instruction:</strong> @Model.ApplicationInstruction</p>
+            <p><strong>Closing Date:</strong> @Model.ClosingDate.ToString("MM/dd/yyyy")</p>
+            <p><strong>Contact Person:</strong> @Model.ContactPerson</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Contact No:</strong> @Model.ContactNo</p>
+            <div class="mt-2 p-2 border border-dark rounded" style="width: fit-content;">
+                <p>Years of Study Options:</p>
+                <ul>
+                    @foreach (var yearOfStudyOption in Model.YearsOfStudyOptions)
+                    {
+                        <li>@yearOfStudyOption</li>
+                    }
+                </ul>
+            </div>
+
+
+
+
+            <!-- Display the approver's note and outcome -->
+            @*@if (User.IsInRole("Approver"))
+            {
+                <div class="approver-details">
+                    <p><strong>Approver's Note:</strong> @Model.ApproversNote</p>
+                    <p><strong>Outcome:</strong> @Model.ApprovalStatus</p>
+                </div>
+            }*@
+
+            <!-- Add input fields for adding a note and changing the outcome -->
+            <div class="input-fields">
+                <div class="form-floating py-2 col-12 col-md-6">
+                    <!-- Adjust the width using col- classes -->
+                    <label asp-for="ApproversNote" class="form-label">Add Note</label>
+                    <textarea asp-for="ApproversNote" class="form-control" style="height: 150px;"></textarea> <!-- Adjust the height using inline style -->
+                </div>
+
+                <div class="form-floating py-2 col-12 col-md-6">
+                    <!-- Adjust the width using col- classes -->
+                    <label asp-for="ApprovalStatus" class="col-form-label-sm">Approval Status</label>
+                    <select asp-for="ApprovalStatus" asp-items="Model.ApprovalStatusOptions" class="form-select"></select>
+                </div>
+
+                <!-- Add a submit button to save the changes -->
+                <div class="button-container">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button class="btn btn-primary close-button" onclick="closePartialView()">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
