@@ -14,8 +14,8 @@ namespace StudentEmploymentPortal.ViewModels.RecruiterViewModels
     public class JobPostViewModel
     {
         public JobPost.EnumRecruiterType RecruiterType { get; set; }
-        public JobPost.EnumFaculty Faculty { get; set; }
-        public JobPost.EnumDepartment Department { get; set; }
+        public JobPost.EnumFaculty? Faculty { get; set; }
+        public string? Department { get; set; }
         public string JobTitle { get; set; }
         public string Location { get; set; }
         public string JobDescription { get; set; }
@@ -49,7 +49,7 @@ namespace StudentEmploymentPortal.ViewModels.RecruiterViewModels
         // Dropdown options
         public IEnumerable<SelectListItem> RecruiterTypeOptions => GetEnumSelectList<JobPost.EnumRecruiterType>();
         public IEnumerable<SelectListItem> FacultyOptions => GetEnumSelectList<JobPost.EnumFaculty>();
-        public IEnumerable<SelectListItem> DepartmentOptions => GetEnumSelectList<JobPost.EnumDepartment>();
+        //public IEnumerable<SelectListItem> DepartmentOptions => GetEnumSelectList<JobPost.EnumDepartment>();
         public IEnumerable<SelectListItem> WeekHourOptions => GetEnumSelectList<JobPost.EnumWeekHours>();
         public IEnumerable<SelectListItem> JobTypeOptions => GetEnumSelectList<JobPost.EnumJobType>();
         public IEnumerable<SelectListItem> NationalityOptions => GetEnumSelectList<JobPost.EnumNationality>();

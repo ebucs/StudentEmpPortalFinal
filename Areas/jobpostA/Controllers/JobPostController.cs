@@ -8,6 +8,7 @@ using StudentEmploymentPortal.Areas.jobpostA.Models;
 using StudentEmploymentPortal.Data;
 using StudentEmploymentPortal.Utility;
 using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,14 +30,27 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Controllers
         public async Task<IActionResult> ManageJobPosts()
         {
             var user = await _userManager.GetUserAsync(User);
+            var recruiter = await _context.Recruiter.FindAsync(user.Id);
             // Retrieve the list of JobPosts
             var jobPosts = await _context.JobPost
-                   .Where(r => r.RecruiterId == user.Id)
-                   .ToListAsync();
+                .Where(r => r.RecruiterId == user.Id)
+                .ToListAsync();
+
+            // Update the department value if null
+            foreach (var jobPost in jobPosts)
+            {
+                if (string.IsNullOrEmpty(jobPost.Department))
+                {
+                    jobPost.Department = recruiter.TradingName;
+                }
+            }
+            // Set the trading name in ViewBag
+            //ViewBag.TradingName = recruiter.TradingName;
 
             ViewBag.JobPosts = jobPosts;
             return View(jobPosts);
         }
+
 
         public async Task<IActionResult> CreateJobPost()
         {
@@ -125,6 +139,74 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Controllers
             }
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public List<string> GetDepartments(string faculty)
+        {
+            
+            
+            List<string> CommerceLawAndManagement = new List<string>() { "Economic And Business Sciences",
+                                                                         "Finance And Investment Management",
+                                                                         "Industrial Psychology And People Management",
+                                                                         "Chemical Engineering",
+                                                                         "Law"};
+
+
+
+            List<string> EngineeringAndBuiltEnvironment = new List<string>() { "Chemical Engineering",
+                                                                               "Civil And Environmental Engineering",
+                                                                               "Electrical And Information Engineering",
+                                                                               "Mechanical Industrial And Aeronautical Engineering"};
+            List<string> HealthSciences = new List<string>() { "Anatomy",
+                                                               "Dentistry",
+                                                               "Medicine",
+                                                               "Pharmacy And Pharmacology"};
+            List<string> Humanities = new List<string>() { "Archaeology And Anthropology",
+                                                           "Geography Archaeology And Environmental Studies",
+                                                           "Political Studies And International Relations"};
+            List<string> Science = new List<string>() { "Chemistry",
+                                                        "Mathematics",
+                                                        "Physics",
+                                                        "Zoology And Entomology",
+                                                        "Computer Science",
+                                                        "Geosciences",
+                                                        "Human Physiology",
+                                                        "Molecular Medicine And Haematology",
+                                                        "School Of Accountancy"};
+
+
+
+            if (faculty.Equals("CommerceLawAndManagement"))
+            {
+                return CommerceLawAndManagement;
+            }
+            else if (faculty.Equals("EngineeringAndBuiltEnvironment"))
+
+
+
+            {
+                return EngineeringAndBuiltEnvironment;
+            }
+            else if (faculty.Equals("HealthSciences"))
+
+
+
+            {
+                return HealthSciences;
+            }
+            else if (faculty.Equals("Humanities"))
+
+
+
+            {
+                return Humanities;
+            }
+            else 
+            {
+                return Science;
+            }
+          
         }
 
 

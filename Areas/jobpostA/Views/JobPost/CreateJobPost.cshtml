@@ -20,12 +20,12 @@
 
             <div class="form-floating py-2 facultyDeptDiv">
                 <label asp-for="Faculty" class="col-form-label-sm">Faculty</label>
-                <select asp-for="Faculty" asp-items="Model.FacultyOptions" class="form-select"></select>
+                <select asp-for="Faculty" id="faculty" asp-items="Model.FacultyOptions" class="form-select"></select>
             </div>
 
             <div class="form-floating py-2 facultyDeptDiv">
                 <label asp-for="Department" class="col-form-label-sm">Department</label>
-                <select asp-for="Department" asp-items="Model.DepartmentOptions" class="form-select"></select>
+                <select asp-for="Department" id="department" class="form-select" ></select>
             </div>
 
 
@@ -78,11 +78,12 @@
             <div class="form-floating py-2">
                 <label asp-for="HourlyRate" class="col-form-label-sm">Hourly Rate</label>
                 <div class="input-group">
-                    <input asp-for="HourlyRate" class="form-control  custom-height" type="number" min="0" />
-                    <span class="input-group-text">$</span>
+                    <span class="input-group-text">R</span>
+                    <input asp-for="HourlyRate" class="form-control custom-height" type="number" min="0" />
                 </div>
                 <span asp-validation-for="HourlyRate" class="text-danger"></span>
             </div>
+
 
             <div class="form-group">
                 <label>Years of Study</label>
@@ -125,7 +126,8 @@
 
             <div class="form-floating py-2">
                 <label asp-for="Nationality" class="col-form-label-sm">Nationality</label>
-                <select asp-for="Nationality" asp-items="Model.NationalityOptions" class="form-select"></select>
+                <select asp-for="Nationality" asp-items="Model.NationalityOptions" class="form-select">
+                </select>
             </div>
 
             <div class="form-floating py-2">

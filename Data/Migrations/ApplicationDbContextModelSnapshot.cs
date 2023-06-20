@@ -266,7 +266,6 @@ namespace StudentEmploymentPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Department")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -277,7 +276,6 @@ namespace StudentEmploymentPortal.Migrations
                         .HasColumnType("Date");
 
                     b.Property<string>("Faculty")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HourlyRate")

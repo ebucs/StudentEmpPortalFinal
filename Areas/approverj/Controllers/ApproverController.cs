@@ -73,15 +73,13 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
                     .Where(r => r.Approved == false || r.Approved == true)
                     .ToListAsync();
 
-                // Pass the recruiters and UserManager to the view
-                ViewBag.jobPosts = jobPosts;
-                ViewBag.UserManager = _userManager;
-
+                // Pass the job posts to the view
                 return View(jobPosts);
             }
 
             return NotFound();
         }
+
 
         public async Task<IActionResult> PartialRecruiterDetails(string id)
         {
@@ -186,11 +184,11 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
             if (yearsOfStudy != null)
             {
                 if (yearsOfStudy.IsFirstYear)
-                    yearsOfStudyOptions.Add("First Year");
+                    yearsOfStudyOptions.Add("1st Year");
                 if (yearsOfStudy.IsSecondYear)
-                    yearsOfStudyOptions.Add("Second Year");
+                    yearsOfStudyOptions.Add("2nd Year");
                 if (yearsOfStudy.IsThirdYear)
-                    yearsOfStudyOptions.Add("Third Year");
+                    yearsOfStudyOptions.Add("3rd Year");
                 if (yearsOfStudy.IsHonours)
                     yearsOfStudyOptions.Add("Honours");
                 if (yearsOfStudy.IsGraduates)
@@ -208,7 +206,7 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
             {
                 RecruiterType = jobPost.RecruiterType,
                 Faculty = (JobPost.EnumFaculty)jobPost.Faculty,
-                Department = (JobPost.EnumDepartment)jobPost.Department,
+                Department = jobPost.Department,
                 JobTitle = jobPost.JobTitle,
                 Location = jobPost.Location,
                 JobDescription = jobPost.JobDescription,

@@ -74,10 +74,6 @@ namespace StudentEmploymentPortal.Data
                 .HasConversion<string>();
 
             modelBuilder.Entity<JobPost>()
-                .Property(s => s.Department)
-                .HasConversion<string>();
-
-            modelBuilder.Entity<JobPost>()
                 .Property(s => s.Faculty)
                 .HasConversion<string>();
 

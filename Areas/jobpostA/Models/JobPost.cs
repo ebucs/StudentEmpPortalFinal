@@ -29,11 +29,9 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
         [Required(ErrorMessage = "Internal Or External is required.")]
         public EnumRecruiterType RecruiterType { get; set; }
 
-        [Required(ErrorMessage = "Faculty field is required.")]
         public EnumFaculty? Faculty { get; set; }
 
-        [Required(ErrorMessage = "Department field is required.")]
-        public EnumDepartment? Department { get; set; }
+        public string? Department { get; set; }
 
         [Required(ErrorMessage = "Job Title field is required.")]
         public string JobTitle { get; set; }
@@ -96,8 +94,7 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
         public JobPost()
         {
             RecruiterType = EnumRecruiterType.Internal;
-            Faculty = EnumFaculty.None;
-            Department = EnumDepartment.None;
+            Department = string.Empty;
             JobTitle = string.Empty;
             Location = string.Empty;
             JobDescription = string.Empty;
@@ -172,7 +169,6 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
 
         public enum EnumFaculty
         {
-            None,
             [Display(Name = "Commerce, Law and Management")]
             CommerceLawAndManagement,
 
@@ -189,93 +185,93 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
             Science
         }
 
-        public enum EnumDepartment
-        {
-            // Commerce, Law and Management
-            None,
-            [Display(Name = "Accounting")]
-            Accounting,
+        //public enum EnumDepartment
+        //{
+        //    // Commerce, Law and Management
+        //    None,
+        //    [Display(Name = "Accounting")]
+        //    Accounting,
 
-            [Display(Name = "Economic and Business Sciences")]
-            EconomicAndBusinessSciences,
+        //    [Display(Name = "Economic and Business Sciences")]
+        //    EconomicAndBusinessSciences,
 
-            [Display(Name = "Finance and Investment Management")]
-            FinanceAndInvestmentManagement,
+        //    [Display(Name = "Finance and Investment Management")]
+        //    FinanceAndInvestmentManagement,
 
-            [Display(Name = "Industrial Psychology and People Management")]
-            IndustrialPsychologyAndPeopleManagement,
+        //    [Display(Name = "Industrial Psychology and People Management")]
+        //    IndustrialPsychologyAndPeopleManagement,
 
-            [Display(Name = "Law")]
-            Law,
+        //    [Display(Name = "Law")]
+        //    Law,
 
-            // Engineering and the Built Environment
-            [Display(Name = "Chemical Engineering")]
-            ChemicalEngineering,
+        //    // Engineering and the Built Environment
+        //    [Display(Name = "Chemical Engineering")]
+        //    ChemicalEngineering,
 
-            [Display(Name = "Civil and Environmental Engineering")]
-            CivilAndEnvironmentalEngineering,
+        //    [Display(Name = "Civil and Environmental Engineering")]
+        //    CivilAndEnvironmentalEngineering,
 
-            [Display(Name = "Electrical and Information Engineering")]
-            ElectricalAndInformationEngineering,
+        //    [Display(Name = "Electrical and Information Engineering")]
+        //    ElectricalAndInformationEngineering,
 
-            [Display(Name = "Mechanical, Industrial and Aeronautical Engineering")]
-            MechanicalIndustrialAndAeronauticalEngineering,
+        //    [Display(Name = "Mechanical, Industrial and Aeronautical Engineering")]
+        //    MechanicalIndustrialAndAeronauticalEngineering,
 
-            // Health Sciences
-            [Display(Name = "Anatomy")]
-            Anatomy,
+        //    // Health Sciences
+        //    [Display(Name = "Anatomy")]
+        //    Anatomy,
 
-            [Display(Name = "Dentistry")]
-            Dentistry,
+        //    [Display(Name = "Dentistry")]
+        //    Dentistry,
 
-            [Display(Name = "Medicine")]
-            Medicine,
+        //    [Display(Name = "Medicine")]
+        //    Medicine,
 
-            [Display(Name = "Pharmacy and Pharmacology")]
-            PharmacyAndPharmacology,
+        //    [Display(Name = "Pharmacy and Pharmacology")]
+        //    PharmacyAndPharmacology,
 
-            // Humanities
-            [Display(Name = "Archaeology and Anthropology")]
-            ArchaeologyAndAnthropology,
+        //    // Humanities
+        //    [Display(Name = "Archaeology and Anthropology")]
+        //    ArchaeologyAndAnthropology,
 
-            [Display(Name = "English")]
-            English,
+        //    [Display(Name = "English")]
+        //    English,
 
-            [Display(Name = "Geography, Archaeology and Environmental Studies")]
-            GeographyArchaeologyAndEnvironmentalStudies,
+        //    [Display(Name = "Geography, Archaeology and Environmental Studies")]
+        //    GeographyArchaeologyAndEnvironmentalStudies,
 
-            [Display(Name = "Political Studies and International Relations")]
-            PoliticalStudiesAndInternationalRelations,
+        //    [Display(Name = "Political Studies and International Relations")]
+        //    PoliticalStudiesAndInternationalRelations,
 
-            // Science
-            [Display(Name = "Chemistry")]
-            Chemistry,
+        //    // Science
+        //    [Display(Name = "Chemistry")]
+        //    Chemistry,
 
-            [Display(Name = "Mathematics")]
-            Mathematics,
+        //    [Display(Name = "Mathematics")]
+        //    Mathematics,
 
-            [Display(Name = "Physics")]
-            Physics,
+        //    [Display(Name = "Physics")]
+        //    Physics,
 
-            [Display(Name = "Zoology and Entomology")]
-            ZoologyAndEntomology,
+        //    [Display(Name = "Zoology and Entomology")]
+        //    ZoologyAndEntomology,
 
-            // Additional Departments
-            [Display(Name = "Computer Science")]
-            ComputerScience,
+        //    // Additional Departments
+        //    [Display(Name = "Computer Science")]
+        //    ComputerScience,
 
-            [Display(Name = "Geosciences")]
-            Geosciences,
+        //    [Display(Name = "Geosciences")]
+        //    Geosciences,
 
-            [Display(Name = "Human Physiology")]
-            HumanPhysiology,
+        //    [Display(Name = "Human Physiology")]
+        //    HumanPhysiology,
 
-            [Display(Name = "Molecular Medicine and Haematology")]
-            MolecularMedicineAndHaematology,
+        //    [Display(Name = "Molecular Medicine and Haematology")]
+        //    MolecularMedicineAndHaematology,
 
-            [Display(Name = "School of Accountancy")]
-            SchoolOfAccountancy
-        }
+        //    [Display(Name = "School of Accountancy")]
+        //    SchoolOfAccountancy
+        //}
 
     }
 }
