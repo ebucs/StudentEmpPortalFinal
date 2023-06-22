@@ -2,16 +2,17 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.EntityFrameworkCore;
 using StudentEmploymentPortal.Areas.Identity;
 using StudentEmploymentPortal.Areas.studentj.Models;
 using StudentEmploymentPortal.Data;
-using StudentEmploymentPortal.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using StudentEmploymentPortal.Utility;
+using StudentEmploymentPortal.Areas.jobpostA.Models;
+using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
+using StudentEmploymentPortal.ViewModels.StudentViewModels;
 
 namespace StudentEmploymentPortal.Areas.studentj.Controllers
 {
@@ -189,10 +190,129 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
             return View("ManageProfile", viewModel);
         }
 
-        public IActionResult SearchAndApply()
+        public async Task<IActionResult> SearchAndApply()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(User);
+            var student = await _context.Student.FindAsync(user.Id);
+            var jobPostsIds = new List<string>();
+            var jobPosts = new List<JobPost>();
+
+            if (student != null)
+            {
+                var studentYearOfStudy = student.CurrentYearOfStudy;
+
+                if (studentYearOfStudy.Equals("FirstYear"))
+                {
+                    jobPostsIds = await _context.YearsOfStudy
+                        .Where(y => y.IsFirstYear)
+                        .Select(y => y.JobPostId)
+                        .ToListAsync();
+                }
+                else if (studentYearOfStudy.Equals("SecondYear"))
+                {
+                    jobPostsIds = await _context.YearsOfStudy
+                        .Where(y => y.IsSecondYear)
+                        .Select(y => y.JobPostId)
+                        .ToListAsync();
+                }
+                else if (studentYearOfStudy.Equals("ThirdYear"))
+                {
+                    jobPostsIds = await _context.YearsOfStudy
+                        .Where(y => y.IsThirdYear)
+                        .Select(y => y.JobPostId)
+                        .ToListAsync();
+                }
+                else if (studentYearOfStudy.Equals("Honours"))
+                {
+                    jobPostsIds = await _context.YearsOfStudy
+                        .Where(y => y.IsHonours)
+                        .Select(y => y.JobPostId)
+                        .ToListAsync();
+                }
+                else if (studentYearOfStudy.Equals("Graduates"))
+                {
+                    jobPostsIds = await _context.YearsOfStudy
+                        .Where(y => y.IsGraduates)
+                        .Select(y => y.JobPostId)
+                        .ToListAsync();
+                }
+                else if (studentYearOfStudy.Equals("Masters"))
+                {
+                    jobPostsIds = await _context.YearsOfStudy
+                        .Where(y => y.IsMasters)
+                        .Select(y => y.JobPostId)
+                        .ToListAsync();
+                }
+                else if (studentYearOfStudy.Equals("PhD"))
+                {
+                    jobPostsIds = await _context.YearsOfStudy
+                        .Where(y => y.IsPhD)
+                        .Select(y => y.JobPostId)
+                        .ToListAsync();
+                }
+                else
+                { 
+                    jobPostsIds = await _context.YearsOfStudy
+                        .Where(y => y.IsPostdoc)
+                        .Select(y => y.JobPostId)
+                        .ToListAsync();
+                }
+                
+
+                foreach (var jobPostId in jobPostsIds)
+                {
+                    var jobPost = await _context.JobPost.FindAsync(jobPostId);
+                    jobPosts.Add(jobPost);
+                }
+
+            }
+            else
+            {
+                ViewData["Message"] = "Complete profile to view posts";
+            }
+
+            return View(jobPosts);
         }
+
+        public async Task<IActionResult> StudentPartialJobPostDetails(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // Retrieve the jobpost based on the id
+            var jobPost = await _context.JobPost.FirstOrDefaultAsync(r => r.JobPostId == id);
+           
+
+            if (jobPost == null)
+            {
+                return NotFound();
+            }
+
+           
+            // Create a new instance of JobPostViewModel and populate it with the data
+            var viewModel = new StudentJobPostViewModel
+            {
+                JobPostId = jobPost.JobPostId,
+                JobTitle = jobPost.JobTitle,
+                Location = jobPost.Location,
+                JobDescription = jobPost.JobDescription,
+                KeyResponsibilities = jobPost.KeyResponsibilities,
+                JobType = jobPost.JobType,
+                PartTimeNumberOfHours = (JobPost.EnumWeekHours)jobPost.PartTimeNumberOfHours,
+                StartDate = jobPost.StartDate,
+                EndDate = jobPost.EndDate,
+                HourlyRate = jobPost.HourlyRate,
+                MinRequirements = jobPost.MinRequirements,
+                ApplicationInstruction = jobPost.ApplicationInstruction,
+                ClosingDate = jobPost.ClosingDate,
+               
+            };
+
+            return PartialView(viewModel);
+        }
+
 
         public IActionResult ApplicationsHistory()
         {

@@ -277,6 +277,7 @@ namespace StudentEmploymentPortal.Migrations
                         .HasColumnType("Date");
 
                     b.Property<string>("Faculty")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HourlyRate")
@@ -424,6 +425,39 @@ namespace StudentEmploymentPortal.Migrations
                     b.HasKey("RecruiterId");
 
                     b.ToTable("Recruiter");
+                });
+
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentApplicationJ.Models.StudentApplication", b =>
+                {
+                    b.Property<string>("ApplicationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("JobPostId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RecruiterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ApplicationId");
+
+                    b.ToTable("StudentApplication");
                 });
 
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Student", b =>

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using StudentEmploymentPortal.Areas.Identity;
 using StudentEmploymentPortal.Areas.jobpostA.Models;
 using StudentEmploymentPortal.Areas.recruiterj.Models;
+using StudentEmploymentPortal.Areas.studentApplicationJ.Models;
 using StudentEmploymentPortal.Areas.studentj.Models;
 using StudentEmploymentPortal.ViewModels;
 
@@ -21,6 +22,7 @@ namespace StudentEmploymentPortal.Data
         public DbSet<Student> Student { get; set; }
         public DbSet<JobPost> JobPost { get; set; }
         public DbSet<YearsOfStudy> YearsOfStudy { get; set; }
+        public DbSet<StudentApplication> StudentApplication { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

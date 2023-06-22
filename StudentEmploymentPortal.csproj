@@ -33,7 +33,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.14" />
     <PackageReference Include="Toastr" Version="2.1.1" />
   </ItemGroup>
 
@@ -46,6 +46,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\recruiterj\Data\" />
+    <Folder Include="Areas\studentApplicationJ\Data\" />
     <Folder Include="Areas\studentj\Data\" />
   </ItemGroup>
 

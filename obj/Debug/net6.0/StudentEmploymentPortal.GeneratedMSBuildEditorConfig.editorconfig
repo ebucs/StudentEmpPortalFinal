@@ -116,6 +116,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNccmVjcnVpdGVyalxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/User/Desktop/StudentEmpPortalFinal/Areas/studentApplicationJ/Views/StudentApplication/AddApplicationDocument.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudEFwcGxpY2F0aW9uSlxWaWV3c1xTdHVkZW50QXBwbGljYXRpb25cQWRkQXBwbGljYXRpb25Eb2N1bWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/Desktop/StudentEmpPortalFinal/Areas/studentj/Views/Student/ManageProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudGpcVmlld3NcU3R1ZGVudFxNYW5hZ2VQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -126,6 +130,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/User/Desktop/StudentEmpPortalFinal/Areas/studentj/Views/Student/StudentDashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudGpcVmlld3NcU3R1ZGVudFxTdHVkZW50RGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/StudentEmpPortalFinal/Areas/studentj/Views/Student/StudentPartialJobPostDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudGpcVmlld3NcU3R1ZGVudFxTdHVkZW50UGFydGlhbEpvYlBvc3REZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/Desktop/StudentEmpPortalFinal/Areas/studentj/Views/_ViewImports.cshtml]
