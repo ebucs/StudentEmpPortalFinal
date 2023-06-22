@@ -266,6 +266,7 @@ namespace StudentEmploymentPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Department")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")

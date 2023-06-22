@@ -45,24 +45,10 @@
 
 .navbar-nav .nav-link {
     font-size: 16px;
-    margin-left: 10px;
-    margin-right: 10px;
     transition: color 0.3s, box-shadow 0.3s !important;
-    position: relative;
 }
 
 .navbar-nav .nav-link:hover {
-    color: #007bff !important;
-    box-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff;
+    color: #ffffff !important; /* Change to your desired whiteish color */
+    box-shadow: 0 0 10px#ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -9,17 +9,24 @@
 <div class="partial-view-container container pt-4">
     <h1>@ViewData["Title"]</h1>
 
-    <form id="ApproveRecruiter" method="post" asp-controller="Approver" asp-action="PartialJobPostDetails">
+    <form id="ApproveRecruiterJobPost" method="post" asp-controller="Approver" asp-action="PartialJobPostDetails">
         <div class="recruiter-details pb-4">
             <p><strong>Recruiter Type:</strong> @Model.RecruiterType</p>
-            <p><strong>Faculty:</strong> @Model.Faculty</p>
+            @if (Model.RecruiterType.ToString() == "Internal")
+            {
+                <p><strong>Faculty:</strong> @Model.Faculty</p>
+            }
+
             <p><strong>Department:</strong> @Model.Department</p>
             <p><strong>Job Title:</strong> @Model.JobTitle</p>
             <p><strong>Location:</strong> @Model.Location</p>
             <p><strong>Job Description:</strong> @Model.JobDescription</p>
             <p><strong>Key Responsibilities:</strong> @Model.KeyResponsibilities</p>
             <p><strong>Job Type:</strong> @Model.JobType</p>
-            <p><strong>Part-Time Number of Hours:</strong> @Model.PartTimeNumberOfHours</p>
+            @if (Model.JobType.ToString() != "FullTime")
+            {
+                <p><strong>Part-Time Number of Hours:</strong> @Model.PartTimeNumberOfHours</p>
+            }
             <p><strong>Start Date:</strong> @Model.StartDate.ToString("MM/dd/yyyy")</p>
             <p><strong>End Date:</strong> @Model.EndDate.ToString("MM/dd/yyyy")</p>
             <p><strong>Hourly Rate:</strong> @Model.HourlyRate</p>
@@ -39,18 +46,6 @@
                     }
                 </ul>
             </div>
-
-
-
-
-            <!-- Display the approver's note and outcome -->
-            @*@if (User.IsInRole("Approver"))
-            {
-                <div class="approver-details">
-                    <p><strong>Approver's Note:</strong> @Model.ApproversNote</p>
-                    <p><strong>Outcome:</strong> @Model.ApprovalStatus</p>
-                </div>
-            }*@
 
             <!-- Add input fields for adding a note and changing the outcome -->
             <div class="input-fields">

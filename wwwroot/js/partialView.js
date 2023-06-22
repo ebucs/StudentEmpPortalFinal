@@ -6,11 +6,15 @@
             var registeredName = $(this).find('td:nth-child(2)').text().toLowerCase();
             var tradingName = $(this).find('td:nth-child(3)').text().toLowerCase();
             var regNumber = $(this).find('td:nth-child(4)').text().toLowerCase();
+            var status = $(this).find('td:nth-child(6)').text().toLowerCase();
 
-            if (firstName.includes(searchText) ||
+            if (
+                firstName.includes(searchText) ||
                 registeredName.includes(searchText) ||
                 tradingName.includes(searchText) ||
-                regNumber.includes(searchText)) {
+                regNumber.includes(searchText) ||
+                status.includes(searchText)
+            ) {
                 $(this).show();
             } else {
                 $(this).hide();

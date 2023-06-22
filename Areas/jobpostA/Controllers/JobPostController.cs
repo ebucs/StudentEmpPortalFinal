@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using StudentEmploymentPortal.Areas.Identity;
 using StudentEmploymentPortal.Areas.jobpostA.Models;
+using StudentEmploymentPortal.Areas.recruiterj.Models;
 using StudentEmploymentPortal.Data;
 using StudentEmploymentPortal.Utility;
 using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
@@ -55,12 +57,10 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Controllers
         public async Task<IActionResult> CreateJobPost()
         {
             var user = await _userManager.GetUserAsync(User);
+            var recruiter = await _context.Recruiter.FindAsync(user.Id);
 
-            if (user == null)
-            {
-                // Handle the case when the user is not found
-                return NotFound();
-            }
+            // Set the ViewBag.TradingName
+            ViewBag.TradingName = recruiter.TradingName;
 
             var viewModel = new JobPostViewModel
             {
@@ -72,6 +72,7 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Controllers
             return View(viewModel);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveJobPost(JobPostViewModel viewModel)
@@ -79,6 +80,7 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
+                var recruiter = await _context.Recruiter.FindAsync(user.Id);
 
                 if (user == null)
                 {
@@ -91,7 +93,8 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Controllers
                     RecruiterId = user.Id,
                     RecruiterType = viewModel.RecruiterType,
                     Faculty = viewModel.Faculty,
-                    Department = viewModel.Department,
+                    Department =  viewModel.Department,
+
                     JobTitle = viewModel.JobTitle,
                     Location = viewModel.Location,
                     JobDescription = viewModel.JobDescription,
@@ -137,7 +140,11 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Controllers
                 Toaster.AddSuccessToastMessage(TempData, "Job Post Created Successfully.");
                 return RedirectToAction("RecruiterDashboard", "Recruiter", new { area = "RecruiterJ" });
             }
-
+            // Log or handle the validation errors
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine("Validation Error: " + error.ErrorMessage);
+            }
             return View(viewModel);
         }
 

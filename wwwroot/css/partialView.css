@@ -28,26 +28,26 @@
 }
 
 
-    .partial-view-container h1 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
+.partial-view-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
 
-    .partial-view-container .input-fields {
-        margin-top: 20px;
-    }
+.partial-view-container .input-fields {
+    margin-top: 20px;
+}
 
-        .partial-view-container .input-fields .form-floating {
-            margin-bottom: 10px;
-        }
+.partial-view-container .input-fields .form-floating {
+    margin-bottom: 10px;
+}
 
-    .partial-view-container .button-container {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin-top: 20px;
-    }
+.partial-view-container .button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+}
 
-        .partial-view-container .button-container button {
-            margin-left: 10px;
-        }
+.partial-view-container .button-container button {
+    margin-left: 10px;
+}

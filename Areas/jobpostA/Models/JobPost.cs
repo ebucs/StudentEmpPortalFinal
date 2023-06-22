@@ -29,9 +29,9 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
         [Required(ErrorMessage = "Internal Or External is required.")]
         public EnumRecruiterType RecruiterType { get; set; }
 
-        public EnumFaculty? Faculty { get; set; }
+        public EnumFaculty Faculty { get; set; }
 
-        public string? Department { get; set; }
+        public string Department { get; set; }
 
         [Required(ErrorMessage = "Job Title field is required.")]
         public string JobTitle { get; set; }
@@ -94,7 +94,6 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
         public JobPost()
         {
             RecruiterType = EnumRecruiterType.Internal;
-            Department = string.Empty;
             JobTitle = string.Empty;
             Location = string.Empty;
             JobDescription = string.Empty;
@@ -169,6 +168,7 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
 
         public enum EnumFaculty
         {
+            NA,
             [Display(Name = "Commerce, Law and Management")]
             CommerceLawAndManagement,
 
@@ -184,94 +184,6 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
             [Display(Name = "Science")]
             Science
         }
-
-        //public enum EnumDepartment
-        //{
-        //    // Commerce, Law and Management
-        //    None,
-        //    [Display(Name = "Accounting")]
-        //    Accounting,
-
-        //    [Display(Name = "Economic and Business Sciences")]
-        //    EconomicAndBusinessSciences,
-
-        //    [Display(Name = "Finance and Investment Management")]
-        //    FinanceAndInvestmentManagement,
-
-        //    [Display(Name = "Industrial Psychology and People Management")]
-        //    IndustrialPsychologyAndPeopleManagement,
-
-        //    [Display(Name = "Law")]
-        //    Law,
-
-        //    // Engineering and the Built Environment
-        //    [Display(Name = "Chemical Engineering")]
-        //    ChemicalEngineering,
-
-        //    [Display(Name = "Civil and Environmental Engineering")]
-        //    CivilAndEnvironmentalEngineering,
-
-        //    [Display(Name = "Electrical and Information Engineering")]
-        //    ElectricalAndInformationEngineering,
-
-        //    [Display(Name = "Mechanical, Industrial and Aeronautical Engineering")]
-        //    MechanicalIndustrialAndAeronauticalEngineering,
-
-        //    // Health Sciences
-        //    [Display(Name = "Anatomy")]
-        //    Anatomy,
-
-        //    [Display(Name = "Dentistry")]
-        //    Dentistry,
-
-        //    [Display(Name = "Medicine")]
-        //    Medicine,
-
-        //    [Display(Name = "Pharmacy and Pharmacology")]
-        //    PharmacyAndPharmacology,
-
-        //    // Humanities
-        //    [Display(Name = "Archaeology and Anthropology")]
-        //    ArchaeologyAndAnthropology,
-
-        //    [Display(Name = "English")]
-        //    English,
-
-        //    [Display(Name = "Geography, Archaeology and Environmental Studies")]
-        //    GeographyArchaeologyAndEnvironmentalStudies,
-
-        //    [Display(Name = "Political Studies and International Relations")]
-        //    PoliticalStudiesAndInternationalRelations,
-
-        //    // Science
-        //    [Display(Name = "Chemistry")]
-        //    Chemistry,
-
-        //    [Display(Name = "Mathematics")]
-        //    Mathematics,
-
-        //    [Display(Name = "Physics")]
-        //    Physics,
-
-        //    [Display(Name = "Zoology and Entomology")]
-        //    ZoologyAndEntomology,
-
-        //    // Additional Departments
-        //    [Display(Name = "Computer Science")]
-        //    ComputerScience,
-
-        //    [Display(Name = "Geosciences")]
-        //    Geosciences,
-
-        //    [Display(Name = "Human Physiology")]
-        //    HumanPhysiology,
-
-        //    [Display(Name = "Molecular Medicine and Haematology")]
-        //    MolecularMedicineAndHaematology,
-
-        //    [Display(Name = "School of Accountancy")]
-        //    SchoolOfAccountancy
-        //}
 
     }
 }

@@ -1,0 +1,91 @@
+﻿@model StudentEmploymentPortal.ViewModels.RecruiterViewModels.ManageRecruiterProfileViewModelcs
+@{
+    ViewData["Title"] = "Update Profile";
+}
+
+<h1 class="pt-4">@ViewData["Title"]</h1>
+
+<hr class="col-md-7" />
+
+<div class="row pt-4">
+    <div class="col-md-7">
+        <form id="updateform" method="post" asp-controller="Recruiter" asp-action="ManageProfile">
+            @Html.AntiForgeryToken()
+
+            <div class=" form-floating mt-2 p-2 border border-dark-subtle rounded" style="width: auto;">
+                <p><strong>Approver's Note:</strong> @Model.ApproverNote</p>
+                <p><strong>Outcome:</strong> @Model.Outcome</p>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="Title" class="col-form-label-sm">Title (Mr/Miss/Mrs)</label>
+                <input asp-for="Title" class="form-control" readonly />
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="FirstName" class="col-form-label-sm">First Name</label>
+                <input asp-for="FirstName" class="form-control" readonly />
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="Surname" class="col-form-label-sm"></label>
+                <input asp-for="Surname" class="form-control" readonly />
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="Email" class="col-form-label-sm"></label>
+                <input asp-for="Email" class="form-control" readonly />
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="PhoneNumber" class="col-form-label-sm">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control" />
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="Telephone" class="col-form-label-sm"></label>
+                <input asp-for="Telephone" class="form-control" />
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="RegisteredAddress" class="col-form-label-sm">Registered Address</label>
+                <input asp-for="RegisteredAddress" class="form-control" />
+                <span asp-validation-for="RegisteredAddress" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="JobTitle" class="col-form-label-sm">Job Title</label>
+                <input asp-for="JobTitle" class="form-control" />
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="RegistrationNumber" class="col-form-label-sm">Registration Number</label>
+                <input asp-for="RegistrationNumber" class="form-control" />
+                <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="RegisteredName" class="col-form-label-sm">Registered Name</label>
+                <input asp-for="RegisteredName" class="form-control" />
+                <span asp-validation-for="RegisteredName" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="TradingName" class="col-form-label-sm">Trading Name</label>
+                <input asp-for="TradingName" class="form-control" />
+                <span asp-validation-for="TradingName" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <label asp-for="BusinessType" class="col-form-label-sm">Business Type</label>
+                <input asp-for="BusinessType" class="form-control" />
+                <span asp-validation-for="BusinessType" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2">
+                <button type="submit" class="btn btn-primary col-md-12">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
