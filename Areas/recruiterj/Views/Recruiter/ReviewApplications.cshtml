@@ -1,0 +1,57 @@
+﻿@model List<StudentEmploymentPortal.Areas.studentj.Models.Student>
+@using StudentEmploymentPortal.Areas.Identity
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Search And Apply";
+}
+
+<h1 class="mb-4 mt-3">Review Applications</h1>
+
+<form method="post" action="">
+    <div class="input-group mb-3">
+        <label class="sr-only" for="searchInput">Search</label>
+        <input class="form-control" type="text" name="search" id="searchInput" placeholder="Search">
+    </div>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-default">
+            <thead>
+                <tr class="table-primary">
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Department</th>
+                    <th>Course</th>
+                    <th>Level</th>
+                    <th>Gender</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var studentApplication in Model)
+                {
+                    <tr>
+                        <td>@studentApplication.Faculty</td>
+                        <td>@studentApplication.Faculty</td>
+                        <td>@studentApplication.Faculty</td>
+                        <td>@studentApplication.Department</td>
+                        <td>@studentApplication.CurrentYearOfStudy</td>
+                        <td>@studentApplication.Gender</td>
+                        <td>@studentApplication.Gender</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>Complete profile to view posts.</p>
+}
+
+<div class="partial-view-overlay"></div> <!-- Overlay div to cover the page -->
+
+<div class="partial-view-container container pt-4"></div>
