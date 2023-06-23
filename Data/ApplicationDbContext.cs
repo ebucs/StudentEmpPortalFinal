@@ -23,6 +23,7 @@ namespace StudentEmploymentPortal.Data
         public DbSet<JobPost> JobPost { get; set; }
         public DbSet<YearsOfStudy> YearsOfStudy { get; set; }
         public DbSet<StudentApplication> StudentApplication { get; set; }
+        public DbSet<ApplicationDocument> ApplicationDocument { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

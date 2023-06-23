@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StudentEmploymentPortal.Areas.Identity;
+using StudentEmploymentPortal.Areas.jobpostA.Models;
 using StudentEmploymentPortal.Areas.recruiterj.Models;
+using StudentEmploymentPortal.Areas.studentApplicationJ.Models;
 using StudentEmploymentPortal.Data;
 using StudentEmploymentPortal.Utility;
 using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
@@ -246,6 +249,32 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> ReviewApplications()
+        {
+            
+            var user = await _userManager.GetUserAsync(User);
+            var recruiter = await _context.Recruiter.FindAsync(user.Id);
+
+
+            if (recruiter != null)
+            {
+                var studentApplications = await _context.StudentApplication
+                   .Where(r => r.RecruiterId == recruiter.RecruiterId)
+                   .ToListAsync();
+
+                foreach (var students in studentApplications)
+                {
+                    var studentsWhoApplied = await _context.Student
+                   .Where(r => r.StudentId == students.StudentId)
+                   .ToListAsync();
+
+                    ViewBag.StudentApplications = studentApplications;
+                    return View(studentsWhoApplied);
+                }
+            }
+
+            return NotFound();
+        }
 
 
     }

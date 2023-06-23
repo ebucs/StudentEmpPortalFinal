@@ -199,7 +199,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
 
             if (student != null)
             {
-                var studentYearOfStudy = student.CurrentYearOfStudy;
+                var studentYearOfStudy = student.CurrentYearOfStudy.ToString();
 
                 if (studentYearOfStudy.Equals("FirstYear"))
                 {
