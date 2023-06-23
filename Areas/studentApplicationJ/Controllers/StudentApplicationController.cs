@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentEmploymentPortal.Areas.Identity;
+using StudentEmploymentPortal.Areas.jobpostA.Models;
 using StudentEmploymentPortal.Areas.studentApplicationJ.Models;
+using StudentEmploymentPortal.Areas.studentj.Models;
 using StudentEmploymentPortal.Data;
+using StudentEmploymentPortal.Utility;
 using StudentEmploymentPortal.ViewModels.StudentViewModels;
 
 namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
@@ -67,6 +70,43 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
         {
             ViewData["ApplicationId"] = id;
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadDocument(IFormFile file, string DocumentName, string ApplicationId)
+        {
+            if (file != null && file.Length > 0)
+            {
+                var StudentApplication = await _context.StudentApplication.FirstOrDefaultAsync(a => a.ApplicationId == ApplicationId);
+
+                if(StudentApplication != null)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await file.CopyToAsync(memoryStream);
+
+                        // Convert the uploaded file to a byte array
+                        byte[] document = memoryStream.ToArray();
+
+                        // Create a new Document instance and set its properties
+                        var applicationDocument = new ApplicationDocument
+                        {
+                            ApplicationId = ApplicationId,
+                            DocumentName = DocumentName,
+                            Documet = document
+                        };
+
+                        // Save the document to the database
+                        // You can use your preferred data access method (e.g., Entity Framework Core)
+                        _context.ApplicationDocument.Add(applicationDocument);
+                        await _context.SaveChangesAsync();
+                    }
+                   
+                    Toaster.AddSuccessToastMessage(TempData, "Application submitted.");
+                    return RedirectToAction("SearchAndApply", "Student", new { area = "StudentJ"});
+                }
+            }
+            return RedirectToAction("Index");
         }
     }
 }

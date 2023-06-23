@@ -427,6 +427,29 @@ namespace StudentEmploymentPortal.Migrations
                     b.ToTable("Recruiter");
                 });
 
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentApplicationJ.Models.ApplicationDocument", b =>
+                {
+                    b.Property<string>("ApplicationDocumentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApplicationId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DocumentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Documet")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("ApplicationDocumentId");
+
+                    b.ToTable("ApplicationDocument");
+                });
+
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentApplicationJ.Models.StudentApplication", b =>
                 {
                     b.Property<string>("ApplicationId")
