@@ -25,6 +25,8 @@ namespace StudentEmploymentPortal.Data
         public DbSet<StudentApplication> StudentApplication { get; set; }
         public DbSet<ApplicationDocument> ApplicationDocument { get; set; }
         public DbSet<Qualification> Qualification { get; set; }
+        public DbSet<WorkExperience> WorkExperience { get; set; }
+        public DbSet<Referee> Referee { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -49,10 +51,6 @@ namespace StudentEmploymentPortal.Data
 
             modelBuilder.Entity<Student>()
                 .Property(s => s.Faculty)
-                .HasConversion<string>();
-
-            modelBuilder.Entity<Student>()
-                .Property(s => s.Department)
                 .HasConversion<string>();
 
             modelBuilder.Entity<Student>()

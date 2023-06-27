@@ -54,7 +54,10 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
 
             if (user != null)
             {
-                var student = await _context.Student.Include(s => s.Qualifications)
+                var student = await _context.Student
+                    .Include(s => s.Qualifications)
+                    .Include(s => s.WorkExperience)
+                    .Include(s => s.Referee)
                     .FirstOrDefaultAsync(s => s.StudentId == user.Id);
 
                 if (student != null)
@@ -78,7 +81,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                             SelectedNationality = student.Nationality,
                             SelectedCurrentYearOfStudy = student.CurrentYearOfStudy,
                             SelectedFaculty = student.Faculty,
-                            SelectedDepartment = student.Department,
+                            Department = student.Department,
 
                             // Non-editable fields
                             FirstName = user.FirstName,
@@ -94,18 +97,103 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                             Subjects = q.Subjects,
                             Majors = q.Majors,
                             Submajors = q.Submajors,
-                            Research = q.Research
+                            Research = q.Research,
+                        }).ToList(),
+                        Referees = student.Referee.Select(q => new RefereeViewModel
+                        {
+                            RefereeId = q.RefereeId,
+                            FullName = q.FullName,
+                            JobTitle = q.JobTitle,
+                            Institution = q.Institution,
+                            Cellphone = q.Cellphone,
+                            Email = q.Email,
+                        }).ToList(),
+                        WorkExperiences = student.WorkExperience.Select(q => new WorkExperienceViewModel
+                        {
+                            WorkExperienceId = q.WorkExperienceId,
+                            Employer = q.Employer,
+                            Date = q.Date,
+                            JobTitle = q.JobTitle,
+                            TaskandResponsibilities = q.TaskandResponsibilities,
                         }).ToList()
                     };
                     // Return the full view with the viewModel
                     return View(viewModel);
-
                 }
             }
 
             // Handle the case when the user is not found
             return NotFound();
         }
+
+        [HttpGet]
+        public List<string> GetDepartments(string faculty)
+        {
+
+
+            List<string> CommerceLawAndManagement = new List<string>() { "Economic And Business Sciences",
+                                                                         "Finance And Investment Management",
+                                                                         "Industrial Psychology And People Management",
+                                                                         "Chemical Engineering",
+                                                                         "Law"};
+
+
+
+            List<string> EngineeringAndBuiltEnvironment = new List<string>() { "Chemical Engineering",
+                                                                               "Civil And Environmental Engineering",
+                                                                               "Electrical And Information Engineering",
+                                                                               "Mechanical Industrial And Aeronautical Engineering"};
+            List<string> HealthSciences = new List<string>() { "Anatomy",
+                                                               "Dentistry",
+                                                               "Medicine",
+                                                               "Pharmacy And Pharmacology"};
+            List<string> Humanities = new List<string>() { "Archaeology And Anthropology",
+                                                           "Geography Archaeology And Environmental Studies",
+                                                           "Political Studies And International Relations"};
+            List<string> Science = new List<string>() { "Chemistry",
+                                                        "Mathematics",
+                                                        "Physics",
+                                                        "Zoology And Entomology",
+                                                        "Computer Science",
+                                                        "Geosciences",
+                                                        "Human Physiology",
+                                                        "Molecular Medicine And Haematology",
+                                                        "School Of Accountancy"};
+
+
+
+            if (faculty.Equals("CommerceLawAndManagement"))
+            {
+                return CommerceLawAndManagement;
+            }
+            else if (faculty.Equals("EngineeringAndBuiltEnvironment"))
+
+
+
+            {
+                return EngineeringAndBuiltEnvironment;
+            }
+            else if (faculty.Equals("HealthSciences"))
+
+
+
+            {
+                return HealthSciences;
+            }
+            else if (faculty.Equals("Humanities"))
+
+
+
+            {
+                return Humanities;
+            }
+            else
+            {
+                return Science;
+            }
+
+        }
+
 
 
         [HttpPost]
@@ -136,7 +224,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                         student.Nationality = viewModel.StudentProfile.SelectedNationality;
                         student.CurrentYearOfStudy = viewModel.StudentProfile.SelectedCurrentYearOfStudy;
                         student.Faculty = viewModel.StudentProfile.SelectedFaculty;
-                        student.Department = viewModel.StudentProfile.SelectedDepartment;
+                        student.Department = viewModel.StudentProfile.Department;
 
                         // Save the changes
                         await _context.SaveChangesAsync();
@@ -274,7 +362,9 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
             return PartialView(viewModel);
         }
 
-        //Qualifications
+
+
+        /////////////////QUALIFICATION////////////
 
         public IActionResult AddQualificationpv()
         {
@@ -290,6 +380,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
 
         // HTTP POST method to save the addition of a qualification
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddQualification(QualificationViewModel viewModel)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -353,6 +444,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditQualification(QualificationViewModel viewModel)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -404,12 +496,268 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
         }
 
 
+        /////////////////END OF QUALIFICATION////////////
 
 
 
+        /////////////////REFEREE////////////
+
+
+        public IActionResult AddRefereepv()
+        {
+            var viewModel = new RefereeViewModel
+            {
+                RefereeId = Guid.NewGuid().ToString(), // Generate a new referee ID,
+            };
+
+            return PartialView(viewModel);
+        }
 
 
 
+        // HTTP POST method to save the addition of a Referee
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReferee(RefereeViewModel viewModel)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                var student = await _context.Student.FirstOrDefaultAsync(s => s.StudentId == user.Id);
+
+                if (ModelState.IsValid && student != null)
+                {
+
+                    // Create a new Referee entity and map the properties from the view model
+                    var newReferee = new Referee
+                    {
+
+                        RefereeId = viewModel.RefereeId,
+                        FullName = viewModel.FullName,
+                        JobTitle = viewModel.JobTitle,
+                        Institution = viewModel.Institution,
+                        Cellphone = viewModel.Cellphone,
+                        Email = viewModel.Email,
+                        StudentId = student.StudentId // Set the StudentId using the current student's ID
+                    };
+
+                    _context.Referee.Add(newReferee);
+                    await _context.SaveChangesAsync();
+                    Toaster.AddSuccessToastMessage(TempData, "Profile updated successfully.");
+                    return RedirectToAction("ManageProfile");
+                }
+            }
+
+            // Handle invalid model state, user, Referee
+            return RedirectToAction("ManageProfile");
+        }
+
+        public IActionResult EditReferee(string refereeId)
+        {
+            var referee = _context.Referee.FirstOrDefault(q => q.RefereeId == refereeId);
+
+            if (referee != null)
+            {
+                var viewModel = new RefereeViewModel
+                {
+                    RefereeId = referee.RefereeId,
+                    FullName = referee.FullName,
+                    JobTitle = referee.JobTitle,
+                    Institution = referee.Institution,
+                    Cellphone = referee.Cellphone,
+                    Email = referee.Email,
+                };
+
+                return PartialView(viewModel);
+            }
+
+            // Handle qualification not found
+            return RedirectToAction("ManageProfile");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditReferee(RefereeViewModel viewModel)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                var student = await _context.Student.FirstOrDefaultAsync(s => s.StudentId == user.Id);
+
+                if (ModelState.IsValid && student != null)
+                {
+                    var referee = await _context.Referee.FindAsync(viewModel.RefereeId);
+
+                    if (referee != null)
+                    {
+                        referee.FullName = viewModel.FullName;
+                        referee.JobTitle = viewModel.JobTitle;
+                        referee.Institution = viewModel.Institution;
+                        referee.Cellphone = viewModel.Cellphone;
+                        referee.Email = viewModel.Email;
+
+                        await _context.SaveChangesAsync();
+                        Toaster.AddSuccessToastMessage(TempData, "Profile updated successfully.");
+                        return RedirectToAction("ManageProfile");
+                    }
+                }
+            }
+
+            // Handle invalid model state, user, or qualification
+            return RedirectToAction("ManageProfile");
+        }
+
+
+
+        // HTTP POST method to delete a Referee
+        [HttpPost]
+        public async Task<IActionResult> DeleteReferee(RefereeViewModel viewModel)
+        {
+            var referee = await _context.Referee.FindAsync(viewModel.RefereeId);
+
+            if (referee != null)
+            {
+                _context.Referee.Remove(referee);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("ManageProfile");
+        }
+
+
+        /////////////////END OF REFEREE////////////
+
+
+
+        /////////////////WORK EXPERIENCE////////////
+
+
+        public IActionResult AddWorkExperiencepv()
+        {
+            var viewModel = new WorkExperienceViewModel
+            {
+                WorkExperienceId = Guid.NewGuid().ToString(), // Generate a new work experience ID,
+            };
+
+            return PartialView(viewModel);
+        }
+
+
+
+        // HTTP POST method to save the addition of a work experience
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddWorkExperience(WorkExperienceViewModel viewModel)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                var student = await _context.Student.FirstOrDefaultAsync(s => s.StudentId == user.Id);
+
+                if (ModelState.IsValid && student != null)
+                {
+
+                    // Create a new work experience entity and map the properties from the view model
+                    var newWorkExpeience = new WorkExperience
+                    {
+
+                        WorkExperienceId = viewModel.WorkExperienceId,
+                        Employer = viewModel.Employer,
+                        Date = viewModel.Date,
+                        JobTitle = viewModel.JobTitle,
+                        TaskandResponsibilities = viewModel.TaskandResponsibilities,
+                        StudentId = student.StudentId // Set the StudentId using the current student's ID
+                    };
+
+                    _context.WorkExperience.Add(newWorkExpeience);
+                    await _context.SaveChangesAsync();
+                    Toaster.AddSuccessToastMessage(TempData, "Profile updated successfully.");
+                    return RedirectToAction("ManageProfile");
+                }
+            }
+
+            // Handle invalid model state, user, or workexperience
+            return RedirectToAction("ManageProfile");
+        }
+
+        public IActionResult EditWorkExperience(string workExperienceId)
+        {
+            var workExperience = _context.WorkExperience.FirstOrDefault(q => q.WorkExperienceId == workExperienceId);
+
+            if (workExperience != null)
+            {
+                var viewModel = new WorkExperienceViewModel
+                {
+                    WorkExperienceId = workExperience.WorkExperienceId,
+                    Employer = workExperience.Employer,
+                    Date = workExperience.Date,
+                    JobTitle = workExperience.JobTitle,
+                    TaskandResponsibilities = workExperience.TaskandResponsibilities,
+                };
+
+                return PartialView(viewModel);
+            }
+
+            // Handle work experience not found
+            return RedirectToAction("ManageProfile");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditWorkExperience(WorkExperienceViewModel viewModel)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                var student = await _context.Student.FirstOrDefaultAsync(s => s.StudentId == user.Id);
+
+                if (ModelState.IsValid && student != null)
+                {
+                    var workExperience = await _context.WorkExperience.FindAsync(viewModel.WorkExperienceId);
+
+                    if (workExperience != null)
+                    {
+                        workExperience.Employer = viewModel.Employer;
+                        workExperience.Date = viewModel.Date;
+                        workExperience.JobTitle = viewModel.JobTitle;
+                        workExperience.TaskandResponsibilities = viewModel.TaskandResponsibilities;
+
+                        await _context.SaveChangesAsync();
+                        Toaster.AddSuccessToastMessage(TempData, "Profile updated successfully.");
+                        return RedirectToAction("ManageProfile");
+                    }
+                }
+            }
+
+            // Handle invalid model state, user, or work experience
+            return RedirectToAction("ManageProfile");
+        }
+
+
+
+        // HTTP POST method to delete a Work Experience
+        [HttpPost]
+        public async Task<IActionResult> DeleteWorkExperience(WorkExperienceViewModel viewModel)
+        {
+            var workExperience = await _context.WorkExperience.FindAsync(viewModel.WorkExperienceId);
+
+            if (workExperience != null)
+            {
+                _context.WorkExperience.Remove(workExperience);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("ManageProfile");
+        }
+
+
+        /////////////////END OF WORK EXPERIENCE////////////
 
         public IActionResult ApplicationsHistory()
         {

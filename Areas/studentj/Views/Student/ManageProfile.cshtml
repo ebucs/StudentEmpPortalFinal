@@ -81,13 +81,14 @@
                     </div>
                     <div class="form-floating py-2 col-6">
                         <label asp-for="StudentProfile.SelectedFaculty" class="col-form-label-sm">Faculty</label>
-                        <select asp-for="StudentProfile.SelectedFaculty" asp-items="Model.StudentProfile.FacultyOptions" class="form-select" id="facultyDropdown"></select>
+                        <select asp-for="StudentProfile.SelectedFaculty" asp-items="Model.StudentProfile.FacultyOptions" class="form-select" id="facultyd"></select>
                     </div>
                     <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.SelectedDepartment" class="col-form-label-sm">Department</label>
-                        <select asp-for="StudentProfile.SelectedDepartment" asp-items="Model.StudentProfile.DepartmentOptions" class="form-select" id="departmentDropdown"></select>
-                        <span asp-validation-for="StudentProfile.SelectedDepartment" class="text-danger"></span>
+                        <label asp-for="StudentProfile.Department" class="col-form-label-sm">Department</label>
+                        <select asp-for="StudentProfile.Department" class="form-select" id="studentDepartment" name="Department"></select>
+                        <span asp-validation-for="StudentProfile.Department" class="text-danger"></span>
                     </div>
+
                     <div class="form-floating py-2 col-6">
                         <label asp-for="StudentProfile.SelectedDriversLicense" class="col-form-label-sm">Drivers License</label>
                         <select asp-for="StudentProfile.SelectedDriversLicense" asp-items="Model.StudentProfile.DriversLicenseOptions" class="form-select"></select>
@@ -123,11 +124,11 @@
             </div>
 
             <div class="tab-pane fade" id="referee" role="tabpanel">
-                <!-- Add Referee Form here -->
+                <partial name="_RefereePartial" model="Model.Referees" />
             </div>
 
             <div class="tab-pane fade" id="work-experience" role="tabpanel">
-                <!-- Add Work Experience Form here -->
+                <partial name="_WorkExperiencePartial" model="Model.WorkExperiences" />
             </div>
         </div>
 

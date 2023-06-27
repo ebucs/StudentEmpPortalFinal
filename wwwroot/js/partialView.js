@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    // Search input event
     $('#searchInput').on('input', function () {
         var searchText = $(this).val().toLowerCase();
         $('tbody tr').each(function () {
@@ -21,64 +22,50 @@
             }
         });
     });
-});
 
-function openPartialView(url) {
-    $(".partial-view-container").empty();
+    // Function to open partial view
+    function openPartialView(url, containerId) {
+        $("#" + containerId).empty();
 
-    $.get(url, function (data) {
-        $(".partial-view-container").html(data);
+        $.get(url, function (data) {
+            $("#" + containerId).html(data);
 
-        // Create a link element for the CSS file
-        var cssFile = $('<link>', {
-            rel: 'stylesheet',
-            type: 'text/css',
-            href: '/css/partialView.css' // Adjust the path to your CSS file
+            // Create a link element for the CSS file
+            var cssFile = $('<link>', {
+                rel: 'stylesheet',
+                type: 'text/css',
+                href: '/css/partialView.css' // Adjust the path to your CSS file
+            });
+
+            // Attach the onload event to ensure CSS is fully loaded before showing the partial view
+            cssFile.on('load', function () {
+                $(".partial-view-overlay").fadeIn();
+                $("#" + containerId).fadeIn();
+                $("#" + containerId).addClass('partial-view');
+            });
+
+            // Append the link element to the head of the document
+            $('head').append(cssFile);
         });
+    }
 
-        // Attach the onload event to ensure CSS is fully loaded before showing the partial view
-        cssFile.on('load', function () {
-            $(".partial-view-overlay").fadeIn();
-            $(".partial-view-container").fadeIn();
-            $(".partial-view-container").addClass('partial-view');
-        });
+    // Function to close partial view
+    function closePartialView() {
+        $(".partial-view-container").fadeOut();
+        $(".partial-view-overlay").fadeOut();
+    }
 
-        // Append the link element to the head of the document
-        $('head').append(cssFile);
-    });
-}
+    //////////// Student Qualification
 
-function closePartialView() {
-    $(".partial-view-container").fadeOut();
-    $(".partial-view-overlay").fadeOut();
-}
-
-
-////////////Student stuff
-
-$(document).ready(function () {
     // Add Qualification button click event
     $("#addQualificationButton").click(function () {
-        $.ajax({
-            url: "/studentj/Student/AddQualificationpv", // Corrected URL
-            type: "GET",
-            success: function (data) {
-                $("#addQualificationPartial").html(data);
-            }
-        });
+        openPartialView("/studentj/Student/AddQualificationpv", "addQualificationPartial");
     });
 
-    //// Edit Qualification button click event
+    // Edit Qualification button click event
     $(".editQualificationButton").click(function () {
         var qualificationId = $(this).data("qualificationid");
-        $.ajax({
-            url: "/StudentJ/Student/EditQualification",
-            type: "GET",
-            data: { qualificationId: qualificationId },
-            success: function (data) {
-                $("#editQualificationPartial").html(data);
-            }
-        });
+        openPartialView("/StudentJ/Student/EditQualification?qualificationId=" + qualificationId, "editQualificationPartial");
     });
 
     // Delete Qualification button click event
@@ -95,6 +82,65 @@ $(document).ready(function () {
             });
         }
     });
+
+
+    //////////// Student Referee
+
+    //Add Referee button click event
+    $("#addRefereeButton").click(function () {
+        openPartialView("/studentj/Student/AddRefereepv", "addRefereePartial");
+    });
+
+    // Edit Referee button click event
+    $(".editRefereeButton").click(function () {
+        var refereeId = $(this).data("refereeid");
+        openPartialView("/StudentJ/Student/EditReferee?refereeId=" + refereeId, "editRefereePartial");
+    });
+
+    // Delete Referee button click event
+    $(".deleteRefereeButton").click(function () {
+        var refereeId = $(this).data("refereeid");
+        if (confirm("Are you sure you want to delete this Referee?")) {
+            $.ajax({
+                url: "/StudentJ/Student/DeleteReferee",
+                type: "POST",
+                data: { refereeId: refereeId },
+                success: function () {
+                    location.reload();
+                }
+            });
+        }
+    });
+
+
+    //////////// Student Work Experience
+
+    // Add WorkExperience
+    $("#addWorkExperienceButton").click(function () {
+        openPartialView("/StudentJ/Student/AddWorkExperiencepv", "addWorkExperiencePartial");
+    });
+
+    // Edit Qualification button click event
+    $(".editWorkExperienceButton").click(function () {
+        var workExperienceId = $(this).data("workexperienceid");
+        openPartialView("/StudentJ/Student/EditWorkExperience?workexperienceId=" + workExperienceId, "editWorkExperiencePartial");
+    });
+
+    // Delete Work Experience button click event
+    $(".deleteWorkExperienceButton").click(function () {
+        var workExperienceId = $(this).data("workexperienceid");
+        if (confirm("Are you sure you want to delete this Work Experience?")) {
+            $.ajax({
+                url: "/StudentJ/Student/DeleteWorkExperience",
+                type: "POST",
+                data: { workExperienceId: workExperienceId },
+                success: function () {
+                    location.reload();
+                }
+            });
+        }
+    });
+
+
+
 });
-
-

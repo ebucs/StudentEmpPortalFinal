@@ -1,0 +1,25 @@
+﻿@model List<StudentEmploymentPortal.ViewModels.StudentViewModels.RefereeViewModel>
+
+<h2 class="mt-5">Referee</h2>
+<button class="btn btn-primary" id="addRefereeButton">Add</button>
+<br />
+<br />
+<div class="qualification-list">
+    @foreach (var referee in Model)
+    {
+        <div class="qualification-item">
+            <span class="qualification-name">@referee.JobTitle</span>
+            <div class="qualification-actions">
+               @* <input type="hidden" asp-for="@referee.RefereeId" name="RefereeId" />*@
+                <button class="btn btn-primary editRefereeButton" data-refereeid="@referee.RefereeId">Edit</button>
+                <button class="btn btn-danger deleteRefereeButton" data-refereeid="@referee.RefereeId">Delete</button>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Add Qualification Partial View -->
+<div id="addRefereePartial"></div>
+
+<!-- Edit Qualification Partial View -->
+<div id="editRefereePartial"></div>

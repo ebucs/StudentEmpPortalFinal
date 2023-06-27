@@ -331,7 +331,7 @@ namespace StudentEmploymentPortal.Migrations
 
                     b.HasIndex("RecruiterId");
 
-                    b.ToTable("JobPost");
+                    b.ToTable("JobPost", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmploymentPortal.Areas.jobpostA.Models.YearsOfStudy", b =>
@@ -373,7 +373,7 @@ namespace StudentEmploymentPortal.Migrations
                     b.HasIndex("JobPostId")
                         .IsUnique();
 
-                    b.ToTable("YearsOfStudy");
+                    b.ToTable("YearsOfStudy", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmploymentPortal.Areas.recruiterj.Models.Recruiter", b =>
@@ -424,7 +424,7 @@ namespace StudentEmploymentPortal.Migrations
 
                     b.HasKey("RecruiterId");
 
-                    b.ToTable("Recruiter");
+                    b.ToTable("Recruiter", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentApplicationJ.Models.ApplicationDocument", b =>
@@ -447,7 +447,7 @@ namespace StudentEmploymentPortal.Migrations
 
                     b.HasKey("ApplicationDocumentId");
 
-                    b.ToTable("ApplicationDocument");
+                    b.ToTable("ApplicationDocument", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentApplicationJ.Models.StudentApplication", b =>
@@ -480,7 +480,7 @@ namespace StudentEmploymentPortal.Migrations
 
                     b.HasKey("ApplicationId");
 
-                    b.ToTable("StudentApplication");
+                    b.ToTable("StudentApplication", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Qualification", b =>
@@ -522,7 +522,44 @@ namespace StudentEmploymentPortal.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Qualification");
+                    b.ToTable("Qualification", (string)null);
+                });
+
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Referee", b =>
+                {
+                    b.Property<string>("RefereeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Cellphone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Institution")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RefereeId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Referee", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Student", b =>
@@ -584,7 +621,35 @@ namespace StudentEmploymentPortal.Migrations
 
                     b.HasKey("StudentId");
 
-                    b.ToTable("Student");
+                    b.ToTable("Student", (string)null);
+                });
+
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.WorkExperience", b =>
+                {
+                    b.Property<string>("WorkExperienceId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Employer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TaskandResponsibilities")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("WorkExperienceId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("WorkExperience", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -682,6 +747,17 @@ namespace StudentEmploymentPortal.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Referee", b =>
+                {
+                    b.HasOne("StudentEmploymentPortal.Areas.studentj.Models.Student", "Student")
+                        .WithMany("Referee")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Student", b =>
                 {
                     b.HasOne("StudentEmploymentPortal.Areas.Identity.ApplicationUser", "User")
@@ -691,6 +767,17 @@ namespace StudentEmploymentPortal.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.WorkExperience", b =>
+                {
+                    b.HasOne("StudentEmploymentPortal.Areas.studentj.Models.Student", "Student")
+                        .WithMany("WorkExperience")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("StudentEmploymentPortal.Areas.Identity.ApplicationUser", b =>
@@ -716,6 +803,10 @@ namespace StudentEmploymentPortal.Migrations
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Student", b =>
                 {
                     b.Navigation("Qualifications");
+
+                    b.Navigation("Referee");
+
+                    b.Navigation("WorkExperience");
                 });
 #pragma warning restore 612, 618
         }

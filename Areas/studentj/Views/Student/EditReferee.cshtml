@@ -1,0 +1,70 @@
+﻿@model StudentEmploymentPortal.ViewModels.StudentViewModels.RefereeViewModel
+
+<div id="addRefereePartial" class="add-qualification-popup">
+    <div class="add-qualification-popup-content">
+        <h3>Update Referee</h3>
+        <form id="editRefereeForm" class="row" method="post" asp-controller="Student" asp-action="EditReferee" asp-route-itemid="@Model.RefereeId">
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="RefereeId" />
+
+            <div class="form-group">
+                <label asp-for="FullName">Full Name</label>
+                <input asp-for="FullName" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="JobTitle">Job Title</label>
+                <input asp-for="JobTitle" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Institution"></label>
+                <input asp-for="Institution" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Cellphone">Cell-Phone</label>
+                <input asp-for="Cellphone" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control">
+            </div>
+
+            <div class="pt-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" id="cancelEditRefereeButton">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Cancel Add Qualification button click event
+        $("#cancelEditRefereeButton").click(function () {
+            $("#editRefereePartial").html("");
+        });
+
+        // Center the add qualification popup
+        function centerAddQualificationPopup() {
+            var popup = $(".add-qualification-popup");
+            var content = $(".add-qualification-popup-content");
+            var windowHeight = $(window).height();
+            var popupHeight = content.outerHeight();
+            var offset = (windowHeight - popupHeight) / 2;
+            content.css("margin-top", offset + "px");
+        }
+
+        // Call the centering function on window resize
+        $(window).resize(function () {
+            centerAddQualificationPopup();
+        });
+
+        // Initial centering of the popup
+        centerAddQualificationPopup();
+    });
+</script>

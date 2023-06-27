@@ -27,11 +27,9 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
         [Required(ErrorMessage = "Current year of study is required.")]
         public currentYearOfStudy CurrentYearOfStudy { get; set; }
 
-        [Required(ErrorMessage = "Faculty is required.")]
         public faculty Faculty { get; set; }
 
-        [Required(ErrorMessage = "Department is required.")]
-        public department Department { get; set; }
+        public string Department { get; set; }
 
         public string Skills { get; set; }
 
@@ -47,6 +45,12 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
         // Navigation property for Qualifications
         public virtual ICollection<Qualification> Qualifications { get; set; }
 
+        // Navigation property for Qualifications
+        public virtual ICollection<WorkExperience> WorkExperience { get; set; }
+
+        // Navigation property for Qualifications
+        public virtual ICollection<Referee> Referee { get; set; }
+
         //constructor
 
         public Student()
@@ -57,8 +61,6 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
             Race = race.Black;
             Nationality = EnumNationality.SouthAfrican;
             CurrentYearOfStudy = currentYearOfStudy.FirstYear;
-            Faculty = faculty.Science;
-            Department = department.ComputerScience;
             Skills = string.Empty;
             Achievements = string.Empty;
             Interests = string.Empty;
@@ -152,174 +154,6 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
             [Display(Name = "Science")]
             Science
-        }
-
-        public enum department
-        {
-            // Commerce, Law and Management
-            [Display(Name = "Accounting")]
-            Accounting,
-
-            [Display(Name = "Economic and Business Sciences")]
-            EconomicAndBusinessSciences,
-
-            [Display(Name = "Finance and Investment Management")]
-            FinanceAndInvestmentManagement,
-
-            [Display(Name = "Industrial Psychology and People Management")]
-            IndustrialPsychologyAndPeopleManagement,
-
-            [Display(Name = "Law")]
-            Law,
-
-            // Engineering and the Built Environment
-            [Display(Name = "Chemical Engineering")]
-            ChemicalEngineering,
-
-            [Display(Name = "Civil and Environmental Engineering")]
-            CivilAndEnvironmentalEngineering,
-
-            [Display(Name = "Electrical and Information Engineering")]
-            ElectricalAndInformationEngineering,
-
-            [Display(Name = "Mechanical, Industrial and Aeronautical Engineering")]
-            MechanicalIndustrialAndAeronauticalEngineering,
-
-            // Health Sciences
-            [Display(Name = "Anatomy")]
-            Anatomy,
-
-            [Display(Name = "Dentistry")]
-            Dentistry,
-
-            [Display(Name = "Medicine")]
-            Medicine,
-
-            [Display(Name = "Pharmacy and Pharmacology")]
-            PharmacyAndPharmacology,
-
-            // Humanities
-            [Display(Name = "Archaeology and Anthropology")]
-            ArchaeologyAndAnthropology,
-
-            [Display(Name = "English")]
-            English,
-
-            [Display(Name = "Geography, Archaeology and Environmental Studies")]
-            GeographyArchaeologyAndEnvironmentalStudies,
-
-            [Display(Name = "Political Studies and International Relations")]
-            PoliticalStudiesAndInternationalRelations,
-
-            // Science
-            [Display(Name = "Chemistry")]
-            Chemistry,
-
-            [Display(Name = "Mathematics")]
-            Mathematics,
-
-            [Display(Name = "Physics")]
-            Physics,
-
-            [Display(Name = "Zoology and Entomology")]
-            ZoologyAndEntomology,
-
-            // Additional Departments
-            [Display(Name = "Computer Science")]
-            ComputerScience,
-
-            [Display(Name = "Geosciences")]
-            Geosciences,
-
-            [Display(Name = "Human Physiology")]
-            HumanPhysiology,
-
-            [Display(Name = "Molecular Medicine and Haematology")]
-            MolecularMedicineAndHaematology,
-
-            [Display(Name = "School of Accountancy")]
-            SchoolOfAccountancy
-        }
-
-        public static class FacultyDepartmentMapping
-        {
-            public static Dictionary<Student.faculty, List<Student.department>> FacultyDepartments = new Dictionary<Student.faculty, List<Student.department>>()
-            {
-                // Commerce, Law and Management
-                {
-                    Student.faculty.CommerceLawAndManagement,
-                    new List<Student.department>
-                    {
-                        Student.department.Accounting,
-                        Student.department.EconomicAndBusinessSciences,
-                        Student.department.FinanceAndInvestmentManagement,
-                        Student.department.IndustrialPsychologyAndPeopleManagement,
-                        Student.department.Law
-                    }
-                },
-
-                // Engineering and the Built Environment
-                {
-                    Student.faculty.EngineeringAndBuiltEnvironment,
-                    new List<Student.department>
-                    {
-                        Student.department.ChemicalEngineering,
-                        Student.department.CivilAndEnvironmentalEngineering,
-                        Student.department.ElectricalAndInformationEngineering,
-                        Student.department.MechanicalIndustrialAndAeronauticalEngineering
-                    }
-                },
-
-                // Health Sciences
-                {
-                    Student.faculty.HealthSciences,
-                    new List<Student.department>
-                    {
-                        Student.department.Anatomy,
-                        Student.department.Dentistry,
-                        Student.department.Medicine,
-                        Student.department.PharmacyAndPharmacology
-                    }
-                },
-
-                // Humanities
-                {
-                    Student.faculty.Humanities,
-                    new List<Student.department>
-                    {
-                        Student.department.ArchaeologyAndAnthropology,
-                        Student.department.English,
-                        Student.department.GeographyArchaeologyAndEnvironmentalStudies,
-                        Student.department.PoliticalStudiesAndInternationalRelations
-                    }
-                },
-
-                // Science
-                {
-                    Student.faculty.Science,
-                    new List<Student.department>
-                    {
-                        Student.department.Chemistry,
-                        Student.department.Mathematics,
-                        Student.department.Physics,
-                        Student.department.ZoologyAndEntomology,
-                        Student.department.ComputerScience,
-                        Student.department.Geosciences,
-                        Student.department.HumanPhysiology,
-                        Student.department.MolecularMedicineAndHaematology
-                    }
-                }
-            };
-        }
-
-        public List<department> GetDepartmentsForFaculty(faculty selectedFaculty)
-        {
-            if (FacultyDepartmentMapping.FacultyDepartments.ContainsKey(selectedFaculty))
-            {
-                return FacultyDepartmentMapping.FacultyDepartments[selectedFaculty];
-            }
-
-            return new List<department>(); // Return an empty list if the faculty is not found
         }
 
 
