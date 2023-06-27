@@ -1,4 +1,5 @@
-﻿@model StudentEmploymentPortal.ViewModels.StudentViewModels.ManageStudentProfileViewModel
+﻿@model StudentEmploymentPortal.ViewModels.StudentViewModels.BuildProfile
+@using StudentEmploymentPortal.ViewModels.StudentViewModels
 @using System.ComponentModel.DataAnnotations
 @using StudentEmploymentPortal.Areas.studentj.Models
 @using StudentEmploymentPortal.Utility
@@ -8,95 +9,127 @@
 }
 
 <h1 class="pt-4">@ViewData["Title"]</h1>
+ <hr />
 
 <div class="row pt-4">
     <div class="col-md-7">
-        <form id="profileForm" class="row" method="post" asp-controller="Student" asp-action="SaveProfile">
-            <hr />
-            <div class="form-floating py-2 col-12">
-                <label asp-for="Email" class="col-form-label-sm"></label>
-                <input asp-for="Email" class="form-control" aria-required="true" readonly />
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" data-bs-toggle="tab" href="#personal-details" role="tab" aria-selected="true">Personal Details</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#qualification" role="tab" aria-selected="false">Qualification</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#referee" role="tab" aria-selected="false">Referee</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#work-experience" role="tab" aria-selected="false">Work Experience</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="personal-details" role="tabpanel">
+                <form id="profileForm" class="row" method="post" asp-controller="Student" asp-action="SaveProfile">
+                    <div class="form-floating py-2 col-12 mt-5">
+                        <label asp-for="StudentProfile.Email" class="col-form-label-sm"></label>
+                        <input asp-for="StudentProfile.Email" class="form-control" aria-required="true" readonly />
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.FirstName" class="col-form-label-sm">First Name</label>
+                        <input asp-for="StudentProfile.FirstName" class="form-control" aria-required="true" readonly />
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.Surname" class="col-form-label-sm">Surname</label>
+                        <input asp-for="StudentProfile.Surname" class="form-control" aria-required="true" readonly />
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.Address" class="col-form-label-sm">Address</label>
+                        <input asp-for="StudentProfile.Address" class="form-control" aria-required="true" />
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.PhoneNumber" class="col-form-label-sm">Phone Number</label>
+                        <input asp-for="StudentProfile.PhoneNumber" class="form-control" aria-required="true" />
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.Telephone" class="col-form-label-sm">Telephone</label>
+                        <input asp-for="StudentProfile.Telephone" class="form-control" aria-required="true" />
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        @if (string.IsNullOrEmpty(Model.StudentProfile.IDNumber))
+                        {
+                            <label asp-for="StudentProfile.IDNumber" class="col-form-label-sm">ID/Passport Number</label>
+                            <input asp-for="StudentProfile.IDNumber" class="form-control" aria-required="true" />
+                        }
+                        else
+                        {
+                            <label asp-for="StudentProfile.IDNumber" class="col-form-label-sm">ID/Passport Number</label>
+                            <input asp-for="StudentProfile.IDNumber" class="form-control" aria-required="true" readonly />
+                        }
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.SelectedRace" class="col-form-label-sm">Race</label>
+                        <select asp-for="StudentProfile.SelectedRace" asp-items="Model.StudentProfile.RaceOptions" class="form-select"></select>
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.SelectedNationality" class="col-form-label-sm">Nationality</label>
+                        <select asp-for="StudentProfile.SelectedNationality" asp-items="Model.StudentProfile.NationalityOptions" class="form-select"></select>
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.SelectedCurrentYearOfStudy" class="col-form-label-sm">Current Year of Study</label>
+                        <select asp-for="StudentProfile.SelectedCurrentYearOfStudy" asp-items="Model.StudentProfile.CurrentYearOfStudyOptions" class="form-select"></select>
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.SelectedFaculty" class="col-form-label-sm">Faculty</label>
+                        <select asp-for="StudentProfile.SelectedFaculty" asp-items="Model.StudentProfile.FacultyOptions" class="form-select" id="facultyDropdown"></select>
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.SelectedDepartment" class="col-form-label-sm">Department</label>
+                        <select asp-for="StudentProfile.SelectedDepartment" asp-items="Model.StudentProfile.DepartmentOptions" class="form-select" id="departmentDropdown"></select>
+                        <span asp-validation-for="StudentProfile.SelectedDepartment" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.SelectedDriversLicense" class="col-form-label-sm">Drivers License</label>
+                        <select asp-for="StudentProfile.SelectedDriversLicense" asp-items="Model.StudentProfile.DriversLicenseOptions" class="form-select"></select>
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <label asp-for="StudentProfile.SelectedGender" class="col-form-label-sm">Gender</label>
+                        <select asp-for="StudentProfile.SelectedGender" asp-items="Model.StudentProfile.GenderOptions" class="form-select"></select>
+                    </div>
+                    <div class="form-floating py-2 col-12">
+                        <label asp-for="StudentProfile.CareerObjective" class="col-form-label-sm">Career Objective</label>
+                        <textarea asp-for="StudentProfile.CareerObjective" class="form-control"></textarea>
+                    </div>
+                    <div class="form-floating py-2 col-12">
+                        <label asp-for="StudentProfile.Skills" class="col-form-label-sm">Skills</label>
+                        <textarea asp-for="StudentProfile.Skills" class="form-control"></textarea>
+                    </div>
+                    <div class="form-floating py-2 col-12">
+                        <label asp-for="StudentProfile.Achievements" class="col-form-label-sm">Achievements</label>
+                        <textarea asp-for="StudentProfile.Achievements" class="form-control"></textarea>
+                    </div>
+                    <div class="form-floating py-2 col-12">
+                        <label asp-for="StudentProfile.Interests" class="col-form-label-sm">Interests</label>
+                        <textarea asp-for="StudentProfile.Interests" class="form-control"></textarea>
+                    </div>
+                    <div class="form-floating py-2">
+                        <button type="submit" class="btn btn-primary col-md-12">Save</button>
+                    </div>
+                </form>
             </div>
-            <!-- Display fields as text for non-editable values -->
-            <div class="form-floating py-2 col-6">
-                <label asp-for="FirstName" class="col-form-label-sm">First Name</label>
-                <input asp-for="FirstName" class="form-control" aria-required="true" readonly />
+
+            <div class="tab-pane fade" id="qualification" role="tabpanel">
+                <partial name="_QualificationPartial" model="Model.Qualifications" />
             </div>
-            <div class="form-floating py-2 col-6">
-                <label asp-for="Surname" class="col-form-label-sm"></label>
-                <input asp-for="Surname" class="form-control" aria-required="true" readonly />
+
+            <div class="tab-pane fade" id="referee" role="tabpanel">
+                <!-- Add Referee Form here -->
             </div>
-            <div class="form-floating py-2 col-6">
-                <label asp-for="Address" class="col-form-label-sm"></label>
-                <input asp-for="Address" class="form-control" aria-required="true" />
+
+            <div class="tab-pane fade" id="work-experience" role="tabpanel">
+                <!-- Add Work Experience Form here -->
             </div>
-            <div class="form-floating py-2 col-6">
-                <label asp-for="PhoneNumber" class="col-form-label-sm">Phone Number</label>
-                <input asp-for="PhoneNumber" class="form-control" aria-required="true" />
-            </div>
-            <div class="form-floating py-2 col-6">
-                <label asp-for="Telephone" class="col-form-label-sm"></label>
-                <input asp-for="Telephone" class="form-control" aria-required="true" />
-            </div>
-            <div class="form-floating py-2 col-6">
-                @if (string.IsNullOrEmpty(Model.IDNumber))
-                {
-                    <label asp-for="IDNumber" class="col-form-label-sm">ID/Passport Number</label>
-                    <input asp-for="IDNumber" class="form-control" aria-required="true" />
-                }
-                else
-                {
-                    <label asp-for="IDNumber" class="col-form-label-sm">ID/Passport Number</label>
-                    <input asp-for="IDNumber" class="form-control" aria-required="true" readonly />
-                }
-            </div>
-            <!-- Add dropdowns for all selectable fields -->
-            <div class="form-floating py-2 col-6">
-                <label asp-for="SelectedRace" class="col-form-label-sm">Race</label>
-                <select asp-for="SelectedRace" asp-items="Model.RaceOptions" class="form-select"></select>
-            </div>
-            <div class="form-floating py-2 col-6">
-                <label asp-for="SelectedNationality" class="col-form-label-sm">Nationality</label>
-                <select asp-for="SelectedNationality" asp-items="Model.NationalityOptions" class="form-select"></select>
-            </div>
-            <div class="form-floating py-2 col-6">
-                <label asp-for="SelectedCurrentYearOfStudy" class="col-form-label-sm">Current Year of Study</label>
-                <select asp-for="SelectedCurrentYearOfStudy" asp-items="Model.CurrentYearOfStudyOptions" class="form-select"></select>
-            </div>
-            <div class="form-floating py-2 col-6">
-                <label asp-for="SelectedFaculty" class="col-form-label-sm">Faculty</label>
-                <select asp-for="SelectedFaculty" asp-items="Model.FacultyOptions" class="form-select" id="facultyDropdown"></select>
-            </div>
-            <div class="form-floating py-2 col-6">
-                <label asp-for="SelectedDepartment" class="col-form-label-sm">Department</label>
-                <select asp-for="SelectedDepartment" asp-items="Model.DepartmentOptions" class="form-select" id="departmentDropdown"></select>
-                <span asp-validation-for="SelectedDepartment" class="text-danger"></span>
-            </div>
-            <div class="form-floating py-2 col-6">
-                <label asp-for="SelectedDriversLicense" class="col-form-label-sm">Drivers License</label>
-                <select asp-for="SelectedDriversLicense" asp-items="Model.DriversLicenseOptions" class="form-select"></select>
-            </div>
-            <div class="form-floating py-2 col-6">
-                <label asp-for="SelectedGender" class="col-form-label-sm">Gender</label>
-                <select asp-for="SelectedGender" asp-items="Model.GenderOptions" class="form-select"></select>
-            </div>
-            <div class="form-floating py-2 col-12">
-                <label asp-for="CareerObjective" class="col-form-label-sm">Career Objective</label>
-                <textarea asp-for="CareerObjective" class="form-control"></textarea>
-            </div>
-            <div class="form-floating py-2 col-12">
-                <label asp-for="Skills" class="col-form-label-sm"></label>
-                <textarea asp-for="Skills" class="form-control"></textarea>
-            </div>
-            <div class="form-floating py-2 col-12">
-                <label asp-for="Achievements" class="col-form-label-sm"></label>
-                <textarea asp-for="Achievements" class="form-control"></textarea>
-            </div>
-            <div class="form-floating py-2 col-12">
-                <label asp-for="Interests" class="col-form-label-sm"></label>
-                <textarea asp-for="Interests" class="form-control"></textarea>
-            </div>
-            <button id="profileSubmit" type="submit" class="w-100 btn btn-primary">Save</button>
-        </form>
+        </div>
+
     </div>
 </div>

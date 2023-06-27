@@ -124,6 +124,7 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> PartialRecruiterDetails(string id, CompleteRegisterViewModel viewModel)
         {
             if (id == null)
@@ -234,6 +235,7 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> PartialJobPostDetails(string id, JobPostViewModel viewModel)
         {
             if (id == null)

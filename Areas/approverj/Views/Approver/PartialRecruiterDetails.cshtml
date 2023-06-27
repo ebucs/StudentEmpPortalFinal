@@ -10,6 +10,7 @@
     <h1>@ViewData["Title"]</h1>
 
     <form id="ApproveRecruiter" method="post" asp-controller="Approver" asp-action="PartialRecruiterDetails">
+        @Html.AntiForgeryToken()
         <div class="recruiter-details pb-4">
             <p><strong>Title:</strong> @Model.Title</p>
             <p><strong>First Name:</strong> @Model.FirstName</p>
@@ -41,7 +42,7 @@
                 <!-- Add a submit button to save the changes -->
                 <div class="button-container">
                     <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <button class="btn btn-primary close-button" onclick="closePartialView()">Close</button>
+                    <button class="btn btn-primary close-button" asp-controller="Approver" asp-action="ManageRecruiterRegistration">Close</button>
                 </div>
             </div>
         </div>

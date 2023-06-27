@@ -1,0 +1,25 @@
+﻿@model List<StudentEmploymentPortal.ViewModels.StudentViewModels.QualificationViewModel>
+
+<h2 class="mt-5">Education</h2>
+<button class="btn btn-primary" id="addQualificationButton">Add</button>
+<br />
+<br />
+<div class="qualification-list">
+    @foreach (var qualification in Model)
+    {
+        <div class="qualification-item">
+            <span class="qualification-name">@qualification.Qualification</span>
+            <div class="qualification-actions">
+                <input type="hidden" asp-for="@qualification.Qualification" />
+                <button class="btn btn-primary editQualificationButton" data-qualificationid="@qualification.QualificationId">Edit</button>
+                <button class="btn btn-danger deleteQualificationButton" data-qualificationid="@qualification.QualificationId">Delete</button>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Add Qualification Partial View -->
+<div id="addQualificationPartial"></div>
+
+<!-- Edit Qualification Partial View -->
+<div id="editQualificationPartial"></div>
