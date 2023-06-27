@@ -483,6 +483,48 @@ namespace StudentEmploymentPortal.Migrations
                     b.ToTable("StudentApplication");
                 });
 
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Qualification", b =>
+                {
+                    b.Property<string>("QualificationId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Institution")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Majors")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Research")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StuQualification")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Subjects")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Submajors")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("QualificationId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Qualification");
+                });
+
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Student", b =>
                 {
                     b.Property<string>("StudentId")
@@ -629,6 +671,17 @@ namespace StudentEmploymentPortal.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Qualification", b =>
+                {
+                    b.HasOne("StudentEmploymentPortal.Areas.studentj.Models.Student", "Student")
+                        .WithMany("Qualifications")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Student", b =>
                 {
                     b.HasOne("StudentEmploymentPortal.Areas.Identity.ApplicationUser", "User")
@@ -658,6 +711,11 @@ namespace StudentEmploymentPortal.Migrations
             modelBuilder.Entity("StudentEmploymentPortal.Areas.recruiterj.Models.Recruiter", b =>
                 {
                     b.Navigation("JobPosts");
+                });
+
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Student", b =>
+                {
+                    b.Navigation("Qualifications");
                 });
 #pragma warning restore 612, 618
         }

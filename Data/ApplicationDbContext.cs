@@ -24,6 +24,7 @@ namespace StudentEmploymentPortal.Data
         public DbSet<YearsOfStudy> YearsOfStudy { get; set; }
         public DbSet<StudentApplication> StudentApplication { get; set; }
         public DbSet<ApplicationDocument> ApplicationDocument { get; set; }
+        public DbSet<Qualification> Qualification { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

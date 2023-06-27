@@ -124,6 +124,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudEFwcGxpY2F0aW9uSlxWaWV3c1xTdHVkZW50QXBwbGljYXRpb25cQWRkQXBwbGljYXRpb25Eb2N1bWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/A0080350/Desktop/StudentEmpPortalFinal/Areas/studentApplicationJ/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudEFwcGxpY2F0aW9uSlxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/A0080350/Desktop/StudentEmpPortalFinal/Areas/studentApplicationJ/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudEFwcGxpY2F0aW9uSlxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/A0080350/Desktop/StudentEmpPortalFinal/Areas/studentj/Views/Student/AddQualificationpv.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudGpcVmlld3NcU3R1ZGVudFxBZGRRdWFsaWZpY2F0aW9ucHYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/A0080350/Desktop/StudentEmpPortalFinal/Areas/studentj/Views/Student/EditQualification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudGpcVmlld3NcU3R1ZGVudFxFZGl0UXVhbGlmaWNhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/A0080350/Desktop/StudentEmpPortalFinal/Areas/studentj/Views/Student/ManageProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudGpcVmlld3NcU3R1ZGVudFxNYW5hZ2VQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -138,6 +154,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/A0080350/Desktop/StudentEmpPortalFinal/Areas/studentj/Views/Student/StudentPartialJobPostDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudGpcVmlld3NcU3R1ZGVudFxTdHVkZW50UGFydGlhbEpvYlBvc3REZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/A0080350/Desktop/StudentEmpPortalFinal/Areas/studentj/Views/Student/_QualificationPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcc3R1ZGVudGpcVmlld3NcU3R1ZGVudFxfUXVhbGlmaWNhdGlvblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/A0080350/Desktop/StudentEmpPortalFinal/Areas/studentj/Views/_ViewImports.cshtml]

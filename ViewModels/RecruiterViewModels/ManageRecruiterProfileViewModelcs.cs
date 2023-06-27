@@ -24,6 +24,10 @@ namespace StudentEmploymentPortal.ViewModels.RecruiterViewModels
         public string Surname { get; set; }
         public string Email { get; set; }
 
+        //ids
+
+        //public string RecruiterId { get; set; }
+
         // Additional properties for the approver
         public string? ApproverNote { get; set; }
         public Recruiter.outcomeStatus Outcome { get; set; }

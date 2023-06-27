@@ -52,3 +52,49 @@ function closePartialView() {
     $(".partial-view-container").fadeOut();
     $(".partial-view-overlay").fadeOut();
 }
+
+
+////////////Student stuff
+
+$(document).ready(function () {
+    // Add Qualification button click event
+    $("#addQualificationButton").click(function () {
+        $.ajax({
+            url: "/studentj/Student/AddQualificationpv", // Corrected URL
+            type: "GET",
+            success: function (data) {
+                $("#addQualificationPartial").html(data);
+            }
+        });
+    });
+
+    //// Edit Qualification button click event
+    $(".editQualificationButton").click(function () {
+        var qualificationId = $(this).data("qualificationid");
+        $.ajax({
+            url: "/StudentJ/Student/EditQualification",
+            type: "GET",
+            data: { qualificationId: qualificationId },
+            success: function (data) {
+                $("#editQualificationPartial").html(data);
+            }
+        });
+    });
+
+    // Delete Qualification button click event
+    $(".deleteQualificationButton").click(function () {
+        var qualificationId = $(this).data("qualificationid");
+        if (confirm("Are you sure you want to delete this qualification?")) {
+            $.ajax({
+                url: "/StudentJ/Student/DeleteQualification",
+                type: "POST",
+                data: { qualificationId: qualificationId },
+                success: function () {
+                    location.reload();
+                }
+            });
+        }
+    });
+});
+
+
