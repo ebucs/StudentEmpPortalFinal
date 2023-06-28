@@ -54,6 +54,10 @@ namespace StudentEmploymentPortal.Data
                 .HasConversion<string>();
 
             modelBuilder.Entity<Student>()
+                .Property(s => s.Department)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<Student>()
                 .Property(s => s.DriversLicense)
                 .HasConversion<string>();
 

@@ -29,7 +29,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
         public EnumFaculty Faculty { get; set; }
 
-        public string Department { get; set; }
+        public department Department { get; set; }
 
         public string Skills { get; set; }
 
@@ -181,6 +181,93 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
             [Display(Name = "Code EC - Articulated heavy vehicle with GVM > 16,000 kg")]
             CodeEC
+        }
+
+        public enum department
+        {
+            // Commerce, Law and Management
+            [Display(Name = "Accounting")]
+            Accounting,
+
+            [Display(Name = "Economic and Business Sciences")]
+            EconomicAndBusinessSciences,
+
+            [Display(Name = "Finance and Investment Management")]
+            FinanceAndInvestmentManagement,
+
+            [Display(Name = "Industrial Psychology and People Management")]
+            IndustrialPsychologyAndPeopleManagement,
+
+            [Display(Name = "Law")]
+            Law,
+
+            // Engineering and the Built Environment
+            [Display(Name = "Chemical Engineering")]
+            ChemicalEngineering,
+
+            [Display(Name = "Civil and Environmental Engineering")]
+            CivilAndEnvironmentalEngineering,
+
+            [Display(Name = "Electrical and Information Engineering")]
+            ElectricalAndInformationEngineering,
+
+            [Display(Name = "Mechanical, Industrial and Aeronautical Engineering")]
+            MechanicalIndustrialAndAeronauticalEngineering,
+
+            // Health Sciences
+            [Display(Name = "Anatomy")]
+            Anatomy,
+
+            [Display(Name = "Dentistry")]
+            Dentistry,
+
+            [Display(Name = "Medicine")]
+            Medicine,
+
+            [Display(Name = "Pharmacy and Pharmacology")]
+            PharmacyAndPharmacology,
+
+            // Humanities
+            [Display(Name = "Archaeology and Anthropology")]
+            ArchaeologyAndAnthropology,
+
+            [Display(Name = "English")]
+            English,
+
+            [Display(Name = "Geography, Archaeology and Environmental Studies")]
+            GeographyArchaeologyAndEnvironmentalStudies,
+
+            [Display(Name = "Political Studies and International Relations")]
+            PoliticalStudiesAndInternationalRelations,
+
+            // Science
+            [Display(Name = "Chemistry")]
+            Chemistry,
+
+            [Display(Name = "Mathematics")]
+            Mathematics,
+
+            [Display(Name = "Physics")]
+            Physics,
+
+            [Display(Name = "Zoology and Entomology")]
+            ZoologyAndEntomology,
+
+            // Additional Departments
+            [Display(Name = "Computer Science")]
+            ComputerScience,
+
+            [Display(Name = "Geosciences")]
+            Geosciences,
+
+            [Display(Name = "Human Physiology")]
+            HumanPhysiology,
+
+            [Display(Name = "Molecular Medicine and Haematology")]
+            MolecularMedicineAndHaematology,
+
+            [Display(Name = "School of Accountancy")]
+            SchoolOfAccountancy
         }
 
     }

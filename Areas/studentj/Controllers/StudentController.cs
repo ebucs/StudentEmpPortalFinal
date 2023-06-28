@@ -142,7 +142,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                             SelectedNationality = default,
                             SelectedCurrentYearOfStudy = default,
                             SelectedFaculty = default,
-                            Department = string.Empty,
+                            Department = default,
 
                             // Non-editable fields
                             FirstName = user.FirstName,
@@ -175,7 +175,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                 {
                     var student = await _context.Student.FindAsync(user.Id);
 
-                    if (student != null || viewModel.Qualifications == null && viewModel.Referees == null && viewModel.WorkExperiences == null)
+                    if (student != null)
                     {
                         // Update the student profile
                         student.CareerObjective = viewModel.StudentProfile.CareerObjective;
@@ -225,6 +225,17 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                         // Save the changes
                         await _context.SaveChangesAsync();
                         Toaster.AddSuccessToastMessage(TempData, "Profile updated successfully.");
+                    }
+                }
+            }
+            else
+            {
+                // Log ModelState errors for debugging
+                foreach (var modelStateEntry in ModelState.Values)
+                {
+                    foreach (var error in modelStateEntry.Errors)
+                    {
+                        Console.WriteLine(error.ErrorMessage);
                     }
                 }
             }
