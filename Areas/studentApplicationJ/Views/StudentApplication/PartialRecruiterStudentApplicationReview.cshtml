@@ -1,0 +1,27 @@
+﻿@model StudentEmploymentPortal.ViewModels.StudentApplicationViewModels.StudentApplicationViewModel
+
+@{
+    ViewData["Title"] = "Student Application Review";
+}
+
+<div class="partial-view-overlay"></div> <!-- Overlay div to cover the page -->
+
+<div class="partial-view-container container pt-4">
+    <h1>@ViewData["Title"]</h1>
+
+    <form method="post" asp-controller="StudentApplication" asp-action="CreateApplication" asp-area="StudentApplicationJ">
+        <div class="recruiter-details pb-4">
+
+            <input type="hidden" name="studentApplicationId" value="@Model.studentApplicationId" />
+            <p><strong>JobPost:</strong> @Model.jobPost</p>
+            <p><strong>FirstName:</strong> @Model.firstName</p>
+            <p><strong>Surname:</strong> @Model.surname</p>
+            <p><strong>Tel. Number:</strong> @Model.telephone</p>
+            <p><strong>Student:</strong> @Model.student</p>
+           
+                    <button class="btn btn-primary close-button" asp-controller="Student" asp-action="SearchAndApply" asp-area="StudentJ">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -22,15 +22,17 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Models
         [ForeignKey("RecruiterId")]
         public string RecruiterId { get; set; }
 
-        //Status
-        public string Status { get; set; }
-
         // DateCreated
         public DateTime DateCreated { get; set; }
 
         //DateUpdated
 
         public DateTime ReviewDate { get; set; }
+
+        //Status
+        public EnumStudentApplicationStatus StudentApplicationStatus { get; set; }
+
+        public bool IsWithdrawn { get; set; }
 
         // ApplicationDocument
         //[Required]
@@ -39,9 +41,19 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Models
 
         public StudentApplication()
         {
-            Status = string.Empty;
+            StudentApplicationStatus = EnumStudentApplicationStatus.OnHold;
             DateCreated = DateTime.Now;
             ReviewDate = DateTime.Now;
+        }
+        //enums
+        public enum EnumStudentApplicationStatus
+        {
+            InterView,
+            OnHold,
+            Rejected,
+            Appointed,
+            Withdrawn,
+            Pending
         }
     }
 }

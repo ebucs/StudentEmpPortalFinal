@@ -430,7 +430,6 @@ namespace StudentEmploymentPortal.Migrations
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentApplicationJ.Models.ApplicationDocument", b =>
                 {
                     b.Property<string>("ApplicationDocumentId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ApplicationId")
@@ -441,9 +440,9 @@ namespace StudentEmploymentPortal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Documet")
+                    b.Property<string>("FilePath")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ApplicationDocumentId");
 
@@ -459,6 +458,9 @@ namespace StudentEmploymentPortal.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsWithdrawn")
+                        .HasColumnType("bit");
+
                     b.Property<string>("JobPostId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -470,7 +472,7 @@ namespace StudentEmploymentPortal.Migrations
                     b.Property<DateTime>("ReviewDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("StudentApplicationStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

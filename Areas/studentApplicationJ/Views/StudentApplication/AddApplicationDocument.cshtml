@@ -1,17 +1,21 @@
-﻿@using StudentEmploymentPortal.Areas.Identity
-@using Microsoft.AspNetCore.Identity
+﻿@model StudentEmploymentPortal.Areas.studentApplicationJ.Models.ApplicationDocument
 
-<form method="post" enctype="multipart/form-data" action="/StudentApplicationJ/StudentApplication/UploadDocument">
+@{
+    ViewData["Title"] = "Add Application Document";
+}
 
+<h1>Add Application Document</h1>
+<form method="post" enctype="multipart/form-data" asp-area="StudentApplicationJ" asp-controller="StudentApplication" asp-action="AddApplicationDocument">
     <div class="form-group">
         <label for="file">Choose a file:</label>
         <input type="file" id="file" name="file" class="form-control-file" />
     </div>
 
-    <div class="form-floating py-2 col-12">
-        <label class="col-form-label-sm" for="documentName">Enter document name</label>
-        <input id="documentName" name="DocumentName" class="form-control" aria-required="true" />
+    <div class="form-group">
+        <label for="documentName">Enter document name:</label>
+        <input type="text" id="documentName" name="DocumentName" class="form-control" required />
     </div>
+
     <input type="hidden" name="ApplicationId" value="@ViewData["ApplicationId"]" />
 
     <button type="submit" class="btn btn-primary">Upload</button>

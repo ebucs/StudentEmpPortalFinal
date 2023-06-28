@@ -249,32 +249,76 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> ReviewApplications()
+        public async Task<IActionResult> ReviewStudentApplications()
         {
-            
             var user = await _userManager.GetUserAsync(User);
             var recruiter = await _context.Recruiter.FindAsync(user.Id);
-
+            var studentApplicationStatus = "";
 
             if (recruiter != null)
             {
                 var studentApplications = await _context.StudentApplication
-                   .Where(r => r.RecruiterId == recruiter.RecruiterId)
-                   .ToListAsync();
+                    .Where(r => r.RecruiterId == recruiter.RecruiterId)
+                    .ToListAsync();
 
-                foreach (var students in studentApplications)
+                var viewModelList = new List<ReviewStudentsApplicationsViewModel>();
+
+                foreach (var studentApplication in studentApplications)
                 {
-                    var studentsWhoApplied = await _context.Student
-                   .Where(r => r.StudentId == students.StudentId)
-                   .ToListAsync();
+                    var student = await _context.Student
+                        .Include(s => s.User)
+                        .FirstOrDefaultAsync(s => s.StudentId == studentApplication.StudentId);
 
-                    ViewBag.StudentApplications = studentApplications;
-                    return View(studentsWhoApplied);
+                    if (student != null)
+                    {
+                        if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.Withdrawn)
+                        {
+                            studentApplicationStatus = "Withdrawn";
+                        }
+                        else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.Rejected)
+                        {
+                            studentApplicationStatus = "Unsuccessful";
+                        }
+                        else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.InterView)
+                        {
+                            studentApplicationStatus = "Interview";
+                        }
+                        else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.Appointed)
+                        {
+                            studentApplicationStatus = "Scuccessful";
+                        }
+                        else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.OnHold)
+                        {
+                            studentApplicationStatus = "On hold";
+                        }
+                        else 
+                        {
+                            studentApplicationStatus = "Pending";
+                        }
+
+                        //ViewModel
+                        var viewModel = new ReviewStudentsApplicationsViewModel
+                        {
+                            StudentApplicationId = studentApplication.ApplicationId,
+                            FirstName = student.User.FirstName,
+                            Surname = student.User.Surname,
+                            Department = student.Faculty,
+                            Course = student.Department,
+                            Level = student.CurrentYearOfStudy,
+                            Gender = student.Gender,
+                            StudentApplicationStatus= studentApplicationStatus
+                        };
+
+                        viewModelList.Add(viewModel);
+                    }
                 }
+
+                return View(viewModelList);
             }
 
             return NotFound();
         }
+
 
 
     }

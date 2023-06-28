@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Zky451fRvLbi7q1mghM4+Jb8LZZExQh0XU03uLzloU3nIK3fpS4EB0wX8+j//sE5dMIguPLfbbS596uXzC8vgg==",
+  "dgSpecHash": "gm7ZvYXQpnc1WPgjXaT/graLarU4qyekS/JM6okA1w9i9AoLW5RIEEVQWhKzXYPKmYk0vHFa+W6ILcFfTwZ4DA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Documents\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
+  "projectFilePath": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\A0079417\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\A0079417\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

@@ -11355,11 +11355,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Documents\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
+      "projectUniqueName": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
       "projectName": "StudentEmploymentPortal",
-      "projectPath": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Documents\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
+      "projectPath": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
       "packagesPath": "C:\\Users\\A0079417\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Documents\\StudentEmpPortalFinal\\obj\\",
+      "outputPath": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\A0079417\\AppData\\Roaming\\NuGet\\NuGet.Config",
