@@ -5,17 +5,24 @@
 <br />
 <br />
 <div class="qualification-list">
-    @foreach (var referee in Model)
+    @if (Model != null && Model.Count > 0)
     {
-        <div class="qualification-item">
-            <span class="qualification-name">@referee.JobTitle</span>
-            <div class="qualification-actions">
-               @* <input type="hidden" asp-for="@referee.RefereeId" name="RefereeId" />*@
-                <button class="btn btn-primary editRefereeButton" data-refereeid="@referee.RefereeId">Edit</button>
-                <button class="btn btn-danger deleteRefereeButton" data-refereeid="@referee.RefereeId">Delete</button>
+        @foreach (var referee in Model)
+        {
+            <div class="qualification-item">
+                <span class="qualification-name">@referee.JobTitle</span>
+                <div class="qualification-actions">
+                    <button class="btn btn-primary editRefereeButton" data-refereeid="@referee.RefereeId">Edit</button>
+                    <button class="btn btn-danger deleteRefereeButton" data-refereeid="@referee.RefereeId">Delete</button>
+                </div>
             </div>
-        </div>
+        }
     }
+    else
+    {
+        <p>No referees found.</p>
+    }
+
 </div>
 
 <!-- Add Qualification Partial View -->

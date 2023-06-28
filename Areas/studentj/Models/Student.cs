@@ -27,7 +27,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
         [Required(ErrorMessage = "Current year of study is required.")]
         public currentYearOfStudy CurrentYearOfStudy { get; set; }
 
-        public faculty Faculty { get; set; }
+        public EnumFaculty Faculty { get; set; }
 
         public string Department { get; set; }
 
@@ -138,8 +138,9 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
             Postdoc
         }
 
-        public enum faculty
+        public enum EnumFaculty
         {
+            NA,
             [Display(Name = "Commerce, Law and Management")]
             CommerceLawAndManagement,
 

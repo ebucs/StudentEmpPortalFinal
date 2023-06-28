@@ -31,6 +31,7 @@
         <div class="tab-content">
             <div class="tab-pane fade show active" id="personal-details" role="tabpanel">
                 <form id="profileForm" class="row" method="post" asp-controller="Student" asp-action="SaveProfile">
+                    @Html.AntiForgeryToken()
                     <div class="form-floating py-2 col-12 mt-5">
                         <label asp-for="StudentProfile.Email" class="col-form-label-sm"></label>
                         <input asp-for="StudentProfile.Email" class="form-control" aria-required="true" readonly />
@@ -81,12 +82,11 @@
                     </div>
                     <div class="form-floating py-2 col-6">
                         <label asp-for="StudentProfile.SelectedFaculty" class="col-form-label-sm">Faculty</label>
-                        <select asp-for="StudentProfile.SelectedFaculty" asp-items="Model.StudentProfile.FacultyOptions" class="form-select" id="facultyd"></select>
+                        <select asp-for="StudentProfile.SelectedFaculty" asp-items="Model.StudentProfile.FacultyOptions" class="form-select" id="studentFaculty"></select>
                     </div>
                     <div class="form-floating py-2 col-6">
                         <label asp-for="StudentProfile.Department" class="col-form-label-sm">Department</label>
-                        <select asp-for="StudentProfile.Department" class="form-select" id="studentDepartment" name="Department"></select>
-                        <span asp-validation-for="StudentProfile.Department" class="text-danger"></span>
+                        <select asp-for="StudentProfile.Department" class="form-select" id="studentDepartment" name="Department"></select>  
                     </div>
 
                     <div class="form-floating py-2 col-6">

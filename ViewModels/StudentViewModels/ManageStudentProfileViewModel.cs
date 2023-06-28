@@ -22,7 +22,7 @@ namespace StudentEmploymentPortal.ViewModels.StudentViewModels
         public Student.driversLicense SelectedDriversLicense { get; set; }
         public Student.EnumNationality SelectedNationality { get; set; }
         public Student.currentYearOfStudy SelectedCurrentYearOfStudy { get; set; }
-        public Student.faculty SelectedFaculty { get; set; }
+        public Student.EnumFaculty SelectedFaculty { get; set; }
         public string Department { get; set; }
         public string PhoneNumber { get; set; }
         public string Telephone { get; set; }
@@ -39,7 +39,7 @@ namespace StudentEmploymentPortal.ViewModels.StudentViewModels
         public IEnumerable<SelectListItem> RaceOptions => GetEnumSelectList<Student.race>();
         public IEnumerable<SelectListItem> NationalityOptions => GetEnumSelectList<Student.EnumNationality>();
         public IEnumerable<SelectListItem> CurrentYearOfStudyOptions => GetEnumSelectList<Student.currentYearOfStudy>();
-        public IEnumerable<SelectListItem> FacultyOptions => GetEnumSelectList<Student.faculty>();
+        public IEnumerable<SelectListItem> FacultyOptions => GetEnumSelectList<Student.EnumFaculty>();
         //public IEnumerable<SelectListItem> DepartmentOptions => GetEnumSelectList<Student.department>();
 
         // Helper method to populate dropdown options from enum values

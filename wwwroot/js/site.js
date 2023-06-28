@@ -31,18 +31,20 @@
         });
     }
 
+
+
     // Handle faculty selection change on the student side
-    $('#facultyd').change(function () {
-        var facultyd = $(this).val();
-        loadStudentDepartments(facultyd);
+    $('#studentFaculty').change(function () {
+        var faculty = $(this).val();
+        loadStudentDepartments(faculty);
     });
 
-    function loadStudentDepartments(facultyd) {
+    function loadStudentDepartments(faculty) {
         // Make an AJAX request to fetch the departments based on the selected faculty
         $.ajax({
-            url: '/studentj/Student/GetDepartments', // Replace with your controller action
+            url: '/StudentJ/Student/GetDepartmentss', // Replace with your controller action
             type: 'GET',
-            data: { facultyd: facultyd },
+            data: { faculty: faculty },
             success: function (data) {
                 // Populate the departments dropdown
                 var dropdown = $('#studentDepartment'); // Update the ID here
@@ -54,6 +56,9 @@
             }
         });
     }
+
+
+
 
 
 

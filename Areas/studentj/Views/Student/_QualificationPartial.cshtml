@@ -5,16 +5,24 @@
 <br />
 <br />
 <div class="qualification-list">
-    @foreach (var qualification in Model)
+    @if (Model != null && Model.Count > 0)
     {
-        <div class="qualification-item">
-            <span class="qualification-name">@qualification.Qualification</span>
-            <div class="qualification-actions">
-                <button class="btn btn-primary editQualificationButton" data-qualificationid="@qualification.QualificationId">Edit</button>
-                <button class="btn btn-danger deleteQualificationButton" data-qualificationid="@qualification.QualificationId">Delete</button>
+        foreach (var qualification in Model)
+        {
+            <div class="qualification-item">
+                <span class="qualification-name">@qualification.Qualification</span>
+                <div class="qualification-actions">
+                    <button class="btn btn-primary editQualificationButton" data-qualificationid="@qualification.QualificationId">Edit</button>
+                    <button class="btn btn-danger deleteQualificationButton" data-qualificationid="@qualification.QualificationId">Delete</button>
+                </div>
             </div>
-        </div>
+        }
     }
+    else
+    {
+        <p>No qualifications found.</p>
+    }
+
 </div>
 
 <!-- Add Qualification Partial View -->

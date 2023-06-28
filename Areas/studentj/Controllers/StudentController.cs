@@ -117,7 +117,44 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                             TaskandResponsibilities = q.TaskandResponsibilities,
                         }).ToList()
                     };
+
                     // Return the full view with the viewModel
+                    return View(viewModel);
+                }
+                else
+                {
+                    var viewModel = new BuildProfile
+                    {
+                        StudentProfile = new ManageStudentProfileViewModel
+                        {
+                            // Editable fields
+                            CareerObjective = string.Empty,
+                            Skills = string.Empty,
+                            Achievements = string.Empty,
+                            Interests = string.Empty,
+                            PhoneNumber = user.PhoneNumber,
+                            Telephone = user.Telephone,
+                            IDNumber = string.Empty,
+                            Address = string.Empty,
+                            SelectedRace = default,
+                            SelectedGender = default,
+                            SelectedDriversLicense = default,
+                            SelectedNationality = default,
+                            SelectedCurrentYearOfStudy = default,
+                            SelectedFaculty = default,
+                            Department = string.Empty,
+
+                            // Non-editable fields
+                            FirstName = user.FirstName,
+                            Surname = user.Surname,
+                            Email = user.Email,
+                        },
+                        Qualifications = new List<QualificationViewModel>(),
+                        Referees = new List<RefereeViewModel>(),
+                        WorkExperiences = new List<WorkExperienceViewModel>()
+                    };
+
+                    // Return the view with the empty viewModel
                     return View(viewModel);
                 }
             }
@@ -126,8 +163,79 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
             return NotFound();
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SaveProfile(BuildProfile viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null)
+                {
+                    var student = await _context.Student.FindAsync(user.Id);
+
+                    if (student != null || viewModel.Qualifications == null && viewModel.Referees == null && viewModel.WorkExperiences == null)
+                    {
+                        // Update the student profile
+                        student.CareerObjective = viewModel.StudentProfile.CareerObjective;
+                        student.Skills = viewModel.StudentProfile.Skills;
+                        student.Achievements = viewModel.StudentProfile.Achievements;
+                        student.Interests = viewModel.StudentProfile.Interests;
+                        user.PhoneNumber = viewModel.StudentProfile.PhoneNumber;
+                        user.Telephone = viewModel.StudentProfile.Telephone;
+                        student.IDNumber = viewModel.StudentProfile.IDNumber;
+                        student.Race = viewModel.StudentProfile.SelectedRace;
+                        student.Gender = viewModel.StudentProfile.SelectedGender;
+                        student.Address = viewModel.StudentProfile.Address;
+                        student.DriversLicense = viewModel.StudentProfile.SelectedDriversLicense;
+                        student.Nationality = viewModel.StudentProfile.SelectedNationality;
+                        student.CurrentYearOfStudy = viewModel.StudentProfile.SelectedCurrentYearOfStudy;
+                        student.Faculty = viewModel.StudentProfile.SelectedFaculty;
+                        student.Department = viewModel.StudentProfile.Department;
+
+                        // Save the changes
+                        await _context.SaveChangesAsync();
+                        Toaster.AddSuccessToastMessage(TempData, "Profile updated successfully.");
+                    }
+                    else
+                    {
+                        // Create a new student instance and populate its properties
+                        student = new Student
+                        {
+                            StudentId = user.Id,
+                            CareerObjective = viewModel.StudentProfile.CareerObjective,
+                            Skills = viewModel.StudentProfile.Skills,
+                            Achievements = viewModel.StudentProfile.Achievements,
+                            Interests = viewModel.StudentProfile.Interests,
+                            IDNumber = viewModel.StudentProfile.IDNumber,
+                            Race = viewModel.StudentProfile.SelectedRace,
+                            Address = viewModel.StudentProfile.Address,
+                            Gender = viewModel.StudentProfile.SelectedGender,
+                            DriversLicense = viewModel.StudentProfile.SelectedDriversLicense,
+                            Nationality = viewModel.StudentProfile.SelectedNationality,
+                            CurrentYearOfStudy = viewModel.StudentProfile.SelectedCurrentYearOfStudy,
+                            Faculty = viewModel.StudentProfile.SelectedFaculty,
+                            Department = viewModel.StudentProfile.Department
+                        };
+
+                        // Add the student to the context
+                        _context.Student.Add(student);
+
+                        // Save the changes
+                        await _context.SaveChangesAsync();
+                        Toaster.AddSuccessToastMessage(TempData, "Profile updated successfully.");
+                    }
+                }
+            }
+
+            // If the model is not valid, return the same view with the validation errors
+            return View("ManageProfile", viewModel);
+        }
+
+
         [HttpGet]
-        public List<string> GetDepartments(string faculty)
+        public List<string> GetDepartmentss(string faculty)
         {
 
 
@@ -192,50 +300,6 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                 return Science;
             }
 
-        }
-
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveProfile(BuildProfile viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.GetUserAsync(User);
-                if (user != null)
-                {
-                    var student = await _context.Student.FindAsync(user.Id);
-
-                    if (student != null)
-                    {
-                        // Update the student profile
-                        student.CareerObjective = viewModel.StudentProfile.CareerObjective;
-                        student.Skills = viewModel.StudentProfile.Skills;
-                        student.Achievements = viewModel.StudentProfile.Achievements;
-                        student.Interests = viewModel.StudentProfile.Interests;
-                        user.PhoneNumber = viewModel.StudentProfile.PhoneNumber;
-                        user.Telephone = viewModel.StudentProfile.Telephone;
-                        student.IDNumber = viewModel.StudentProfile.IDNumber;
-                        student.Race = viewModel.StudentProfile.SelectedRace;
-                        student.Gender = viewModel.StudentProfile.SelectedGender;
-                        student.Address = viewModel.StudentProfile.Address;
-                        student.DriversLicense = viewModel.StudentProfile.SelectedDriversLicense;
-                        student.Nationality = viewModel.StudentProfile.SelectedNationality;
-                        student.CurrentYearOfStudy = viewModel.StudentProfile.SelectedCurrentYearOfStudy;
-                        student.Faculty = viewModel.StudentProfile.SelectedFaculty;
-                        student.Department = viewModel.StudentProfile.Department;
-
-                        // Save the changes
-                        await _context.SaveChangesAsync();
-                        Toaster.AddSuccessToastMessage(TempData, "Profile updated successfully.");
-                    }
-                }
-                return RedirectToAction("ManageProfile");
-            }
-
-            // If the model is not valid, return the same view with the validation errors
-            return View("ManageProfile", viewModel);
         }
 
 
