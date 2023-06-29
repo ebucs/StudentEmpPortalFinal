@@ -1,26 +1,69 @@
-﻿@model StudentEmploymentPortal.ViewModels.StudentApplicationViewModels.StudentApplicationViewModel
-
+﻿@model StudentEmploymentPortal.ViewModels.StudentApplicationViewModels.PartialStudentApplicationViewModel
+@*@{
+    List<SelectListItem> statusList = Model.OutComeStatus.Select(s => new SelectListItem
+            {
+                Text = s.ToString(),
+                Value = s.ToString()
+            }).ToList();
+}*@
 @{
-    ViewData["Title"] = "Student Application Review";
+    ViewData["Title"] = "(Student Application Review)";
 }
 
 <div class="partial-view-overlay"></div> <!-- Overlay div to cover the page -->
 
 <div class="partial-view-container container pt-4">
     <h1>@ViewData["Title"]</h1>
-
-    <form method="post" asp-controller="StudentApplication" asp-action="CreateApplication" asp-area="StudentApplicationJ">
+    <br />
+    <form method="post" asp-controller="StudentApplication" asp-action="SaveStudentApplicationStatus" asp-area="StudentApplicationJ">
         <div class="recruiter-details pb-4">
 
-            <input type="hidden" name="studentApplicationId" value="@Model.studentApplicationId" />
-            <p><strong>JobPost:</strong> @Model.jobPost</p>
-            <p><strong>FirstName:</strong> @Model.firstName</p>
-            <p><strong>Surname:</strong> @Model.surname</p>
-            <p><strong>Tel. Number:</strong> @Model.telephone</p>
-            <p><strong>Student:</strong> @Model.student</p>
-           
-                    <button class="btn btn-primary close-button" asp-controller="Student" asp-action="SearchAndApply" asp-area="StudentJ">Close</button>
-                </div>
+            <h3>Job Post</h3>
+            <input type="hidden" name="studentApplicationId" value="@Model.StudentApplicationId" />
+            <p><strong>Job Title:</strong> @Model.JobTitle</p>
+            <p><strong>JobDescription:</strong> @Model.JobDescription</p>
+            <p><strong>Department:</strong> @Model.Department</p>
+            <p><strong>Course:</strong> @Model.Course</p>
+            <div class="mt-2 p-2 border border-dark rounded" style="width: fit-content;">
+                <p>Years of Study Options:</p>
+                <ul>
+                    @foreach (var yearOfStudyOption in Model.Levels)
+                    {
+                        <li>@yearOfStudyOption</li>
+                    }
+                </ul>
+            </div>
+            <br/>
+
+            <h3>Student Application</h3>
+            <p><strong>FirstName:</strong> @Model.FirstName</p>
+            <p><strong>Surname:</strong> @Model.Surname</p>
+            <p><strong>Address:</strong> @Model.Address</p>
+            <p><strong>Career Objective:</strong> @Model.CareerObjective</p>
+            <p><strong>Skills:</strong> @Model.Skills</p>
+            <p><strong>Achievements:</strong> @Model.Achievements</p>
+            <p><strong>Interests:</strong> @Model.Interests</p>
+            <p><strong>ID Number:</strong> @Model.IDNumber</p>
+            <p><strong>Race:</strong> @Model.Race</p>
+            <p><strong>Gender:</strong> @Model.Gender</p>
+            <p><strong>License:</strong> @Model.DriversLicense</p>
+            <p><strong>Nationality:</strong> @Model.Nationality</p>
+            <p><strong>Current Year of Study:</strong> @Model.CurrentYearOfStudy</p>
+            <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+            <p><strong>Telephone:</strong> @Model.Telephone</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+
+            <div class="form-floating py-2 col-12 col-md-6">
+                <!-- Adjust the width using col- classes -->
+                <label asp-for="SelectedStudentApplicationStatus" class="col-form-label-sm">Outcome</label>
+                <select asp-for="SelectedStudentApplicationStatus" asp-items="Model.StatusOptions" class="form-select"></select>
+            </div>
+
+            <!-- Add a submit button to save the changes -->
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Save Status</button>
+                <button class="btn btn-primary close-button" onclick="closePartialView()">Close</button>
+                
             </div>
         </div>
     </form>

@@ -279,13 +279,13 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
                         {
                             studentApplicationStatus = "Unsuccessful";
                         }
-                        else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.InterView)
+                        else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.Interview)
                         {
                             studentApplicationStatus = "Interview";
                         }
                         else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.Appointed)
                         {
-                            studentApplicationStatus = "Scuccessful";
+                            studentApplicationStatus = "Successful";
                         }
                         else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.OnHold)
                         {

@@ -16,6 +16,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using StudentEmploymentPortal.ViewModels.StudentApplicationViewModels;
+using static StudentEmploymentPortal.Areas.studentApplicationJ.Models.StudentApplication;
 
 namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
 {
@@ -26,7 +27,7 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public StudentApplicationController(IWebHostEnvironment webHostEnvironment,UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public StudentApplicationController(IWebHostEnvironment webHostEnvironment, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
@@ -60,7 +61,7 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
                             JobPostId = JobPostId,
                             RecruiterId = jobPost.RecruiterId,
                             DateCreated = DateTime.Now,
-                            StudentApplicationStatus=StudentApplication.EnumStudentApplicationStatus.Pending
+                            StudentApplicationStatus = StudentApplication.EnumStudentApplicationStatus.Pending
                         };
 
                         _context.StudentApplication.Add(application);
@@ -132,22 +133,93 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
                        .Select(y => y.StudentId)
                        .FirstOrDefaultAsync();
             var student = await _context.Student.FindAsync(studentId);
+            var studentApplication = await _context.StudentApplication.FirstOrDefaultAsync(r => r.StudentId == studentId);
+            if (studentApplication == null)
+            {
+                return NotFound();
+            }
+            var user = await _context.Users.FindAsync(studentId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            if (student == null)
+            {
+                return NotFound();
+            }
             var jobPostId = await _context.StudentApplication
                        .Where(y => y.ApplicationId == id)
                        .Select(y => y.JobPostId)
                        .FirstOrDefaultAsync();
             var jobpost = await _context.JobPost.FindAsync(jobPostId);
 
-            var viewmodel = new StudentApplicationViewModel
+            if (jobpost == null)
             {
-                studentApplicationId = id,
-                jobPost = jobpost,
-                firstName = student.User.FirstName,
-                surname = student.User.Surname,
-                telephone = student.User.Telephone,
-                email = student.User.Email,
-                student = student
+                return NotFound();
+            }
+            var yearsOfStudy = await _context.YearsOfStudy.FirstOrDefaultAsync(y =>
+                  y.JobPostId == jobpost.JobPostId &&
+                  (y.IsFirstYear || y.IsSecondYear || y.IsThirdYear || y.IsHonours || y.IsGraduates || y.IsMasters || y.IsPhD || y.IsPostdoc));
+
+            var yearsOfStudyOptions = new List<string>();
+            //List<StudentApplication.EnumStudentApplicationStatus?> OutComeStatusList = new List<StudentApplication.EnumStudentApplicationStatus?>()
+            //                                                                            {
+            //                                                                                null, // Option representing no selection
+            //                                                                                StudentApplication.EnumStudentApplicationStatus.Interview,
+            //                                                                                StudentApplication.EnumStudentApplicationStatus.OnHold,
+            //                                                                                StudentApplication.EnumStudentApplicationStatus.Rejected,
+            //                                                                                StudentApplication.EnumStudentApplicationStatus.Appointed,
+            //                                                                            };
+
+
+
+            if (yearsOfStudy != null)
+            {
+                if (yearsOfStudy.IsFirstYear)
+                    yearsOfStudyOptions.Add("1st Year");
+                if (yearsOfStudy.IsSecondYear)
+                    yearsOfStudyOptions.Add("2nd Year");
+                if (yearsOfStudy.IsThirdYear)
+                    yearsOfStudyOptions.Add("3rd Year");
+                if (yearsOfStudy.IsHonours)
+                    yearsOfStudyOptions.Add("Honours");
+                if (yearsOfStudy.IsGraduates)
+                    yearsOfStudyOptions.Add("Graduates");
+                if (yearsOfStudy.IsMasters)
+                    yearsOfStudyOptions.Add("Masters");
+                if (yearsOfStudy.IsPhD)
+                    yearsOfStudyOptions.Add("PhD");
+                if (yearsOfStudy.IsPostdoc)
+                    yearsOfStudyOptions.Add("Postdoc");
+            }
+            var viewmodel = new PartialStudentApplicationViewModel
+            {
+                StudentApplicationId = id,
+                JobTitle = jobpost.JobTitle,
+                JobDescription = jobpost.JobDescription,
+                Department = jobpost.Faculty.ToString(),
+                Course = jobpost.Department.ToString(),
+                Levels = yearsOfStudyOptions,
+
+                FirstName = user.FirstName,
+                Surname = user.Surname,
+                Address = student.Address,
+                CareerObjective = student.CareerObjective,
+                Skills = student.Skills,
+                Achievements = student.Achievements,
+                Interests = student.Interests,
+                IDNumber = student.IDNumber,
+                Race = student.Race.ToString(),
+                Gender = student.Gender.ToString(),
+                DriversLicense = student.DriversLicense.ToString(),
+                Nationality = student.Nationality.ToString(),
+                CurrentYearOfStudy = student.CurrentYearOfStudy.ToString(),
+                PhoneNumber = user.PhoneNumber,
+                Telephone = user.Telephone,
+                Email = user.Email,
+                SelectedStudentApplicationStatus = studentApplication.StudentApplicationStatus
             };
+
             return View(viewmodel);
         }
         public async Task<IActionResult> PartialStudentApplicationDetails(string id)
@@ -174,10 +246,44 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
                 ApplicationInstruction = jobPost.ApplicationInstruction,
                 ClosingDate = jobPost.ClosingDate,
 
+
             };
 
             return PartialView(viewModel);
 
+        }
+
+        public async Task<IActionResult> SaveStudentApplicationStatus(string id, PartialStudentApplicationViewModel viewmodel)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var studenApplication = await _context.StudentApplication.FirstOrDefaultAsync(r => r.ApplicationId == id);
+
+            if (studenApplication == null)
+            {
+                return NotFound();
+            }
+
+            //studenApplication.StudentApplicationStatus = viewmodel.OutComeStatus;
+            
+
+            //// Update the Approved property based on the Outcome
+            //if (viewModel.Outcome.ToString() == "Approved")
+            //{
+            //    recruiter.Approved = true;
+            //}
+            //else
+            //{
+            //    recruiter.Approved = false;
+            //}
+
+            //// Save the changes to the database
+            //await _context.SaveChangesAsync();
+
+            return RedirectToAction("ManageRecruiterRegistration");
         }
     }
 }

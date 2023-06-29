@@ -48,7 +48,7 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Models
         //enums
         public enum EnumStudentApplicationStatus
         {
-            InterView,
+            Interview,
             OnHold,
             Rejected,
             Appointed,

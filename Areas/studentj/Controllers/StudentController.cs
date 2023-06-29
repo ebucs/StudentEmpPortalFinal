@@ -340,7 +340,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                 {
                     studentApplicationStatus = "Unsuccessful";
                 }
-                else if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.InterView)
+                else if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.Interview)
                 {
                     studentApplicationStatus = "Interview";
                 }
