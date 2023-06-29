@@ -12,10 +12,10 @@ namespace StudentEmploymentPortal.ViewModels.StudentViewModels
     public class ManageStudentProfileViewModel
     {
         // Editable fields
-        public string CareerObjective { get; set; }
-        public string Skills { get; set; }
-        public string Achievements { get; set; }
-        public string Interests { get; set; }
+        public string? CareerObjective { get; set; }
+        public string? Skills { get; set; }
+        public string? Achievements { get; set; }
+        public string? Interests { get; set; }
         public string IDNumber { get; set; }
         public Student.race SelectedRace { get; set; }
         public Student.gender SelectedGender { get; set; }
@@ -31,7 +31,7 @@ namespace StudentEmploymentPortal.ViewModels.StudentViewModels
         // Non-editable fields
         public string FirstName { get; set; }
         public string Surname { get; set; }
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         // Dropdown options
         public IEnumerable<SelectListItem> DriversLicenseOptions => GetEnumSelectList<Student.driversLicense>();

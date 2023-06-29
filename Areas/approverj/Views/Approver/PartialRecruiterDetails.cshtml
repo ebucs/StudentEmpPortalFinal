@@ -4,47 +4,44 @@
     ViewData["Title"] = "Recruiter Details";
 }
 
-<div class="partial-view-overlay"></div> <!-- Overlay div to cover the page -->
-
-<div class="partial-view-container container pt-4">
     <h1>@ViewData["Title"]</h1>
 
-    <form id="ApproveRecruiter" method="post" asp-controller="Approver" asp-action="PartialRecruiterDetails">
-        @Html.AntiForgeryToken()
-        <div class="recruiter-details pb-4">
-            <p><strong>Title:</strong> @Model.Title</p>
-            <p><strong>First Name:</strong> @Model.FirstName</p>
-            <p><strong>Surname:</strong> @Model.Surname</p>
-            <p><strong>Email:</strong> @Model.Email</p>
-            <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
-            <p><strong>Telephone:</strong> @Model.Telephone</p>
-            <p><strong>Registered Address:</strong> @Model.RegisteredAddress</p>
-            <p><strong>Job Title:</strong> @Model.JobTitle</p>
-            <p><strong>Registration Number:</strong> @Model.RegistrationNumber</p>
-            <p><strong>Registered Name:</strong> @Model.RegisteredName</p>
-            <p><strong>Trading Name:</strong> @Model.TradingName</p>
-            <p><strong>Business Type:</strong> @Model.BusinessType</p>
+<form id="ApproveRecruiter" method="post" asp-controller="Approver" asp-action="PartialRecruiterDetails">
+    @Html.AntiForgeryToken()
+    <div class="recruiter-details pb-4">
+        <p><strong>Title:</strong> @Model.Title</p>
+        <p><strong>First Name:</strong> @Model.FirstName</p>
+        <p><strong>Surname:</strong> @Model.Surname</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+        <p><strong>Telephone:</strong> @Model.Telephone</p>
+        <p><strong>Registered Address:</strong> @Model.RegisteredAddress</p>
+        <p><strong>Job Title:</strong> @Model.JobTitle</p>
+        <p><strong>Registration Number:</strong> @Model.RegistrationNumber</p>
+        <p><strong>Registered Name:</strong> @Model.RegisteredName</p>
+        <p><strong>Trading Name:</strong> @Model.TradingName</p>
+        <p><strong>Business Type:</strong> @Model.BusinessType</p>
 
-            <!-- Add input fields for adding a note and changing the outcome -->
-            <div class="input-fields">
-                <div class="form-floating py-2 col-12 col-md-6">
-                    <!-- Adjust the width using col- classes -->
-                    <label asp-for="ApproverNote" class="form-label">Add Note</label>
-                    <textarea asp-for="ApproverNote" class="form-control" style="height: 150px;"></textarea> <!-- Adjust the height using inline style -->
-                </div>
+        <!-- Add input fields for adding a note and changing the outcome -->
+        <div class="input-fields">
+            <div class="form-floating py-2 col-12 col-md-6">
+                <!-- Adjust the width using col- classes -->
+                <label asp-for="ApproverNote" class="form-label">Add Note</label>
+                <textarea asp-for="ApproverNote" class="form-control" style="height: 150px;"></textarea> <!-- Adjust the height using inline style -->
+            </div>
 
-                <div class="form-floating py-2 col-12 col-md-6">
-                    <!-- Adjust the width using col- classes -->
-                    <label asp-for="Outcome" class="col-form-label-sm"></label>
-                    <select asp-for="Outcome" asp-items="Model.StatusOptions" class="form-select"></select>
-                </div>
+            <div class="form-floating py-2 col-12 col-md-6">
+                <!-- Adjust the width using col- classes -->
+                <label asp-for="Outcome" class="col-form-label-sm"></label>
+                <select asp-for="Outcome" asp-items="Model.StatusOptions" class="form-select"></select>
+            </div>
 
-                <!-- Add a submit button to save the changes -->
-                <div class="button-container">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <button class="btn btn-primary close-button" asp-controller="Approver" asp-action="ManageRecruiterRegistration">Close</button>
-                </div>
+            <!-- Add a submit button to save the changes -->
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button class="btn btn-primary close-button" asp-controller="Approver" asp-action="ManageRecruiterRegistration">Close</button>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>
+

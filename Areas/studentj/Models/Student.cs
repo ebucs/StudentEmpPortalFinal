@@ -14,7 +14,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
         public driversLicense DriversLicense { get; set; }
 
-        public string CareerObjective { get; set; }
+        public string? CareerObjective { get; set; }
 
         public gender Gender { get; set; }
 
@@ -31,13 +31,13 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
         public department Department { get; set; }
 
-        public string Skills { get; set; }
+        public string? Skills { get; set; }
 
-        public string Achievements { get; set; }
+        public string? Achievements { get; set; }
 
-        public string Interests { get; set; }
+        public string? Interests { get; set; }
 
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         // Navigation property
         public virtual ApplicationUser User { get; set; }

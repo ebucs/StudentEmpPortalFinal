@@ -92,6 +92,7 @@
     <script src="~/js/Toast/toastr.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/partialView.js" asp-append-version="true"></script>
+    <script src="~/js/partialView2.js" asp-append-version="true"></script>
 
     @using StudentEmploymentPortal.Utility;
 
@@ -109,6 +110,9 @@
         }
     </script>
 
+    <div class="partial-view-overlay"></div> <!-- Overlay div to cover the page -->
+
+    <div class="partial-view-container container pt-4"></div>
 
 
     @await RenderSectionAsync("Scripts", required: false)

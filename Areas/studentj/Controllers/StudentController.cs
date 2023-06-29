@@ -226,6 +226,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                         await _context.SaveChangesAsync();
                         Toaster.AddSuccessToastMessage(TempData, "Profile updated successfully.");
                     }
+                    return RedirectToAction("ManageProfile", viewModel);
                 }
             }
             else
