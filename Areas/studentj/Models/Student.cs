@@ -57,10 +57,10 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
         {
             DriversLicense = driversLicense.None;
             CareerObjective = string.Empty;
-            Gender = gender.Male;
-            Race = race.Black;
-            Nationality = EnumNationality.SouthAfrican;
-            CurrentYearOfStudy = currentYearOfStudy.FirstYear;
+            Gender = gender.None;
+            Race = race.None;
+            Nationality = EnumNationality.None;
+            CurrentYearOfStudy = currentYearOfStudy.None;
             Skills = string.Empty;
             Achievements = string.Empty;
             Interests = string.Empty;
@@ -70,6 +70,8 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
         //enums
         public enum gender
         {
+            [Display(Name = "")]
+            None,
             [Display(Name = "Male")]
             Male,
 
@@ -82,6 +84,8 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
         public enum race
         {
+            [Display(Name = "")]
+            None,
             [Display(Name = "Black")]
             Black,
 
@@ -103,6 +107,8 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
         public enum EnumNationality
         {
+            [Display(Name = "")]
+            None,
 
             [Display(Name = "South African")]
             SouthAfrican,
@@ -113,6 +119,8 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
         public enum currentYearOfStudy
         {
+            [Display(Name = "")]
+            None,
             [Display(Name = "1st Year")]
             FirstYear,
 
@@ -140,7 +148,8 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
         public enum EnumFaculty
         {
-            NA,
+            [Display(Name = "")]
+            None,
             [Display(Name = "Commerce, Law and Management")]
             CommerceLawAndManagement,
 
@@ -161,6 +170,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
         public enum driversLicense
         {
+            
             [Display(Name = "None")]
             None,
 
@@ -185,6 +195,8 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
 
         public enum department
         {
+            [Display(Name = "")]
+            None,
             // Commerce, Law and Management
             [Display(Name = "Accounting")]
             Accounting,

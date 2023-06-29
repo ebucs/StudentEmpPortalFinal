@@ -1,6 +1,6 @@
 ﻿@model StudentEmploymentPortal.ViewModels.StudentViewModels.QualificationViewModel
 
-<div id="addQualificationPartial" class="add-qualification-popup">
+<div id="addQualificationPartial" class="add-qualification-popup mb-4">
     <div class="add-qualification-popup-content">
         <h3>Update Qualification</h3>
         <form id="editQualificationForm" class="row" method="post" asp-controller="Student" asp-action="EditQualification" asp-route-itemid="@Model.QualificationId">
@@ -8,48 +8,49 @@
 
             <input type="hidden" asp-for="QualificationId" />
 
-            <div class="form-group">
-                <label asp-for="Institution"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Institution">Institution:</label>
                 <input asp-for="Institution" class="form-control" required>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Date"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Date">Date:</label>
                 <input asp-for="Date" class="form-control" required>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Qualification"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Qualification">Qualification:</label>
                 <input asp-for="Qualification" class="form-control" required>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Subjects"></label>
-                <textarea asp-for="Subjects" class="form-control textarea-height"></textarea>
+            <div class="form-group mb-3">
+                <label asp-for="Subjects">Subjects:</label>
+                <textarea asp-for="Subjects" class="form-control" rows="6"></textarea>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Majors"></label>
-                <textarea asp-for="Majors" class="form-control textarea-height"></textarea>
+            <div class="form-group mb-3">
+                <label asp-for="Majors">Majors:</label>
+                <textarea asp-for="Majors" class="form-control" rows="6"></textarea>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Submajors"></label>
-                <textarea asp-for="Submajors" class="form-control textarea-height"></textarea>
+            <div class="form-group mb-3">
+                <label asp-for="Submajors">Submajors:</label>
+                <textarea asp-for="Submajors" class="form-control" rows="6"></textarea>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Research"></label>
-                <textarea asp-for="Research" class="form-control textarea-height"></textarea>
+            <div class="form-group mb-3">
+                <label asp-for="Research">Research:</label>
+                <textarea asp-for="Research" class="form-control" rows="6"></textarea>
             </div>
+
             <div class="pt-3">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-secondary" id="cancelEditQualificationButton">Cancel</button>
+                <button type="button" class="btn btn-danger" id="cancelEditQualificationButton">Cancel</button>
             </div>
         </form>
-
     </div>
 </div>
+
 
 <script>
     $(document).ready(function () {

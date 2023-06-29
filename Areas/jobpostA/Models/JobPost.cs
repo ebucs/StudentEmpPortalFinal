@@ -39,7 +39,8 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
         [Required(ErrorMessage = "Location field is required.")]
         public string Location { get; set; }
 
-        [Required(ErrorMessage = "Job Decription field is required.")]
+        [Display(Name = "Job Description")]
+        [Required(ErrorMessage = "Job Description field is required.")]
         public string JobDescription { get; set; }
 
         [Required(ErrorMessage = "Key Responsibilities field is required.")]
