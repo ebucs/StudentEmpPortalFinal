@@ -114,7 +114,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
             SouthAfrican,
 
             [Display(Name = "Not South African")]
-            NotSouthAfrican
+            OpenToEveryone
         }
 
         public enum currentYearOfStudy

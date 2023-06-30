@@ -38,7 +38,7 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Models
         //[Required]
         //public byte[] ApplicationDocument { get; set; }
 
-
+        public virtual ICollection<ApplicationDocument> ApplicationDocuments { get; set; }
         public StudentApplication()
         {
             StudentApplicationStatus = EnumStudentApplicationStatus.OnHold;

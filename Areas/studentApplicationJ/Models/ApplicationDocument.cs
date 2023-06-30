@@ -16,5 +16,10 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Models
         public string DocumentName { get; set; }
 
         public string FilePath { get; set; }
+
+        public string StudentApplicationId { get; set; }
+
+        [ForeignKey(nameof(StudentApplicationId))]
+        public virtual StudentApplication StudentApplication { get; set; }
     }
 }

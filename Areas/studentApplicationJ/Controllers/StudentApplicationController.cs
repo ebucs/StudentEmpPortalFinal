@@ -51,12 +51,12 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
 
                     if (jobPost != null)
                     {
-                        var searchApplication = await _context.StudentApplication.FirstOrDefaultAsync(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId);
-                        if (searchApplication != null)
-                        {
-                            Toaster.AddSuccessToastMessage(TempData, "You already applied to this post");
-                            return RedirectToAction("SearchAndApply", "Student", new { area = "studentJ" });
-                        }
+                        //var searchApplication = await _context.StudentApplication.FirstOrDefaultAsync(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId);
+                        //if (searchApplication != null)
+                        //{
+                        //    //Toaster.AddSuccessToastMessage(TempData, "You already applied to this post");
+                        //    return RedirectToAction("SearchAndApply", "Student", new { area = "studentJ" });
+                        //}
                         var application = new StudentApplication
                         {
                             StudentId = student.StudentId,
@@ -131,6 +131,7 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
 
             return RedirectToAction("Index");
         }
+
 
         public async Task<IActionResult> PartialStudentApplicationDetails(string id)
         {

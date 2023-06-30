@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using StudentEmploymentPortal.Areas.Identity
+@using StudentEmploymentPortal.Areas.studentj
+@using StudentEmploymentPortal.Utility
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,21 +26,25 @@
 
     <header>
         <nav class="navbar navbar-expand-md bg-primary" data-bs-theme="dark">
-            <div class="container-fluid">
+            <div class="container-fluid d-flex align-items-center flex-grow-5">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     Student Employment Portal
                 </a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    var user = await UserManager.GetUserAsync(User);
+                    var roles = await UserManager.GetRolesAsync(user);
+
+                    @if (roles.Contains("Student"))
+                    {
+                        <a class="text-white ms-3 nav-link active">Student</a>
+                    }
+                }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav ms-auto">
-                       @* <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>*@
-                        @*<li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>*@
                         <li class="nav-item">
                             <partial name="_LoginPartial" />
                         </li>
@@ -43,6 +53,10 @@
             </div>
         </nav>
     </header>
+
+
+
+
 
 
 

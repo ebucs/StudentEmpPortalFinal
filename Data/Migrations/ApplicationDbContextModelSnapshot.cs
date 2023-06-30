@@ -445,7 +445,13 @@ namespace StudentEmploymentPortal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("StudentApplicationId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("ApplicationDocumentId");
+
+                    b.HasIndex("StudentApplicationId");
 
                     b.ToTable("ApplicationDocument");
                 });
@@ -734,6 +740,17 @@ namespace StudentEmploymentPortal.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentApplicationJ.Models.ApplicationDocument", b =>
+                {
+                    b.HasOne("StudentEmploymentPortal.Areas.studentApplicationJ.Models.StudentApplication", "StudentApplication")
+                        .WithMany("ApplicationDocuments")
+                        .HasForeignKey("StudentApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("StudentApplication");
+                });
+
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Qualification", b =>
                 {
                     b.HasOne("StudentEmploymentPortal.Areas.studentj.Models.Student", "Student")
@@ -796,6 +813,11 @@ namespace StudentEmploymentPortal.Migrations
             modelBuilder.Entity("StudentEmploymentPortal.Areas.recruiterj.Models.Recruiter", b =>
                 {
                     b.Navigation("JobPosts");
+                });
+
+            modelBuilder.Entity("StudentEmploymentPortal.Areas.studentApplicationJ.Models.StudentApplication", b =>
+                {
+                    b.Navigation("ApplicationDocuments");
                 });
 
             modelBuilder.Entity("StudentEmploymentPortal.Areas.studentj.Models.Student", b =>

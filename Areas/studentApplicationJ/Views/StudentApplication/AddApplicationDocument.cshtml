@@ -7,16 +7,87 @@
 <h1>Add Application Document</h1>
 <form method="post" enctype="multipart/form-data" asp-area="StudentApplicationJ" asp-controller="StudentApplication" asp-action="AddApplicationDocument">
 
-    <div class="form-group">
-        <label for="file" class="form-label mt-4">Choose a file:</label>
-        <input type="file" id="file" name="file" class="form-control" />
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Document Name</th>
+                <th>File</th>
+                <th>Preview</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="form-floating">
+                        <input id="documentName" name="DocumentName" class="form-control" aria-required="true" required />
+                        <label class="col-form-label-sm" for="documentName">Enter document name</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="file" id="file" name="file" class="form-control" onchange="showFileDetails(this)" accept=".pdf, .doc, .docx" required />
+                        <p id="fileDetailsDisplay" class="text-muted"></p>
+                    </div>
+                </td>
+                <td>
+                    <div id="previewContainer"></div>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                    <button type="button" class="btn btn-danger" onclick="clearFileInput()">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-    <div class="form-floating py-2 col-12">
-        <label class="col-form-label-sm" for="documentName">Enter document name</label>
-        <input id="documentName" name="DocumentName" class="form-control" aria-required="true" />
-    </div>
     <input type="hidden" name="ApplicationId" value="@ViewData["ApplicationId"]" />
-
-    <button type="submit" class="btn btn-primary">Upload</button>
 </form>
+<button type="button" class="btn btn-danger close-button" onclick="navigateToView()">Cancel</button>
+
+@section Scripts {
+    <script>
+        // Function to display file details and create a preview link
+        function showFileDetails(input) {
+            var fileInput = input;
+            var fileDetailsDisplay = document.getElementById("fileDetailsDisplay");
+            var previewContainer = document.getElementById("previewContainer");
+
+            if (fileInput.files.length > 0) {
+                var file = fileInput.files[0];
+               // fileDetailsDisplay.textContent = "Selected File: " + file.name;
+
+                var fileURL = URL.createObjectURL(file);
+                var previewLink = document.createElement("a");
+                previewLink.setAttribute("href", fileURL);
+                previewLink.setAttribute("target", "_blank");
+                previewLink.textContent = "Preview Document";
+
+                previewContainer.innerHTML = "";
+                previewContainer.appendChild(previewLink);
+            } else {
+                fileDetailsDisplay.textContent = "";
+                previewContainer.innerHTML = "";
+            }
+        }
+
+        // Function to clear the file input field, document name input field, file details display, and preview container
+        function clearFileInput() {
+            var fileInput = document.getElementById("file");
+            var documentNameInput = document.getElementById("documentName");
+            var fileDetailsDisplay = document.getElementById("fileDetailsDisplay");
+            var previewContainer = document.getElementById("previewContainer");
+
+            fileInput.value = ""; // Clear the selected file
+            documentNameInput.value = ""; // Clear the document name input field
+            fileDetailsDisplay.textContent = "";
+            previewContainer.innerHTML = "";
+        }
+
+        function navigateToView() {
+            // Redirect the user to the view URL
+            window.location.href = '@Url.Action("SearchAndApply", "Student", new { area = "StudentJ" })';
+        }
+    </script>
+}
+

@@ -326,6 +326,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
             if (student != null)
             {
                 var studentYearOfStudy = student.CurrentYearOfStudy.ToString();
+                var studentNationality = student.Nationality; 
 
                 if (studentYearOfStudy.Equals("FirstYear"))
                 {
@@ -383,12 +384,23 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                         .Select(y => y.JobPostId)
                         .ToListAsync();
                 }
-                
+
+
 
                 foreach (var jobPostId in jobPostsIds)
                 {
                     var jobPost = await _context.JobPost.FindAsync(jobPostId);
-                    jobPosts.Add(jobPost);
+
+                    if(jobPost == null)
+                    {
+                        return NotFound();
+                    }
+                    var searchApplication = await _context.StudentApplication.FirstOrDefaultAsync(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId);
+                    if (searchApplication == null && studentNationality.ToString().Equals(jobPost.Nationality.ToString()))
+                    {
+                        jobPosts.Add(jobPost);
+                    }
+                    
                 }
 
             }
