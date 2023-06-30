@@ -14,6 +14,7 @@ using StudentEmploymentPortal.Areas.jobpostA.Models;
 using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
 using StudentEmploymentPortal.ViewModels.StudentViewModels;
 using StudentEmploymentPortal.Migrations;
+using StudentEmploymentPortal.Areas.studentApplicationJ.Models;
 
 namespace StudentEmploymentPortal.Areas.studentj.Controllers
 {
@@ -835,9 +836,68 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
 
         /////////////////END OF WORK EXPERIENCE////////////
 
-        public IActionResult ApplicationsHistory()
+        public async Task<IActionResult> StudentApplicationsHistory()
         {
-            return View();
+
+            var studentApplications = new List<StudentApplicationsHistory>();
+            var studentApplicationStatus = "";
+            var viewmodel = new StudentApplicationsHistory();
+            var user = await _userManager.GetUserAsync(User);
+            var student = await _context.Student.FindAsync(user.Id);
+            var jobPostsIds = await _context.StudentApplication
+                        .Where(y => y.StudentId == student.StudentId)
+                        .Select(y => y.JobPostId)
+                        .ToListAsync();
+
+            foreach (var id in jobPostsIds)
+            {
+                var jobPost = await _context.JobPost.FindAsync(id);
+                var applicationStatus = await _context.StudentApplication
+                                        .Where(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId)
+                                        .Select(a => a.StudentApplicationStatus)
+                                        .FirstOrDefaultAsync();
+                if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.Withdrawn)
+                {
+                    studentApplicationStatus = "Withdrawn";
+                }
+                else if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.Rejected)
+                {
+                    studentApplicationStatus = "Unsuccessful";
+                }
+                else if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.Interview)
+                {
+                    studentApplicationStatus = "Interview";
+                }
+                else if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.Appointed)
+                {
+                    studentApplicationStatus = "Scuccessful";
+                }
+                else if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.OnHold)
+                {
+                    studentApplicationStatus = "On hold";
+                }
+                else
+                {
+                    studentApplicationStatus = "Pending";
+                }
+                var applicationId = await _context.StudentApplication
+                                        .Where(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId)
+                                        .Select(a => a.ApplicationId)
+                                        .FirstOrDefaultAsync();
+                var viewModel = new StudentApplicationsHistory
+                {
+                    StudentApplicationiId = applicationId,
+                    JobTitle = jobPost.JobTitle,
+                    Department = jobPost.Department,
+                    JobType = jobPost.JobType,
+                    StartDate = jobPost.StartDate,
+                    EndDate = jobPost.EndDate,
+                    StudentApplicationStatus = studentApplicationStatus
+                };
+
+                studentApplications.Add(viewModel);
+            }
+            return View(studentApplications);
         }
     }
 }

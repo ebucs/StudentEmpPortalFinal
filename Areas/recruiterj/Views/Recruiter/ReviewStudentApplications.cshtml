@@ -1,4 +1,4 @@
-﻿@model List<StudentEmploymentPortal.Areas.studentj.Models.Student>
+﻿@model List<StudentEmploymentPortal.ViewModels.RecruiterViewModels.ReviewStudentsApplicationsViewModel>
 @using StudentEmploymentPortal.Areas.Identity
 @using Microsoft.AspNetCore.Identity
 
@@ -33,14 +33,14 @@
             <tbody>
                 @foreach (var studentApplication in Model)
                 {
-                    <tr>
-                        <td>@studentApplication.Faculty</td>
-                        <td>@studentApplication.Faculty</td>
-                        <td>@studentApplication.Faculty</td>
+                    <tr onclick="openPartialView('@Url.Action("PartialRecruiterStudentApplicationReview", "Recruiter", new { area = "RecruiterJ", id = studentApplication.StudentApplicationId })')">
+                        <td>@studentApplication.FirstName</td>
+                        <td>@studentApplication.Surname</td>
                         <td>@studentApplication.Department</td>
-                        <td>@studentApplication.CurrentYearOfStudy</td>
+                        <td>@studentApplication.Course</td>
+                        <td>@studentApplication.Level</td>
                         <td>@studentApplication.Gender</td>
-                        <td>@studentApplication.Gender</td>
+                        <td>@studentApplication.StudentApplicationStatus</td>
                     </tr>
                 }
             </tbody>
@@ -49,5 +49,5 @@
 }
 else
 {
-    <p>Complete profile to view posts.</p>
+    <p>No student applications available.</p>
 }

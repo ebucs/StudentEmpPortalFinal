@@ -99,7 +99,9 @@ namespace StudentEmploymentPortal.Data
                 .Property(s => s.PartTimeNumberOfHours)
                 .HasConversion<string>();
 
-
+            modelBuilder.Entity<StudentApplication>()
+               .Property(s => s.StudentApplicationStatus)
+               .HasConversion<string>();
         }
     }
 }

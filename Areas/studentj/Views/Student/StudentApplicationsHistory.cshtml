@@ -1,0 +1,52 @@
+﻿@model List<StudentEmploymentPortal.ViewModels.StudentViewModels.StudentApplicationsHistory>
+@using StudentEmploymentPortal.Areas.Identity
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Application History";
+}
+
+<h1 class="mb-4 mt-3">Student Applications History</h1>
+
+<form method="post" action="">
+    <div class="input-group mb-3">
+        <label class="sr-only" for="searchInput">Search</label>
+        <input class="form-control" type="text" name="search" id="searchInput" placeholder="Search">
+    </div>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-default">
+            <thead>
+                <tr class="table-primary">
+                    <th>Job title</th>
+                    <th>Department</th>
+                    <th>FT/PT</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Outcome</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var studentApplication in Model)
+                {
+                    <tr onclick="openPartialView('@Url.Action("PartialStudentApplicationDetails", "StudentApplication", new { area = "StudentApplicationJ", id = studentApplication.StudentApplicationiId })')">
+
+                        <td>@studentApplication.JobTitle</td>
+                        <td>@studentApplication.Department</td>
+                        <td>@studentApplication.JobType</td>
+                        <td>@studentApplication.StartDate.ToString("MM/dd/yyyy")</td>
+                        <td>@studentApplication.EndDate.ToString("MM/dd/yyyy")</td>
+                        <td>@studentApplication.StudentApplicationStatus</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>You currently have no existing applications</p>
+}
