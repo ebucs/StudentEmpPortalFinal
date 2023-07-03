@@ -4,7 +4,7 @@
     var ApprovalStatus = ViewData["ApprovalStatus"];
 }
 
-<h1 class="pt-3">Welcome @ViewData["FirstName"] (Recruiter)</h1>
+<h1 class="pt-3 text-center">Welcome @ViewData["FirstName"]</h1>
 
 
 @if (ApprovalStatus != null && !(bool)ApprovalStatus)
@@ -15,12 +15,21 @@
 {
     <div class="row pt-4">
         <div class="col-md-12 text-center">
-            <div class="btn-group" role="group">
-                <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="jobpostA" asp-controller="JobPost" asp-action="CreateJobPost">Create Job Post</a>
-                <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="jobpostA" asp-controller="JobPost" asp-action="ManageJobPosts">Manage Post</a>
-                <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="RecruiterJ" asp-controller="Recruiter" asp-action="ReviewStudentApplications">Review Applications</a>
-                <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="RecruiterJ" asp-controller="Recruiter" asp-action="ManageProfile">Manage Profile</a>
+            <div class="d-flex flex-wrap justify-content-center">
+                <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="jobpostA" asp-controller="JobPost" asp-action="CreateJobPost">
+                    <i class="fas fa-briefcase"></i>
+                    <span style="font-size: smaller;">Create Job Post</span>
+                </a>
+                <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="jobpostA" asp-controller="JobPost" asp-action="ManageJobPosts">
+                    <i class="fas fa-pencil-alt"></i>
+                    <span style="font-size: smaller;">Manage Job Posts</span>
+                </a>
+                <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="RecruiterJ" asp-controller="Recruiter" asp-action="ManageProfile">
+                    <i class="fas fa-user"></i>
+                    <span style="font-size: smaller;">Manage Profile</span>
+                </a>
             </div>
-        </div>          
+        </div>
     </div>
+
 }

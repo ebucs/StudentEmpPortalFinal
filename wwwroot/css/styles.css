@@ -43,12 +43,69 @@
 
 /* Navbar styles */
 
-.navbar-nav .nav-link {
-    font-size: 16px;
-    transition: color 0.3s, box-shadow 0.3s !important;
+.graduation-icon {
+    font-size: 40px; /* Adjust the font size as desired */
+    padding-left: 18px; /* Add padding to the right */
 }
 
-.navbar-nav .nav-link:hover {
-    color: #ffffff !important; /* Change to your desired whiteish color */
-    box-shadow: 0 0 10px#ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+.nav-font 
+{
+    font-size: 15px !important;
 }
+
+.role-name-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.role-name {
+    font-size: 24px; /* Adjust the font size as desired */
+}
+
+
+.navbar-nav .nav-link {
+    font-size: 16px;
+    position: relative;
+    transition: color 0.3s, transform 0.3s;
+}
+
+    .navbar-nav .nav-link:before {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #ffffff;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #ffffff; /* Change to your desired color */
+        transform: translateY(-2px);
+    }
+
+        .navbar-nav .nav-link:hover:before {
+            transform: scaleX(1);
+        }
+
+    .navbar-nav .nav-link:after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover:after {
+        opacity: 1;
+    }

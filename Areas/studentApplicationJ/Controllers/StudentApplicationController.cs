@@ -51,19 +51,13 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
 
                     if (jobPost != null)
                     {
-                        //var searchApplication = await _context.StudentApplication.FirstOrDefaultAsync(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId);
-                        //if (searchApplication != null)
-                        //{
-                        //    //Toaster.AddSuccessToastMessage(TempData, "You already applied to this post");
-                        //    return RedirectToAction("SearchAndApply", "Student", new { area = "studentJ" });
-                        //}
                         var application = new StudentApplication
                         {
                             StudentId = student.StudentId,
                             JobPostId = JobPostId,
                             RecruiterId = jobPost.RecruiterId,
                             DateCreated = DateTime.Now,
-                            StudentApplicationStatus = StudentApplication.EnumStudentApplicationStatus.Pending
+                            StudentApplicationStatus = EnumStudentApplicationStatus.Pending
                         };
 
                         _context.StudentApplication.Add(application);
@@ -96,41 +90,50 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddApplicationDocument(IFormFile file, string DocumentName, string ApplicationId)
+        public async Task<IActionResult> AddApplicationDocument(List<IFormFile> files, List<string> DocumentName, string ApplicationId)
         {
-            if (file != null && file.Length > 0)
+            if (files != null && files.Count > 0)
             {
-                var uploadsPath = Path.Combine(_webHostEnvironment.WebRootPath, "Documents");
-                var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-                var filePath = Path.Combine(uploadsPath, uniqueFileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                for (int i = 0; i < files.Count; i++)
                 {
-                    await file.CopyToAsync(stream);
-                }
-
-                var application = await _context.StudentApplication.FindAsync(ApplicationId);
-
-                if (application != null)
-                {
-                    var applicationDocument = new ApplicationDocument
+                    var file = files[i];
+                    if (file != null && file.Length > 0)
                     {
-                        ApplicationId = ApplicationId,
-                        DocumentName = DocumentName,
-                        FilePath = uniqueFileName
-                    };
+                        var uploadsPath = Path.Combine(_webHostEnvironment.WebRootPath, "Documents");
+                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                        var filePath = Path.Combine(uploadsPath, uniqueFileName);
 
-                    _context.ApplicationDocument.Add(applicationDocument);
-                    await _context.SaveChangesAsync();
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
 
-                    Toaster.AddSuccessToastMessage(TempData, "Application submitted.");
+                        var application = await _context.StudentApplication.FindAsync(ApplicationId);
 
-                    return RedirectToAction("SearchAndApply", "Student", new { area = "StudentJ" });
+                        if (application != null)
+                        {
+                            var applicationDocument = new ApplicationDocument
+                            {
+                                StudentApplicationId = ApplicationId,
+                                DocumentName = DocumentName[i],
+                                FilePath = uniqueFileName
+                            };
+
+                            _context.ApplicationDocument.Add(applicationDocument);
+                        }
+                    }
                 }
+
+                await _context.SaveChangesAsync();
+
+                Toaster.AddSuccessToastMessage(TempData, "Application submitted.");
+
+                return RedirectToAction("SearchAndApply", "Student", new { area = "StudentJ" });
             }
 
             return RedirectToAction("Index");
         }
+
 
 
         public async Task<IActionResult> PartialStudentApplicationDetails(string id)

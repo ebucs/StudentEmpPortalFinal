@@ -2,13 +2,19 @@
     ViewData["Title"] = "ApproverDashboard";
 }
 
-<h1 class="pt-3">Welcome @ViewData["FirstName"] (Approver)</h1>
+<h1 class="pt-3 text-center">Welcome @ViewData["FirstName"]</h1>
 
 <div class="row pt-4">
     <div class="col-md-12 text-center">
-        <div class="btn-group" role="group">
-            <a asp-area="ApproverJ" asp-controller="Approver" asp-action="ManageRecruiterRegistration" class="btn btn-primary custom-btn mx-2 mb-2 rounded">Manage Recruiter Registration</a>
-            <a asp-area="ApproverJ" asp-controller="Approver" asp-action="ManageRecruiterJobPosts" class="btn btn-primary custom-btn mx-2 mb-2 rounded">Manage Job Post</a>
+        <div class="d-flex flex-wrap justify-content-center">
+            <a asp-area="ApproverJ" asp-controller="Approver" asp-action="ManageRecruiterRegistration" class="btn btn-primary custom-btn mx-2 mb-2 rounded">
+                <i class="fas fa-users-cog"></i>
+                <span style="font-size: smaller;">Recruiter Registration</span>
+            </a>
+            <a asp-area="ApproverJ" asp-controller="Approver" asp-action="ManageRecruiterJobPosts" class="btn btn-primary custom-btn mx-2 mb-2 rounded">
+                <i class="fas fa-cogs"></i>
+                <span style="font-size: smaller;">Manage Job Post</span>
+            </a>
         </div>
     </div>
 </div>

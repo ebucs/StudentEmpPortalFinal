@@ -15,5 +15,25 @@ html {
 
 body {
     margin-bottom: 15em; /* Adjust the margin value as needed */
-    opacity:1.3;
+    opacity:1;
+}
+
+/*.form-control {
+    background-color: #e8f0fe !important;
+}
+
+.form-select {
+    background-color: #e8f0fe !important;
+}
+
+*//*.form-check-input {
+    background-color: #e8f0fe !important;
+}*/
+
+hr {
+    margin: 1rem 0 !important;
+    color: inherit !important;
+/*     border: none !important; 
+     border-top: none !important; */
+    opacity: 0.4 !important;
 }

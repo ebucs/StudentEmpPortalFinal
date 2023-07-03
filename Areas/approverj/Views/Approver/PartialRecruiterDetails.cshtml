@@ -4,11 +4,12 @@
     ViewData["Title"] = "Recruiter Details";
 }
 
-    <h1>@ViewData["Title"]</h1>
+<h1 class="section-heading">@ViewData["Title"]</h1>
+<br/>
 
 <form id="ApproveRecruiter" method="post" asp-controller="Approver" asp-action="PartialRecruiterDetails">
     @Html.AntiForgeryToken()
-    <div class="recruiter-details pb-4">
+    <div class="section-content">
         <p><strong>Title:</strong> @Model.Title</p>
         <p><strong>First Name:</strong> @Model.FirstName</p>
         <p><strong>Surname:</strong> @Model.Surname</p>
@@ -22,8 +23,10 @@
         <p><strong>Trading Name:</strong> @Model.TradingName</p>
         <p><strong>Business Type:</strong> @Model.BusinessType</p>
 
+        </div>
+
         <!-- Add input fields for adding a note and changing the outcome -->
-        <div class="input-fields">
+        <div class="section-content">
             <div class="form-floating py-2 col-12 col-md-6">
                 <!-- Adjust the width using col- classes -->
                 <label asp-for="ApproverNote" class="form-label">Add Note</label>
@@ -36,13 +39,12 @@
                 <select asp-for="Outcome" asp-items="Model.StatusOptions" class="form-select"></select>
             </div>
 
-            <!-- Add a submit button to save the changes -->
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-                <button class="btn btn-danger close-button" asp-controller="Approver" asp-action="ManageRecruiterRegistration">Close</button>
-            </div>
-
         </div>
-    </div>
+
+        <!-- Add a submit button to save the changes -->
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button class="btn btn-danger close-button" asp-controller="Approver" asp-action="ManageRecruiterRegistration">Close</button>
+        </div>
 </form>
 

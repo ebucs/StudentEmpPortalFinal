@@ -4,10 +4,11 @@
     ViewData["Title"] = "Job Post Details";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="section-heading">@ViewData["Title"]</h1>
+<br />
 
 <form method="post" asp-controller="StudentApplication" asp-action="CreateApplication" asp-area="StudentApplicationJ">
-    <div class="recruiter-details pb-4">
+    <div class="section-content">
 
         <input type="hidden" name="JobPostId" value="@Model.JobPostId" />
         <p><strong>Job Title:</strong> @Model.JobTitle</p>
@@ -24,15 +25,18 @@
         <p><strong>Hourly Rate:</strong> @Model.HourlyRate</p>
         <p><strong>Minimum Requirements:</strong> @Model.MinRequirements</p>
         <p><strong>Application Instruction:</strong> @Model.ApplicationInstruction</p>
-        <p><strong>Closing Date:</strong> @Model.ClosingDate.ToString("MM/dd/yyyy")</p>
+        <p style="font-size: 1.1em; font-weight: bold; color: red;">
+            <strong>Closing Date:</strong> @Model.ClosingDate.ToString("MM/dd/yyyy")
+        </p>
 
-        <!-- Add input fields for adding a note and changing the outcome -->
-        <div class="input-fields">
-            <!-- Add a submit button to save the changes -->
-            <div class="button-container">
+    </div>
 
-                <button class="btn btn-danger close-button" asp-controller="Student" asp-action="StudentApplicationsHistory" asp-area="StudentJ">Close</button>
-            </div>
+    <!-- Add input fields for adding a note and changing the outcome -->
+    <div class="input-fields">
+        <!-- Add a submit button to save the changes -->
+        <div class="button-container">
+
+            <button class="btn btn-danger close-button" asp-controller="Student" asp-action="StudentApplicationsHistory" asp-area="StudentJ">Close</button>
         </div>
     </div>
 </form>

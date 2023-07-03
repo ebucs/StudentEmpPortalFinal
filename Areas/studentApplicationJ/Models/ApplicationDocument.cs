@@ -9,9 +9,6 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string ApplicationDocumentId { get; set; }
 
-        [ForeignKey("ApplicationId")]
-        public string ApplicationId { get; set; }
-
         [Required]
         public string DocumentName { get; set; }
 

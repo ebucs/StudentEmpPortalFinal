@@ -49,6 +49,7 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Models
         public enum EnumStudentApplicationStatus
         {
             Interview,
+            [Display(Name = "On Hold")]
             OnHold,
             Rejected,
             Appointed,

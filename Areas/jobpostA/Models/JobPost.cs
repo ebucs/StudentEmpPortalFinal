@@ -99,12 +99,12 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
             Location = string.Empty;
             JobDescription = string.Empty;
             KeyResponsibilities = string.Empty;
-            JobType = EnumJobType.FullTime;
-            PartTimeNumberOfHours = EnumWeekHours.None;
+            //JobType = EnumJobType.FullTime;
+            //PartTimeNumberOfHours = EnumWeekHours.None;
             StartDate = DateTime.Now.Date;
             EndDate = DateTime.Now.Date;
             HourlyRate = 0;
-            Nationality = EnumNationality.SouthAfrican;
+            //Nationality = EnumNationality.SouthAfrican;
             MinRequirements = string.Empty;
             ApplicationInstruction = string.Empty;
             ClosingDate = DateTime.Now.Date;
@@ -113,6 +113,7 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
             ContactNo = string.Empty;
             Approved = false;
             ApproversNote = string.Empty;
+            ApprovalStatus = EnumApprovalStatus.Pending;
         }
 
         // Enums

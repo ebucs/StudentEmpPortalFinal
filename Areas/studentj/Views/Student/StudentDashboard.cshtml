@@ -2,35 +2,67 @@
     ViewData["Title"] = "StudentDashboard";
 }
 
-<h1 class="pt-3">Welcome @ViewData["FirstName"] (Student)</h1>
+<h1 class="pt-3 text-center">Welcome @ViewData["FirstName"]</h1>
 
 <div class="row pt-4">
     <div class="col-md-12 text-center">
-        <div class="btn-group" role="group">
-            <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="StudentJ" asp-controller="Student" asp-action="ManageProfile">Manage Profile</a>
-            <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="StudentJ" asp-controller="Student" asp-action="SearchAndApply">Search and Apply</a>
-            <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="StudentJ" asp-controller="Student" asp-action="StudentApplicationsHistory">Applications History</a>
+        <div class="d-flex flex-wrap justify-content-center">
+            <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="StudentJ" asp-controller="Student" asp-action="ManageProfile">
+                <i class="fas fa-user"></i>
+                <span style="font-size: smaller;">Manage Profile</span>
+            </a>
+            <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="StudentJ" asp-controller="Student" asp-action="SearchAndApply">
+                <i class="fas fa-search"></i>
+                <span style="font-size: smaller;">Search and Apply</span>
+            </a>
+            <a class="btn btn-primary custom-btn mx-2 mb-2 rounded" asp-area="StudentJ" asp-controller="Student" asp-action="StudentApplicationsHistory">
+                <i class="fas fa-history"></i>
+                <span style="font-size: smaller;">Applications History</span>
+            </a>
         </div>
     </div>
 </div>
 
-<div class="pt-4">
-    <h3 class="mb-5">Links</h3>
-    <div class="d-flex">
-        <ul>
-            <li class="mb-2">
-                <a href="https://www.wits.ac.za/media/wits-university/students/ccdu/documents/The%20CV%20%20Cover%20Letter%20[4%20Mar%202020].pdf" target="_blank">CV &amp; Cover Letter Presentation</a> - A pdf of the PowerPoint presentation as presented in the Journey to Employability Programme [JEm]
-            </li>
-            <li class="mb-2">
-                <a href="https://www.wits.ac.za/media/wits-university/students/ccdu/documents/KABELO%20SEKELE%20(5%20Mar%202020).docx" target="_blank">Kabelo Sekele CV</a> - A Word template providing a guide to the essential elements of a CV
-            </li>
-            <li class="mb-2">
-                <a href="https://www.wits.ac.za/media/wits-university/students/ccdu/documents/KABELO%20SEKELE%20(5%20Mar%202020).pdf" target="_blank">Kabelo Sekele CV (pdf)</a> - A pdf template providing a guide to the essential elements of a CV
-            </li>
-            <li class="mb-2">
-                <a href="https://www.wits.ac.za/media/wits-university/students/ccdu/documents/The%20Job%20Interview%20[11%20Mar%202020].pdf" target="_blank">The Job Interview [11Mar2020]</a> - A pdf of the PowerPoint presentation as presented in the Journey to Employability Programme [JEm]
-            </li>
-        </ul>
+
+
+<div class="pt-4 d-flex justify-content-center">
+    <h3 class="mb-4 text-center text-secondary">*Important Links*</h3>
+</div>
+<div class="card-container d-flex justify-content-center">
+    <div class="card">
+        <a href="https://www.wits.ac.za/media/wits-university/students/ccdu/documents/The%20CV%20%20Cover%20Letter%20[4%20Mar%202020].pdf" target="_blank" class="card-link">
+            <div class="card-header bg-danger">CV &amp; Cover Letter Presentation</div>
+            <div class="card-body">
+                <p class="card-description">A pdf of the PowerPoint presentation as presented in the Journey to Employability Programme [JEm]</p>
+            </div>
+        </a>
+    </div>
+    <div class="card">
+        <a href="https://www.wits.ac.za/media/wits-university/students/ccdu/documents/KABELO%20SEKELE%20(5%20Mar%202020).docx" target="_blank" class="card-link">
+            <div class="card-header bg-danger">Kabelo Sekele CV</div>
+            <div class="card-body">
+                <p class="card-description">A Word template providing a guide to the essential elements of a CV</p>
+            </div>
+        </a>
+    </div>
+    <div class="card">
+        <a href="https://www.wits.ac.za/media/wits-university/students/ccdu/documents/KABELO%20SEKELE%20(5%20Mar%202020).pdf" target="_blank" class="card-link">
+            <div class="card-header bg-danger">Kabelo Sekele CV (pdf)</div>
+            <div class="card-body">
+                <p class="card-description">A pdf template providing a guide to the essential elements of a CV</p>
+            </div>
+        </a>
+    </div>
+    <div class="card">
+        <a href="https://www.wits.ac.za/media/wits-university/students/ccdu/documents/The%20Job%20Interview%20[11%20Mar%202020].pdf" target="_blank" class="card-link">
+            <div class="card-header bg-danger">The Job Interview [11Mar2020]</div>
+            <div class="card-body">
+                <p class="card-description">A pdf of the PowerPoint presentation as presented in the Journey to Employability Programme [JEm]</p>
+            </div>
+        </a>
     </div>
 </div>
+
+
+
 
