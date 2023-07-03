@@ -207,3 +207,33 @@
 }
 
 
+.warning-container {
+    position: relative;
+}
+
+.warning-textarea {
+    height: 150px; /* Adjust the height as desired */
+    border: none; /* Remove the textarea border */
+}
+
+.warning-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #ffc107; /* Set the warning icon color */
+    font-size: 20px; /* Adjust the warning icon size as desired */
+}
+
+    .warning-icon i {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+.warning-textarea:focus {
+    box-shadow: none; /* Remove the textarea focus box shadow */
+    outline: none; /* Remove the textarea outline */
+}
+
+
+

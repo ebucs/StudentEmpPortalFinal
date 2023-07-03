@@ -42,16 +42,19 @@
                     </tr>
                     <tr class="job-post-actions-row d-none">
                         <td colspan="6">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-sm edit-job-post-btn">Edit Job Post</button>
-                                <a class="btn btn-success btn-sm view-applications-btn"
-                                   href="@Url.Action("ReviewStudentApplications", "Recruiter", new { area = "RecruiterJ", jobPostId = jobPost.JobPostId })">
-                                    View Applications
-                                </a>
+                            @if (jobPost.ApprovalStatus.ToString() == "Approved")
+                            {
+                                <span class="btn btn-primary btn-sm disabled">Edit Job Post</span>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary btn-sm" href="@Url.Action("EditJobPost", "JobPost", new { area = "jobpostA", jobPostId = jobPost.JobPostId })">Edit Job Post</a>
+                            }
 
-
-                            </div>
-
+                            <a class="btn btn-success btn-sm view-applications-btn"
+                               href="@Url.Action("ReviewStudentApplications", "Recruiter", new { area = "RecruiterJ", jobPostId = jobPost.JobPostId })">
+                                View Applications
+                            </a>
                         </td>
                     </tr>
                 }
@@ -64,11 +67,11 @@ else
     <p>You currently don't have any job posts.</p>
 }
 
+
 <style>
     .edit-job-post-btn {
         margin-right: 0.5rem;
     }
-
 </style>
 
 @section Scripts {
@@ -77,13 +80,6 @@ else
             $(".job-post-row").click(function () {
                 // Toggle the visibility of job post actions row
                 $(this).next(".job-post-actions-row").toggleClass("d-none");
-            });
-
-            $(".edit-job-post-btn").click(function (event) {
-                event.stopPropagation(); // Prevent row click event from triggering
-                var jobId = $(this).closest(".job-post-row").data("jobid");
-                // Redirect to the edit job post page using the jobId
-                window.location.href = "/JobPost/Edit/" + jobId;
             });
 
             $(".view-applications-btn").click(function (event) {

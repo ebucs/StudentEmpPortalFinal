@@ -220,6 +220,14 @@ namespace StudentEmploymentPortal.Areas.Identity.Pages.Account
                         }
                     }
                 }
+                Input = new InputModel()
+                {
+                    Rolelist = _roleManager.Roles.Where(x => x.Name != SD.Approver && x.Name != SD.Admin).Select(x => x.Name).Select(i => new SelectListItem
+                    {
+                        Text = i,
+                        Value = i
+                    })
+                };
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);

@@ -148,6 +148,129 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Controllers
             return View(viewModel);
         }
 
+        public IActionResult EditJobPost(string jobPostId)
+        {
+            var jobPost = _context.JobPost.FirstOrDefault(q => q.JobPostId == jobPostId);
+            var yearsOfStudy = _context.YearsOfStudy.FirstOrDefault(q => q.JobPostId == jobPostId);
+
+            if (jobPost == null)
+            {
+                // Handle the case when the job post is not found
+                return NotFound();
+            }
+
+            var viewModel = new editjobpostViewModel
+            {
+                // Populate the view model properties with the existing job post data
+                JobpostId = jobPost.JobPostId,
+                RecruiterType = jobPost.RecruiterType,
+                Faculty = jobPost.Faculty,
+                Department = jobPost.Department,
+                JobTitle = jobPost.JobTitle,
+                Location = jobPost.Location,
+                JobDescription = jobPost.JobDescription,
+                KeyResponsibilities = jobPost.KeyResponsibilities,
+                JobType = jobPost.JobType,
+                PartTimeNumberOfHours = (JobPost.EnumWeekHours)jobPost.PartTimeNumberOfHours,
+                StartDate = jobPost.StartDate,
+                EndDate = jobPost.EndDate,
+                HourlyRate = jobPost.HourlyRate,
+                Nationality = jobPost.Nationality,
+                MinRequirements = jobPost.MinRequirements,
+                ApplicationInstruction = jobPost.ApplicationInstruction,
+                ClosingDate = jobPost.ClosingDate,
+                ContactPerson = jobPost.ContactPerson,
+                Email = jobPost.Email,
+                ContactNo = jobPost.ContactNo,
+                ApprovalStatus = jobPost.ApprovalStatus,
+                Approved = jobPost.Approved,
+                ApproversNote = jobPost.ApproversNote,
+                IsFirstYear = yearsOfStudy?.IsFirstYear ?? false,
+                IsSecondYear = yearsOfStudy?.IsSecondYear ?? false,
+                IsThirdYear = yearsOfStudy?.IsThirdYear ?? false,
+                IsHonours = yearsOfStudy?.IsHonours ?? false,
+                IsGraduates = yearsOfStudy?.IsGraduates ?? false,
+                IsMasters = yearsOfStudy?.IsMasters ?? false,
+                IsPhD = yearsOfStudy?.IsPhD ?? false,
+                IsPostdoc = yearsOfStudy?.IsPostdoc ?? false
+            };
+
+            return View(viewModel);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditJobPost(editjobpostViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var jobPost = await _context.JobPost.FindAsync(viewModel.JobpostId);
+
+                if (jobPost == null)
+                {
+                    // Handle the case when the job post is not found
+                    return NotFound();
+                }
+
+                jobPost.RecruiterType = viewModel.RecruiterType;
+                jobPost.Faculty = viewModel.Faculty;
+                jobPost.Department = viewModel.Department;
+                jobPost.JobTitle = viewModel.JobTitle;
+                jobPost.Location = viewModel.Location;
+                jobPost.JobDescription = viewModel.JobDescription;
+                jobPost.KeyResponsibilities = viewModel.KeyResponsibilities;
+                jobPost.JobType = viewModel.JobType;
+                jobPost.PartTimeNumberOfHours = viewModel.PartTimeNumberOfHours;
+                jobPost.StartDate = viewModel.StartDate;
+                jobPost.EndDate = viewModel.EndDate;
+                jobPost.HourlyRate = viewModel.HourlyRate;
+                jobPost.Nationality = viewModel.Nationality;
+                jobPost.MinRequirements = viewModel.MinRequirements;
+                jobPost.ApplicationInstruction = viewModel.ApplicationInstruction;
+                jobPost.ClosingDate = viewModel.ClosingDate;
+                jobPost.ContactPerson = viewModel.ContactPerson;
+                jobPost.Email = viewModel.Email;
+                jobPost.ContactNo = viewModel.ContactNo;
+                jobPost.ApprovalStatus = viewModel.ApprovalStatus;
+                jobPost.Approved = viewModel.Approved;
+                jobPost.ApproversNote = viewModel.ApproversNote;
+
+                var yearsOfStudy = await _context.YearsOfStudy.FirstOrDefaultAsync(q => q.JobPostId == viewModel.JobpostId);
+
+                if (yearsOfStudy == null)
+                {
+                    // If the job post doesn't have an associated YearsOfStudy entity, create a new one
+                    yearsOfStudy = new YearsOfStudy();
+                    yearsOfStudy.JobPostId = viewModel.JobpostId;
+                    _context.YearsOfStudy.Add(yearsOfStudy);
+                }
+
+                yearsOfStudy.IsFirstYear = viewModel.IsFirstYear;
+                yearsOfStudy.IsSecondYear = viewModel.IsSecondYear;
+                yearsOfStudy.IsThirdYear = viewModel.IsThirdYear;
+                yearsOfStudy.IsHonours = viewModel.IsHonours;
+                yearsOfStudy.IsGraduates = viewModel.IsGraduates;
+                yearsOfStudy.IsMasters = viewModel.IsMasters;
+                yearsOfStudy.IsPhD = viewModel.IsPhD;
+                yearsOfStudy.IsPostdoc = viewModel.IsPostdoc;
+
+                await _context.SaveChangesAsync();
+
+                Toaster.AddSuccessToastMessage(TempData, "Job Post Updated Successfully.");
+                return RedirectToAction("ManageJobPosts", "JobPost", new { area = "jobpostA", jobPostId = jobPost.JobPostId });
+            }
+
+            // Log or handle the validation errors
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine("Validation Error: " + error.ErrorMessage);
+            }
+            return View(viewModel);
+        }
+
+
+
         [HttpGet]
         public List<string> GetDepartments(string faculty)
         {
