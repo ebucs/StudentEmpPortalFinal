@@ -246,76 +246,6 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
             return View("ManageProfile", viewModel);
         }
 
-
-        [HttpGet]
-        public List<string> GetDepartmentss(string faculty)
-        {
-
-
-            List<string> CommerceLawAndManagement = new List<string>() { "Economic And Business Sciences",
-                                                                         "Finance And Investment Management",
-                                                                         "Industrial Psychology And People Management",
-                                                                         "Chemical Engineering",
-                                                                         "Law"};
-
-
-
-            List<string> EngineeringAndBuiltEnvironment = new List<string>() { "Chemical Engineering",
-                                                                               "Civil And Environmental Engineering",
-                                                                               "Electrical And Information Engineering",
-                                                                               "Mechanical Industrial And Aeronautical Engineering"};
-            List<string> HealthSciences = new List<string>() { "Anatomy",
-                                                               "Dentistry",
-                                                               "Medicine",
-                                                               "Pharmacy And Pharmacology"};
-            List<string> Humanities = new List<string>() { "Archaeology And Anthropology",
-                                                           "Geography Archaeology And Environmental Studies",
-                                                           "Political Studies And International Relations"};
-            List<string> Science = new List<string>() { "Chemistry",
-                                                        "Mathematics",
-                                                        "Physics",
-                                                        "Zoology And Entomology",
-                                                        "Computer Science",
-                                                        "Geosciences",
-                                                        "Human Physiology",
-                                                        "Molecular Medicine And Haematology",
-                                                        "School Of Accountancy"};
-
-
-
-            if (faculty.Equals("CommerceLawAndManagement"))
-            {
-                return CommerceLawAndManagement;
-            }
-            else if (faculty.Equals("EngineeringAndBuiltEnvironment"))
-
-
-
-            {
-                return EngineeringAndBuiltEnvironment;
-            }
-            else if (faculty.Equals("HealthSciences"))
-
-
-
-            {
-                return HealthSciences;
-            }
-            else if (faculty.Equals("Humanities"))
-
-
-
-            {
-                return Humanities;
-            }
-            else
-            {
-                return Science;
-            }
-
-        }
-
-
         public async Task<IActionResult> SearchAndApply()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -396,7 +326,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                         return NotFound();
                     }
                     var searchApplication = await _context.StudentApplication.FirstOrDefaultAsync(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId);
-                    if (searchApplication == null && studentNationality.ToString().Equals(jobPost.Nationality.ToString()))
+                    if (searchApplication == null && studentNationality.ToString().Equals(jobPost.Nationality.ToString()) && jobPost.Approved)
                     {
                         jobPosts.Add(jobPost);
                     }

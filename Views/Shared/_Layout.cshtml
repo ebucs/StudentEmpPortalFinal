@@ -20,29 +20,44 @@
     <link rel="stylesheet" href="~/css/Toast/toastr.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/partialView.css" asp-append-version="true" />
 
-
 </head>
+
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-md bg-primary" data-bs-theme="dark">
-            <div class="container-fluid d-flex align-items-center flex-grow-5">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    Student Employment Portal
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-primary border-bottom box-shadow mb-4" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" @*asp-area="" asp-controller="Home" asp-action="Index"*@ href="#">
+                    <!-- Replace the brand text with an icon -->
+                    <i class="fas fa-graduation-cap fa-lg graduation-icon"></i>
                 </a>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    var user = await UserManager.GetUserAsync(User);
-                    var roles = await UserManager.GetRolesAsync(user);
-
-                    @if (roles.Contains("Student"))
-                    {
-                        <a class="text-white ms-3 nav-link active">Student</a>
-                    }
-                }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarColor01">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        var user = await UserManager.GetUserAsync(User);
+                        var roles = await UserManager.GetRolesAsync(user);
+
+                        <div class="role-name-container">
+                            @if (roles.Contains(SD.Student))
+                            {
+                                <span class="text-primary text-white role-name">STUDENT</span>
+                            }
+                            else if (roles.Contains(SD.Recruiter))
+                            {
+                                <span class="text-primary text-white role-name">RECRUITER</span>
+                            }
+                            else
+                            {
+                                <span class="text-primary text-white role-name">APPROVER</span>
+                            }
+                        </div>
+                    }
+                </div>
+
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -53,13 +68,6 @@
             </div>
         </nav>
     </header>
-
-
-
-
-
-
-
 
 
     <div class="container">

@@ -8,8 +8,6 @@
 
 <h1 class="mb-4 mt-3">Manage Job Posts</h1>
 
-
-
 <form method="post" action="">
     <div class="input-group mb-3">
         <label class="sr-only" for="searchInput">Search</label>
@@ -34,13 +32,27 @@
             <tbody>
                 @foreach (var jobPost in Model)
                 {
-                    <tr>
+                    <tr class="job-post-row" data-jobid="@jobPost.JobPostId">
                         <td>@jobPost.JobTitle</td>
                         <td>@jobPost.Department</td>
                         <td>@jobPost.JobType</td>
                         <td>@jobPost.StartDate.ToString("MM/dd/yyyy")</td>
                         <td>@jobPost.EndDate.ToString("MM/dd/yyyy")</td>
                         <td>@jobPost.ApprovalStatus</td>
+                    </tr>
+                    <tr class="job-post-actions-row d-none">
+                        <td colspan="6">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-sm edit-job-post-btn">Edit Job Post</button>
+                                <a class="btn btn-success btn-sm view-applications-btn"
+                                   href="@Url.Action("ReviewStudentApplications", "Recruiter", new { area = "RecruiterJ", jobPostId = jobPost.JobPostId })">
+                                    View Applications
+                                </a>
+
+
+                            </div>
+
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -49,5 +61,37 @@
 }
 else
 {
-    <p>You currently dont have any job posts.</p>
+    <p>You currently don't have any job posts.</p>
+}
+
+<style>
+    .edit-job-post-btn {
+        margin-right: 0.5rem;
+    }
+
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(".job-post-row").click(function () {
+                // Toggle the visibility of job post actions row
+                $(this).next(".job-post-actions-row").toggleClass("d-none");
+            });
+
+            $(".edit-job-post-btn").click(function (event) {
+                event.stopPropagation(); // Prevent row click event from triggering
+                var jobId = $(this).closest(".job-post-row").data("jobid");
+                // Redirect to the edit job post page using the jobId
+                window.location.href = "/JobPost/Edit/" + jobId;
+            });
+
+            $(".view-applications-btn").click(function (event) {
+                event.stopPropagation(); // Prevent row click event from triggering
+                var jobId = $(this).closest(".job-post-row").data("jobid");
+                // Redirect to the view applications page using the jobId
+                window.location.href = "/JobPost/ViewApplications/" + jobId;
+            });
+        });
+    </script>
 }

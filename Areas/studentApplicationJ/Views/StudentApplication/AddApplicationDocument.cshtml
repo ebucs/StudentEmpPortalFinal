@@ -5,9 +5,10 @@
 }
 
 <h1>Add Application Document</h1>
+
 <form method="post" enctype="multipart/form-data" asp-area="StudentApplicationJ" asp-controller="StudentApplication" asp-action="AddApplicationDocument">
 
-    <table class="table">
+    <table class="table" id="documentTable">
         <thead>
             <tr>
                 <th>Document Name</th>
@@ -20,42 +21,45 @@
             <tr>
                 <td>
                     <div class="form-floating">
-                        <input id="documentName" name="DocumentName" class="form-control" aria-required="true" required />
-                        <label class="col-form-label-sm" for="documentName">Enter document name</label>
+                        <input name="DocumentName" class="form-control document-name" aria-required="true" required />
+                        <label class="col-form-label-sm" for="DocumentName">Enter document name</label>
                     </div>
                 </td>
                 <td>
                     <div class="form-group">
-                        <input type="file" id="file" name="file" class="form-control" onchange="showFileDetails(this)" accept=".pdf, .doc, .docx" required />
-                        <p id="fileDetailsDisplay" class="text-muted"></p>
+                        <input type="file" name="files" class="form-control document-file" onchange="showFileDetails(this)" accept=".pdf, .doc, .docx" required />
+                        <p class="text-muted file-details"></p>
                     </div>
                 </td>
                 <td>
-                    <div id="previewContainer"></div>
+                    <div class="preview-container"></div>
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                    <button type="button" class="btn btn-danger" onclick="clearFileInput()">Delete</button>
+                    <button type="button" class="btn btn-danger" onclick="removeDocumentRow(this)">Delete</button>
                 </td>
             </tr>
         </tbody>
     </table>
 
+    <button type="button" class="btn btn-primary" onclick="addDocumentRow()">Add Document</button>
+
     <input type="hidden" name="ApplicationId" value="@ViewData["ApplicationId"]" />
+
+    <button type="submit" class="btn btn-primary">Upload All</button>
+    <button type="button" class="btn btn-danger close-button" onclick="navigateToView()">Cancel</button>
 </form>
-<button type="button" class="btn btn-danger close-button" onclick="navigateToView()">Cancel</button>
 
 @section Scripts {
     <script>
         // Function to display file details and create a preview link
         function showFileDetails(input) {
             var fileInput = input;
-            var fileDetailsDisplay = document.getElementById("fileDetailsDisplay");
-            var previewContainer = document.getElementById("previewContainer");
+            var fileDetailsDisplay = fileInput.parentNode.querySelector(".file-details");
+            var previewContainer = fileInput.closest("tr").querySelector(".preview-container");
 
             if (fileInput.files.length > 0) {
                 var file = fileInput.files[0];
-               // fileDetailsDisplay.textContent = "Selected File: " + file.name;
+                fileDetailsDisplay.textContent = "Selected File: " + file.name;
 
                 var fileURL = URL.createObjectURL(file);
                 var previewLink = document.createElement("a");
@@ -63,25 +67,86 @@
                 previewLink.setAttribute("target", "_blank");
                 previewLink.textContent = "Preview Document";
 
-                previewContainer.innerHTML = "";
-                previewContainer.appendChild(previewLink);
+                if (previewContainer) {
+                    previewContainer.innerHTML = "";
+                    previewContainer.appendChild(previewLink);
+                }
             } else {
                 fileDetailsDisplay.textContent = "";
-                previewContainer.innerHTML = "";
+                if (previewContainer) {
+                    previewContainer.innerHTML = "";
+                }
             }
         }
 
-        // Function to clear the file input field, document name input field, file details display, and preview container
-        function clearFileInput() {
-            var fileInput = document.getElementById("file");
-            var documentNameInput = document.getElementById("documentName");
-            var fileDetailsDisplay = document.getElementById("fileDetailsDisplay");
-            var previewContainer = document.getElementById("previewContainer");
 
-            fileInput.value = ""; // Clear the selected file
-            documentNameInput.value = ""; // Clear the document name input field
-            fileDetailsDisplay.textContent = "";
-            previewContainer.innerHTML = "";
+        // Function to add a new document row
+        function addDocumentRow() {
+            var tableBody = document.getElementById("documentTable").getElementsByTagName("tbody")[0];
+
+            var newRow = document.createElement("tr");
+
+            var documentNameCell = document.createElement("td");
+            var documentNameDiv = document.createElement("div");
+            documentNameDiv.classList.add("form-floating");
+
+            var documentNameInput = document.createElement("input");
+            documentNameInput.setAttribute("name", "DocumentName");
+            documentNameInput.setAttribute("class", "form-control document-name");
+            documentNameInput.setAttribute("aria-required", "true");
+            documentNameInput.setAttribute("required", "required");
+
+            var documentNameLabel = document.createElement("label");
+            documentNameLabel.setAttribute("class", "col-form-label-sm");
+            documentNameLabel.setAttribute("for", "DocumentName");
+            documentNameLabel.textContent = "Enter document name";
+
+            documentNameDiv.appendChild(documentNameInput);
+            documentNameDiv.appendChild(documentNameLabel);
+            documentNameCell.appendChild(documentNameDiv);
+
+            var fileCell = document.createElement("td");
+            var fileInput = document.createElement("input");
+            fileInput.setAttribute("type", "file");
+            fileInput.setAttribute("name", "files");
+            fileInput.setAttribute("class", "form-control document-file");
+            fileInput.setAttribute("onchange", "showFileDetails(this)");
+            fileInput.setAttribute("accept", ".pdf, .doc, .docx");
+            fileInput.setAttribute("required", "required");
+            var fileDetailsP = document.createElement("p");
+            fileDetailsP.setAttribute("class", "text-muted file-details");
+            fileCell.appendChild(fileInput);
+            fileCell.appendChild(fileDetailsP);
+
+            var previewCell = document.createElement("td");
+            var previewContainer = document.createElement("div");
+            previewContainer.setAttribute("class", "preview-container");
+            previewCell.appendChild(previewContainer);
+
+            var actionCell = document.createElement("td");
+            var deleteButton = document.createElement("button");
+            deleteButton.setAttribute("type", "button");
+            deleteButton.setAttribute("class", "btn btn-danger");
+            deleteButton.setAttribute("onclick", "removeDocumentRow(this)");
+            deleteButton.textContent = "Delete";
+            actionCell.appendChild(deleteButton);
+
+            newRow.appendChild(documentNameCell);
+            newRow.appendChild(fileCell);
+            newRow.appendChild(previewCell);
+            newRow.appendChild(actionCell);
+
+            tableBody.appendChild(newRow);
+
+            // Call showFileDetails for the newly added file input
+            showFileDetails(fileInput);
+        }
+
+
+        // Function to remove a document row
+        function removeDocumentRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
         }
 
         function navigateToView() {
@@ -90,4 +155,3 @@
         }
     </script>
 }
-

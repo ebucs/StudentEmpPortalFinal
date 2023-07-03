@@ -5,11 +5,12 @@
 }
 
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="section-heading">@ViewData["Title"]</h1>
+<br />
 
 <form id="ApproveRecruiterJobPost" method="post" asp-controller="Approver" asp-action="PartialJobPostDetails">
     @Html.AntiForgeryToken()
-    <div class="recruiter-details pb-4">
+    <div class="section-content">
         <p><strong>Recruiter Type:</strong> @Model.RecruiterType</p>
         @if (Model.RecruiterType.ToString() == "Internal")
         {
@@ -32,40 +33,38 @@
         <p><strong>Nationality:</strong> @Model.Nationality</p>
         <p><strong>Minimum Requirements:</strong> @Model.MinRequirements</p>
         <p><strong>Application Instruction:</strong> @Model.ApplicationInstruction</p>
-        <p><strong>Closing Date:</strong> @Model.ClosingDate.ToString("MM/dd/yyyy")</p>
         <p><strong>Contact Person:</strong> @Model.ContactPerson</p>
         <p><strong>Email:</strong> @Model.Email</p>
         <p><strong>Contact No:</strong> @Model.ContactNo</p>
-        <div class="mt-2 p-2 border border-dark rounded" style="width: fit-content;">
-            <p>Years of Study Options:</p>
-            <ul>
-                @foreach (var yearOfStudyOption in Model.YearsOfStudyOptions)
-                {
-                    <li>@yearOfStudyOption</li>
-                }
-            </ul>
-        </div>
-
-        <!-- Add input fields for adding a note and changing the outcome -->
-        <div class="input-fields">
-            <div class="form-floating py-2 col-12 col-md-6">
-                <!-- Adjust the width using col- classes -->
-                <label asp-for="ApproversNote" class="form-label">Add Note</label>
-                <textarea asp-for="ApproversNote" class="form-control" style="height: 150px;"></textarea> <!-- Adjust the height using inline style -->
-            </div>
-
-            <div class="form-floating py-2 col-12 col-md-6">
-                <!-- Adjust the width using col- classes -->
-                <label asp-for="ApprovalStatus" class="col-form-label-sm">Approval Status</label>
-                <select asp-for="ApprovalStatus" asp-items="Model.ApprovalStatusOptions" class="form-select"></select>
-            </div>
-
-            <!-- Add a submit button to save the changes -->
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-                <button class="btn btn-danger close-button" asp-controller="Approver" asp-action="ManageRecruiterJobPosts">Close</button>
-            </div>
-        </div>
+        <p><strong>Years of Study Options:</strong> @string.Join(", ", Model.YearsOfStudyOptions)</p>
+        <p style="font-size: 1.1em; font-weight: bold; color: red;">
+            <strong>Closing Date:</strong> @Model.ClosingDate.ToString("MM/dd/yyyy")
+        </p>
     </div>
+
+    <div class="section-content">
+    <!-- Add input fields for adding a note and changing the outcome -->
+  
+        <div class="form-floating py-2 col-12 col-md-6">
+            <!-- Adjust the width using col- classes -->
+            <label asp-for="ApproversNote" class="form-label">Add Note</label>
+            <textarea asp-for="ApproversNote" class="form-control" style="height: 150px;"></textarea> <!-- Adjust the height using inline style -->
+        </div>
+
+        <div class="form-floating py-2 col-12 col-md-6">
+            <!-- Adjust the width using col- classes -->
+            <label asp-for="ApprovalStatus" class="col-form-label-sm">Approval Status</label>
+            <select asp-for="ApprovalStatus" asp-items="Model.ApprovalStatusOptions" class="form-select"></select>
+        </div>
+
+
+    </div>
+
+    <!-- Add a submit button to save the changes -->
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button class="btn btn-danger close-button" asp-controller="Approver" asp-action="ManageRecruiterJobPosts">Close</button>
+    </div>
+   
 </form>
 

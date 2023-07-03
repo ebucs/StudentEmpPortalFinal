@@ -14,161 +14,160 @@
         <form id="jobPostForm" method="post" asp-controller="JobPost" asp-action="SaveJobPost">
             @Html.AntiForgeryToken()
 
-            <div class="form-floating py-2">
-                <label asp-for="RecruiterType" class="col-form-label-sm">Recruiter Type</label>
+            <div class="form-floating mb-4">
                 <select asp-for="RecruiterType" asp-items="Model.RecruiterTypeOptions" class="form-select"></select>
+                <label asp-for="RecruiterType">Recruiter Type</label>
             </div>
 
-            <div class="form-floating py-2 facultyDeptDiv">
-                <label asp-for="Faculty" class="col-form-label-sm">Faculty</label>
+            <div class="form-floating mb-4 facultyDeptDiv">
                 <select asp-for="Faculty" id="faculty" asp-items="Model.FacultyOptions" class="form-select"></select>
+                <label asp-for="Faculty">Faculty</label>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="Department" class="col-form-label-sm">Department</label>
-                <select asp-for="Department" id="department" class="form-select" name="Department" ></select>
+            <div class="form-floating mb-4">
+                <select asp-for="Department" id="department" class="form-select" name="Department"></select>
+                <label asp-for="Department">Department</label>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="JobTitle" class="col-form-label-sm">Job Title</label>
-                <input asp-for="JobTitle" class="form-control" />
+            <div class="form-floating mb-4">
+                <input asp-for="JobTitle" class="form-control" placeholder="Job Title">
+                <label asp-for="JobTitle">Job Title</label>
                 <span asp-validation-for="JobTitle" class="text-danger"></span>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="Location" class="col-form-label-sm">Location</label>
-                <input asp-for="Location" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="Location" class="form-control" placeholder="Location">
+                <label asp-for="Location">Location</label>
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>
 
-            <label asp-for="JobDescription" class="col-form-label-sm">Job Description:</label>
-            <div class="form-floating py-2">
+            <div class="form-group mb-3">
+                <label asp-for="JobDescription" class="col-form-label">Job Description:</label>
                 <textarea asp-for="JobDescription" class="form-control" rows="5"></textarea>
                 <span asp-validation-for="JobDescription" class="text-danger"></span>
             </div>
 
-            <label asp-for="KeyResponsibilities" class="col-form-label-sm">Key Responsibilities:</label>
-            <div class="form-floating py-2">
+            <div class="form-group mb-3">
+                <label asp-for="KeyResponsibilities" class="col-form-label">Key Responsibilities:</label>
                 <textarea asp-for="KeyResponsibilities" class="form-control" rows="5"></textarea>
                 <span asp-validation-for="KeyResponsibilities" class="text-danger"></span>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="JobType" class="col-form-label-sm">Job Type</label>
+            <div class="form-floating mb-3">
                 <select asp-for="JobType" asp-items="Model.JobTypeOptions" class="form-select"></select>
+                <label asp-for="JobType">Job Type</label>
             </div>
 
-            <div class="form-floating py-2 offpt">
-                <label asp-for="PartTimeNumberOfHours" class="col-form-label-sm">Part-Time Hours</label>
+            <div class="form-floating mb-3 offpt">
                 <select asp-for="PartTimeNumberOfHours" asp-items="Model.WeekHourOptions" class="form-select"></select>
+                <label asp-for="PartTimeNumberOfHours">Part-Time Hours</label>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="StartDate" class="col-form-label-sm">Start Date</label>
-                <input asp-for="StartDate" class="form-control custom-height" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+            <div class="form-floating mb-3">
+                <input asp-for="StartDate" class="form-control custom-height" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                <label asp-for="StartDate">Start Date</label>
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
 
-            <div class="form-floating py-2">
+            <div class="form-floating mb-3">
+                <input asp-for="EndDate" class="form-control custom-height" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
                 <label asp-for="EndDate" class="col-form-label-sm">End Date</label>
-                <input asp-for="EndDate" class="form-control custom-height" type ="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="HourlyRate" class="col-form-label-sm">Hourly Rate</label>
+            <div class="form-group mb-3">
+                <label asp-for="HourlyRate">Hourly Rate:</label>
                 <div class="input-group">
-                    <input asp-for="HourlyRate" class="form-control custom-height" type="number" min="0" />
                     <span class="input-group-text">R</span>
+                    <input asp-for="HourlyRate" class="form-control custom-height" type="number" min="0" />         
                 </div>
                 <span asp-validation-for="HourlyRate" class="text-danger"></span>
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group mb-4">
                 <label>Years of Study</label>
                 <div>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" asp-for="IsFirstYear" class="form-check-input" id="chkFirstYear" />
+                        <input type="checkbox" asp-for="IsFirstYear" class="form-check-input bg-primary" id="chkFirstYear" />
                         <label class="form-check-label" for="chkFirstYear">1st Year</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" asp-for="IsSecondYear" class="form-check-input" id="chkSecondYear" />
+                        <input type="checkbox" asp-for="IsSecondYear" class="form-check-input bg-primary" id="chkSecondYear" />
                         <label class="form-check-label" for="chkSecondYear">2nd Year</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" asp-for="IsThirdYear" class="form-check-input" id="chkThirdYear" />
+                        <input type="checkbox" asp-for="IsThirdYear" class="form-check-input bg-primary" id="chkThirdYear" />
                         <label class="form-check-label" for="chkThirdYear">3rd Year</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" asp-for="IsHonours" class="form-check-input" id="chkHonours" />
+                        <input type="checkbox" asp-for="IsHonours" class="form-check-input bg-primary" id="chkHonours" />
                         <label class="form-check-label" for="chkHonours">Honours</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" asp-for="IsGraduates" class="form-check-input" id="chkGraduates" />
+                        <input type="checkbox" asp-for="IsGraduates" class="form-check-input bg-primary" id="chkGraduates" />
                         <label class="form-check-label" for="chkGraduates">Graduates</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" asp-for="IsMasters" class="form-check-input" id="chkMasters" />
+                        <input type="checkbox" asp-for="IsMasters" class="form-check-input bg-primary" id="chkMasters" />
                         <label class="form-check-label" for="chkMasters">Masters</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" asp-for="IsPhD" class="form-check-input" id="chkPhD" />
+                        <input type="checkbox" asp-for="IsPhD" class="form-check-input bg-primary" id="chkPhD" />
                         <label class="form-check-label" for="chkPhD">PhD</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" asp-for="IsPostdoc" class="form-check-input" id="chkPostdoc" />
+                        <input type="checkbox" asp-for="IsPostdoc" class="form-check-input bg-primary" id="chkPostdoc" />
                         <label class="form-check-label" for="chkPostdoc">Postdoc</label>
                     </div>
                 </div>
             </div>
 
 
-            <div class="form-floating py-2">
-                <label asp-for="Nationality" class="col-form-label-sm">Nationality</label>
-                <select asp-for="Nationality" asp-items="Model.NationalityOptions" class="form-select">
-                </select>
+            <div class="form-floating mb-4">
+                <select asp-for="Nationality" asp-items="Model.NationalityOptions" class="form-select"></select>
+                <label asp-for="Nationality">Nationality</label>
             </div>
 
-            <label asp-for="MinRequirements" class="col-form-label-sm">Minimum Requirements:</label>
-            <div class="form-floating py-2">
+            <div class="form-group mb-3">
+                <label asp-for="MinRequirements" class="col-form-label">Minimum Requirements:</label>
                 <textarea asp-for="MinRequirements" class="form-control" rows="5"></textarea>
                 <span asp-validation-for="MinRequirements" class="text-danger"></span>
             </div>
 
-            <label asp-for="ApplicationInstruction" class="col-form-label-sm">Application Instructions:</label>
-            <div class="form-floating py-2">
+            <div class="form-group mb-3">
+                <label asp-for="ApplicationInstruction" class="col-form-label">Application Instructions:</label>
                 <textarea asp-for="ApplicationInstruction" class="form-control" rows="5"></textarea>
                 <span asp-validation-for="ApplicationInstruction" class="text-danger"></span>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="ClosingDate" class="col-form-label-sm">Closing Date</label>
-                <input asp-for="ClosingDate" class="form-control custom-height" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+            <div class="form-floating mb-4">
+                <input asp-for="ClosingDate" class="form-control custom-height" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                <label asp-for="ClosingDate">Closing Date</label>
                 <span asp-validation-for="ClosingDate" class="text-danger"></span>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="ContactPerson" class="col-form-label-sm">Contact Person</label>
-                <input asp-for="ContactPerson" class="form-control" />
+            <div class="form-floating mb-4">
+                <input asp-for="ContactPerson" placeholder="Contact Person" class="form-control">
+                <label asp-for="ContactPerson">Contact Person</label>         
                 <span asp-validation-for="ContactPerson" class="text-danger"></span>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="Email" class="col-form-label-sm">Email</label>
-                <input asp-for="Email" class="form-control" />
+            <div class="form-floating mb-4">
+                <input asp-for="Email" placeholder="Email" class="form-control" />
+                <label asp-for="Email">Email</label>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="ContactNo" class="col-form-label-sm">Contact No</label>
-                <input asp-for="ContactNo" class="form-control" />
+            <div class="form-floating mb-4">
+                <input asp-for="ContactNo" placeholder="Contact No" class="form-control" />
+                <label asp-for="ContactNo">Contact No</label>
                 <span asp-validation-for="ContactNo" class="text-danger"></span>
             </div>
 
             <div class="pt-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-controller="Recruiter" asp-action="RecruiterDashboard" asp-area="RecruiterJ" class="btn btn-secondary">Cancel</a>
+                <a asp-controller="Recruiter" asp-action="RecruiterDashboard" asp-area="RecruiterJ" class="btn btn-danger">Cancel</a>
             </div>
         </form>
     </div>

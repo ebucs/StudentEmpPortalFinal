@@ -112,12 +112,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\css\Toast\toastr.css))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\1488893b-dd50-4916-9a7d-00b2e3efc67d_CV_Nelson.pdf))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\7f9411b7-a727-4e6c-960b-8e46dbccd07f_NO_Coverletter_Monocle.pdf))">
       <SourceType>Package</SourceType>
       <SourceId>StudentEmploymentPortal</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/StudentEmploymentPortal</BasePath>
-      <RelativePath>Documents/1488893b-dd50-4916-9a7d-00b2e3efc67d_CV_Nelson.pdf</RelativePath>
+      <RelativePath>Documents/7f9411b7-a727-4e6c-960b-8e46dbccd07f_NO_Coverletter_Monocle.pdf</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -126,14 +126,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\1488893b-dd50-4916-9a7d-00b2e3efc67d_CV_Nelson.pdf))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\7f9411b7-a727-4e6c-960b-8e46dbccd07f_NO_Coverletter_Monocle.pdf))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\19bb6e61-ef13-4b8e-b121-4acf6d5b296a_CV_Nelson.pdf))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\b0a81d8b-7c33-4766-b608-0917f3414edd_CV.pdf))">
       <SourceType>Package</SourceType>
       <SourceId>StudentEmploymentPortal</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/StudentEmploymentPortal</BasePath>
-      <RelativePath>Documents/19bb6e61-ef13-4b8e-b121-4acf6d5b296a_CV_Nelson.pdf</RelativePath>
+      <RelativePath>Documents/b0a81d8b-7c33-4766-b608-0917f3414edd_CV.pdf</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -142,14 +142,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\19bb6e61-ef13-4b8e-b121-4acf6d5b296a_CV_Nelson.pdf))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\b0a81d8b-7c33-4766-b608-0917f3414edd_CV.pdf))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\8019dd1c-5880-46fa-bc9a-bc408390d7f8_CV_Nelson.pdf))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\b15d1ae2-805c-49b4-a996-88266f5e7846_CV_Nelson.pdf))">
       <SourceType>Package</SourceType>
       <SourceId>StudentEmploymentPortal</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/StudentEmploymentPortal</BasePath>
-      <RelativePath>Documents/8019dd1c-5880-46fa-bc9a-bc408390d7f8_CV_Nelson.pdf</RelativePath>
+      <RelativePath>Documents/b15d1ae2-805c-49b4-a996-88266f5e7846_CV_Nelson.pdf</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -158,7 +158,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\8019dd1c-5880-46fa-bc9a-bc408390d7f8_CV_Nelson.pdf))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Documents\b15d1ae2-805c-49b4-a996-88266f5e7846_CV_Nelson.pdf))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico))">
       <SourceType>Package</SourceType>

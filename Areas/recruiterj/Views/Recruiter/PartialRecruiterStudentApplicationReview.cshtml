@@ -1,60 +1,152 @@
 ﻿@model StudentEmploymentPortal.ViewModels.StudentApplicationViewModels.PartialStudentApplicationViewModel
 
 @{
-    ViewData["Title"] = "(Student Application Review)";
+    ViewData["Title"] = "Application Review";
 }
 
 <h1>@ViewData["Title"]</h1>
 <br />
 
-<form method="post" asp-controller="Recruiter" asp-action="PartialRecruiterStudentApplicationReview">
+<form id="saveForm" method="post" asp-controller="Recruiter" asp-action="PartialRecruiterStudentApplicationReview">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="jobPostId" />
+
     <div class="recruiter-details pb-4">
 
-        <h3>Job Post</h3>
-        <p><strong>Job Title:</strong> @Model.JobTitle</p>
-        <p><strong>JobDescription:</strong> @Model.JobDescription</p>
-        <p><strong>Department:</strong> @Model.Department</p>
-        <p><strong>Course:</strong> @Model.Course</p>
-        <div class="mt-2 p-2 border border-dark rounded" style="width: fit-content;">
-            <p>Years of Study Options:</p>
-            <ul>
-                @foreach (var yearOfStudyOption in Model.Levels)
-                {
-                    <li>@yearOfStudyOption</li>
-                }
-            </ul>
+        <h3 class="section-heading">Job Post</h3>
+        <div class="section-content">
+            <p><strong>Job Title:</strong> @Model.JobTitle</p>
+            <p><strong>Job Description:</strong> @Model.JobDescription</p>
+            <p><strong>Department:</strong> @Model.Department</p>
+            <p><strong>Course:</strong> @Model.Course</p>
+            <p><strong>Years of Study Options:</strong> @string.Join(", ", Model.Levels)</p>
         </div>
-        <br />
 
-        <h3>Student Application</h3>
-        <p><strong>FirstName:</strong> @Model.FirstName</p>
-        <p><strong>Surname:</strong> @Model.Surname</p>
-        <p><strong>Address:</strong> @Model.Address</p>
-        <p><strong>Career Objective:</strong> @Model.CareerObjective</p>
-        <p><strong>Skills:</strong> @Model.Skills</p>
-        <p><strong>Achievements:</strong> @Model.Achievements</p>
-        <p><strong>Interests:</strong> @Model.Interests</p>
-        <p><strong>ID Number:</strong> @Model.IDNumber</p>
-        <p><strong>Race:</strong> @Model.Race</p>
-        <p><strong>Gender:</strong> @Model.Gender</p>
-        <p><strong>License:</strong> @Model.DriversLicense</p>
-        <p><strong>Nationality:</strong> @Model.Nationality</p>
-        <p><strong>Current Year of Study:</strong> @Model.CurrentYearOfStudy</p>
-        <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
-        <p><strong>Telephone:</strong> @Model.Telephone</p>
-        <p><strong>Email:</strong> @Model.Email</p>
+        <h3 class="section-heading">Student Profile</h3>
+        <div class="section-content">
+            <p><strong>First Name:</strong> @Model.FirstName</p>
+            <p><strong>Surname:</strong> @Model.Surname</p>
+            <p><strong>Address:</strong> @Model.Address</p>
+            <p><strong>Career Objective:</strong> @Model.CareerObjective</p>
+            <p><strong>Skills:</strong> @Model.Skills</p>
+            <p><strong>Achievements:</strong> @Model.Achievements</p>
+            <p><strong>Interests:</strong> @Model.Interests</p>
+            <p><strong>ID Number:</strong> @Model.IDNumber</p>
+            <p><strong>Race:</strong> @Model.Race</p>
+            <p><strong>Gender:</strong> @Model.Gender</p>
+            <p><strong>License:</strong> @Model.DriversLicense</p>
+            <p><strong>Nationality:</strong> @Model.Nationality</p>
+            <p><strong>Current Year of Study:</strong> @Model.CurrentYearOfStudy</p>
+            <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+            <p><strong>Telephone:</strong> @Model.Telephone</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+        </div>
+
+        <h3 class="section-heading">Qualifications</h3>
+        <div class="section-content">
+            @if (Model.Qualifications.Count > 0)
+            {
+                foreach (var qualification in Model.Qualifications)
+                {
+                    <div class="qualification-details">
+                        <p><strong>Institution:</strong> @qualification.Institution</p>
+                        <p><strong>Date:</strong> @qualification.Date</p>
+                        <p><strong>Qualification:</strong> @qualification.Qualification</p>
+                        <p><strong>Majors:</strong> @qualification.Majors</p>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No qualifications found.</p>
+            }
+        </div>
+
+        <h3 class="section-heading">Referees</h3>
+        <div class="section-content">
+            @if (Model.Referees.Count > 0)
+            {
+                foreach (var referee in Model.Referees)
+                {
+                    <div class="referee-details">
+                        <p><strong>Full Name:</strong> @referee.FullName</p>
+                        <p><strong>Job Title:</strong> @referee.JobTitle</p>
+                        <p><strong>Institution:</strong> @referee.Institution</p>
+                        <p><strong>Email:</strong> @referee.Email</p>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No referees found.</p>
+            }
+        </div>
+
+        <h3 class="section-heading">Work Experience</h3>
+        <div class="section-content">
+            @if (Model.WorkExperiences.Count > 0)
+            {
+                foreach (var workExperience in Model.WorkExperiences)
+                {
+                    <div class="work-experience-details">
+                        <p><strong>Employer:</strong> @workExperience.Employer</p>
+                        <p><strong>Date:</strong> @workExperience.Date</p>
+                        <p><strong>Job Title:</strong> @workExperience.JobTitle</p>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No work experiences found.</p>
+            }
+        </div>
+
+        <h3 class="section-heading">Documents</h3>
+        <div class="section-content">
+            @if (Model.DocumentViewModels.Count > 0)
+            {
+                <table class="documents-table">
+                    <thead>
+                        <tr>
+                            <th>Document Name</th>
+                            <th>Preview</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var document in Model.DocumentViewModels)
+                        {
+                            <tr>
+                                <td>@document.DocumentName</td>
+                                <td><a href="@Url.Content("~/Documents/" + document.FilePath)" target="_blank">@document.DocumentName</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No documents added.</p>
+            }
+        </div>
+
 
         <div class="form-floating py-2 col-12 col-md-6">
-            <!-- Adjust the width using col- classes -->
             <label asp-for="SelectedStudentApplicationStatus" class="col-form-label-sm">Outcome</label>
             <select asp-for="SelectedStudentApplicationStatus" asp-items="Model.OutcomeOptions" class="form-select"></select>
         </div>
 
-        <!-- Add a submit button to save the changes -->
         <div class="d-flex justify-content-between mt-4">
-            <button type="submit" class="btn btn-primary">Save Status</button>
-            <button class="btn btn-danger close-button" asp-controller="Recruiter" asp-action="ReviewStudentApplications" asp-area="RecruiterJ">Close</button>
-
+            <button type="submit" class="btn btn-primary" onclick="submitForm()">Save</button>
+            <a href="@Url.Action("ReviewStudentApplications", "Recruiter", new { area = "RecruiterJ", Model.jobPostId })" class="btn btn-danger view-applications-btn">Cancel</a>
         </div>
     </div>
 </form>
+
+@section Scripts
+    {
+    <script>
+        function submitForm() {
+            document.getElementById("saveForm").submit();
+        }
+    </script>
+}

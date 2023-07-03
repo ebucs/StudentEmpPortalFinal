@@ -14,47 +14,73 @@
 
         @if (!isAuthenticated)
         {
-            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-home fa-lg"></i> <!-- Font Awesome home icon with larger size -->
+                <span class="nav-font">Home</span>
+            </a>
         }
 
         else if (roles.Contains(SD.Student))
         {
             <li class="nav-item">
-                <a class="nav-link active" asp-area="StudentJ" asp-controller="Student" asp-action="StudentDashboard">Home</a>
+                <a class="nav-link active" asp-area="StudentJ" asp-controller="Student" asp-action="StudentDashboard">
+                    <i class="fas fa-home fa-lg"></i> <!-- Font Awesome home icon with larger size -->
+                    <span class="nav-font">@user.FirstName's Dashboard</span>
+                </a>
             </li>
+
         }
         
         else if (roles.Contains(SD.Recruiter))
         {
             <li class="nav-item">
-                <a class="nav-link active" asp-area="RecruiterJ" asp-controller="Recruiter" asp-action="RecruiterDashboard">Home</a>
+                <a class="nav-link active" asp-area="RecruiterJ" asp-controller="Recruiter" asp-action="RecruiterDashboard">
+                    <i class="fas fa-home fa-lg"></i> <!-- Font Awesome home icon with larger size -->
+                    <span class="nav-font">@user.FirstName's Dashboard</span>
+                </a>
             </li>
         }
 
         else if (roles.Contains(SD.Approver))
         {
             <li class="nav-item">
-                <a class="nav-link active" asp-area="ApproverJ" asp-controller="Approver" asp-action="ApproverDashboard">Home</a>
+                <a class="nav-link active" asp-area="ApproverJ" asp-controller="Approver" asp-action="ApproverDashboard">
+                    <i class="fas fa-home fa-lg"></i> <!-- Font Awesome home icon with larger size -->
+                    <span class="nav-font">@user.FirstName's Dashboard</span>
+                </a>
             </li>
         }
         // Add additional else if statements for other user roles
 
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+                <button type="submit" class="nav-link btn btn-link text-white">
+                    <i class="fas fa-sign-out-alt fa-lg"></i> <!-- Font Awesome sign-out icon -->
+                    <span class="nav-font">Logout</span>
+                </button>
+
             </form>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-home fa-lg"></i> 
+                <span class="nav-font">Home</span>
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a class="nav-link active" asp-area="Identity" asp-page="/Account/Register">
+                <i class="fas fa-user-plus"></i>
+                <span class="nav-font">Register</span>
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <a class="nav-link active" asp-area="Identity" asp-page="/Account/Login">
+                <i class="fas fa-sign-in-alt"></i>
+                <span class="nav-font">Login</span>
+            </a>
         </li>
     }
 </ul>

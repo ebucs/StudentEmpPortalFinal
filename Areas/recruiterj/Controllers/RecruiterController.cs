@@ -6,6 +6,7 @@ using StudentEmploymentPortal.Areas.Identity;
 using StudentEmploymentPortal.Areas.jobpostA.Models;
 using StudentEmploymentPortal.Areas.recruiterj.Models;
 using StudentEmploymentPortal.Areas.studentApplicationJ.Models;
+using StudentEmploymentPortal.Areas.studentj.Models;
 using StudentEmploymentPortal.Data;
 using StudentEmploymentPortal.Utility;
 using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
@@ -252,7 +253,7 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> ReviewStudentApplications()
+        public async Task<IActionResult> ReviewStudentApplications(string jobPostId)
         {
             var user = await _userManager.GetUserAsync(User);
             var recruiter = await _context.Recruiter.FindAsync(user.Id);
@@ -261,7 +262,7 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
             if (recruiter != null)
             {
                 var studentApplications = await _context.StudentApplication
-                    .Where(r => r.RecruiterId == recruiter.RecruiterId)
+                    .Where(r => r.RecruiterId == recruiter.RecruiterId && r.JobPostId == jobPostId)
                     .ToListAsync();
 
                 var viewModelList = new List<ReviewStudentsApplicationsViewModel>();
@@ -274,23 +275,23 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
 
                     if (student != null)
                     {
-                        if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.Withdrawn)
+                        if (studentApplication.StudentApplicationStatus == EnumStudentApplicationStatus.Withdrawn)
                         {
                             studentApplicationStatus = "Withdrawn";
                         }
-                        else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.Rejected)
+                        else if (studentApplication.StudentApplicationStatus == EnumStudentApplicationStatus.Rejected)
                         {
                             studentApplicationStatus = "Unsuccessful";
                         }
-                        else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.Interview)
+                        else if (studentApplication.StudentApplicationStatus == EnumStudentApplicationStatus.Interview)
                         {
                             studentApplicationStatus = "Interview";
                         }
-                        else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.Appointed)
+                        else if (studentApplication.StudentApplicationStatus == EnumStudentApplicationStatus.Appointed)
                         {
                             studentApplicationStatus = "Successful";
                         }
-                        else if (studentApplication.StudentApplicationStatus == StudentApplication.EnumStudentApplicationStatus.OnHold)
+                        else if (studentApplication.StudentApplicationStatus == EnumStudentApplicationStatus.OnHold)
                         {
                             studentApplicationStatus = "On hold";
                         }
@@ -321,6 +322,7 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
 
             return NotFound();
         }
+
 
         public async Task<IActionResult> PartialRecruiterStudentApplicationReview(string id)
         {
@@ -353,6 +355,30 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
             {
                 return NotFound();
             }
+
+            var qualifications = await _context.Qualification
+                .Where(q => q.StudentId == studentId)
+                .ToListAsync();
+
+            var referees = await _context.Referee
+                .Where(q => q.StudentId == studentId)
+                .ToListAsync();
+
+            var workExperiences = await _context.WorkExperience
+                .Where(q => q.StudentId == studentId)
+                .ToListAsync();
+
+            // Fetch the document names and file paths
+            var documents = await _context.ApplicationDocument
+                .Where(d => d.StudentApplicationId == id)
+                .Select(d => new StudentApplicationDocsViewModel
+                {
+                    DocumentName = d.DocumentName,
+                    FilePath = d.FilePath
+                })
+                .ToListAsync();
+
+
             var yearsOfStudy = await _context.YearsOfStudy.FirstOrDefaultAsync(y =>
                   y.JobPostId == jobpost.JobPostId &&
                   (y.IsFirstYear || y.IsSecondYear || y.IsThirdYear || y.IsHonours || y.IsGraduates || y.IsMasters || y.IsPhD || y.IsPostdoc));
@@ -378,6 +404,51 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
                 if (yearsOfStudy.IsPostdoc)
                     yearsOfStudyOptions.Add("Postdoc");
             }
+
+            var qualificationViewModels = new List<QualificationViewModel>();
+
+            foreach (var qualification in qualifications)
+            {
+                var qualificationViewModel = new QualificationViewModel
+                {
+                    Institution = qualification.Institution,
+                    Date = qualification.Date,
+                    Qualification = qualification.StuQualification,
+                    Majors = qualification.Majors
+                };
+
+                qualificationViewModels.Add(qualificationViewModel);
+            }
+
+            var refereViewModels = new List<RefereeViewModel>();
+
+            foreach (var referee in referees)
+            {
+                var refereeViewModel = new RefereeViewModel
+                {
+                    FullName =  referee.FullName,
+                    JobTitle = referee.JobTitle,
+                    Institution =  referee.Institution,
+                    Email = referee.Email
+                };
+                refereViewModels.Add(refereeViewModel);
+            }
+
+            var workExperienceViewModels = new List<WorkExperienceViewModel>();
+
+            foreach (var workexperience in workExperiences)
+            {
+                var workExpViewModel = new WorkExperienceViewModel
+                {
+                    Employer = workexperience.Employer,
+                    Date = workexperience.Date,
+                    JobTitle = workexperience.JobTitle
+                };
+
+                workExperienceViewModels.Add(workExpViewModel);
+            }
+
+
             var viewmodel = new PartialStudentApplicationViewModel
             {
                 StudentApplicationId = id,
@@ -403,13 +474,22 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
                 PhoneNumber = user.PhoneNumber,
                 Telephone = user.Telephone,
                 Email = user.Email,
-                SelectedStudentApplicationStatus = studentApplication.StudentApplicationStatus.ToString()
+                SelectedStudentApplicationStatus = studentApplication.StudentApplicationStatus,
+
+                Qualifications = qualificationViewModels,
+                Referees = refereViewModels,
+                WorkExperiences = workExperienceViewModels,
+
+                DocumentViewModels = documents,
+                jobPostId = jobPostId
+
             };
 
             return PartialView(viewmodel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> PartialRecruiterStudentApplicationReview(string id, PartialStudentApplicationViewModel viewmodel)
         {
             if (id == null)
@@ -417,14 +497,14 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
                 return NotFound();
             }
 
-            var studenApplication = await _context.StudentApplication.FirstOrDefaultAsync(r => r.ApplicationId == id);
+            var studenApplication = await _context.StudentApplication.FirstOrDefaultAsync(r => r.ApplicationId == id );
 
             if (studenApplication == null)
             {
                 return NotFound();
             }
 
-            studenApplication.StudentApplicationStatus = Enum.Parse<EnumStudentApplicationStatus>(viewmodel.SelectedStudentApplicationStatus);
+            studenApplication.StudentApplicationStatus = viewmodel.SelectedStudentApplicationStatus;
 
 
 
@@ -441,7 +521,7 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Controllers
             // Save the changes to the database
             await _context.SaveChangesAsync();
             Toaster.AddSuccessToastMessage(TempData, "Student Application Status Updated.");
-            return RedirectToAction("ReviewStudentApplications");
+            return RedirectToAction("ReviewStudentApplications", new {viewmodel.jobPostId});
         }
 
 

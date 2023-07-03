@@ -5,6 +5,6 @@ namespace StudentEmploymentPortal.ViewModels.StudentViewModels
     public class StudentApplicationDocumentViewModel
     {
         public Student student { get; set; }
-        public byte[] Document { get; set; }
+        public List<IFormFile> Documents { get; set; }
     }
 }

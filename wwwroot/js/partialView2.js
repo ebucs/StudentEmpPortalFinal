@@ -48,7 +48,7 @@ function openPartialView(url) {
     });
 }
 
-function closePartialView() {
-    $(".partial-view-container").fadeOut();
-    $(".partial-view-overlay").fadeOut();
-}
+//function closePartialView() {
+//    $(".partial-view-container").fadeOut();
+//    $(".partial-view-overlay").fadeOut();
+//}
