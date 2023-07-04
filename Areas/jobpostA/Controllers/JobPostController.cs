@@ -336,9 +336,25 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Controllers
             {
                 return Science;
             }
+
           
         }
 
+        [HttpPost]
+        public async Task<IActionResult> WithdrawJobPost(string jobPostId)
+        {
+            var jobPost = await _context.JobPost.FindAsync(jobPostId);
 
+            if (jobPost == null)
+            {
+                return NotFound();
+            }
+
+            jobPost.ApprovalStatus = JobPost.EnumApprovalStatus.Withdrawn;
+            await _context.SaveChangesAsync();
+            Toaster.AddSuccessToastMessage(TempData, "Job Post withdrawn Successfully.");
+
+            return RedirectToAction("ManageJobPosts", "JobPost", new { area = "jobpostA" });
+        }
     }
 }

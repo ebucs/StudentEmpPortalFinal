@@ -38,25 +38,40 @@
                         <td>@jobPost.JobType</td>
                         <td>@jobPost.StartDate.ToString("MM/dd/yyyy")</td>
                         <td>@jobPost.EndDate.ToString("MM/dd/yyyy")</td>
-                        <td>@jobPost.ApprovalStatus</td>
+                        @if (jobPost.ApprovalStatus.ToString() == "Withdrawn")
+                        {
+                            <td class="text-danger">@jobPost.ApprovalStatus</td>
+                        }
+                        else if (jobPost.ApprovalStatus.ToString() == "Approved")
+                        {
+                            <td class="text-success">@jobPost.ApprovalStatus</td>
+                        }
+                        else
+                        {
+                            <td>@jobPost.ApprovalStatus</td>
+                        }
+                        
                     </tr>
-                    <tr class="job-post-actions-row d-none">
-                        <td colspan="6">
-                            @if (jobPost.ApprovalStatus.ToString() == "Approved")
-                            {
-                                <span class="btn btn-primary btn-sm disabled">Edit Job Post</span>
-                            }
-                            else
-                            {
-                                <a class="btn btn-primary btn-sm" href="@Url.Action("EditJobPost", "JobPost", new { area = "jobpostA", jobPostId = jobPost.JobPostId })">Edit Job Post</a>
-                            }
-
-                            <a class="btn btn-success btn-sm view-applications-btn"
-                               href="@Url.Action("ReviewStudentApplications", "Recruiter", new { area = "RecruiterJ", jobPostId = jobPost.JobPostId })">
-                                View Applications
-                            </a>
+                    @if (jobPost.ApprovalStatus.ToString() != "Withdrawn")
+                    {
+                        <tr class="job-post-actions-row d-none">
+                         <td colspan="6">
+                                @if (jobPost.ApprovalStatus.ToString() == "Approved")
+                                {
+                                    <span class="btn btn-primary btn-sm disabled">Edit Job Post</span>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary btn-sm" href="@Url.Action("EditJobPost", "JobPost", new { area = "jobpostA", jobPostId = jobPost.JobPostId })">Edit Job Post</a>
+                                }
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-sm withdraw-job-post-btn" data-bs-toggle="modal" data-bs-target="#withdrawJobPostModal" data-jobpostid="@jobPost.JobPostId">Withdraw</button>
+                                    <a class="btn btn-success btn-sm view-applications-btn" href="@Url.Action("ReviewStudentApplications", "Recruiter", new { area = "RecruiterJ", jobPostId = jobPost.JobPostId })">View Applications</a>
+                                </div>
+                            
                         </td>
                     </tr>
+                    }
                 }
             </tbody>
         </table>
@@ -67,10 +82,36 @@ else
     <p>You currently don't have any job posts.</p>
 }
 
+<!-- Withdraw Job Post Modal -->
+<div class="modal" id="withdrawJobPostModal" tabindex="-1" aria-labelledby="withdrawJobPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="withdrawJobPostModalLabel">Withdraw Job Post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to withdraw this job post?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="withdrawJobPostForm" method="post" action="@Url.Action("WithdrawJobPost", "JobPost", new { area = "jobpostA" })">
+                    <input type="hidden" name="jobPostId" value="" />
+                    <button type="submit" class="btn btn-primary">Withdraw</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <style>
     .edit-job-post-btn {
         margin-right: 0.5rem;
+    }
+
+    .withdraw-job-post-btn {
+        margin-right: 0.5rem;
+
     }
 </style>
 
@@ -82,11 +123,17 @@ else
                 $(this).next(".job-post-actions-row").toggleClass("d-none");
             });
 
-            $(".view-applications-btn").click(function (event) {
+            $(".edit-job-post-btn").click(function (event) {
                 event.stopPropagation(); // Prevent row click event from triggering
                 var jobId = $(this).closest(".job-post-row").data("jobid");
-                // Redirect to the view applications page using the jobId
-                window.location.href = "/JobPost/ViewApplications/" + jobId;
+                // Redirect to the edit job post page using the jobId
+                window.location.href = "/JobPost/Edit/" + jobId;
+            });
+
+            $(".withdraw-job-post-btn").click(function () {
+                var jobPostId = $(this).data("jobpostid");
+                // Set the jobPostId value in the hidden form
+                $("#withdrawJobPostForm input[name='jobPostId']").val(jobPostId);
             });
         });
     </script>
