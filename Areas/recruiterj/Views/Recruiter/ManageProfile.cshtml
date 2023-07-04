@@ -12,19 +12,29 @@
         <form id="updateform" method="post" asp-controller="Recruiter" asp-action="ManageProfile">
             @Html.AntiForgeryToken()
 
-            <div class=" form-floating mt-2 p-2 border border-dark-subtle rounded" style="width: auto;">
-                <p><strong>Approver's Note:</strong> @Model.ApproverNote</p>
-                <p><strong>Outcome:</strong> @Model.Outcome</p>
+            <div class="form-floating mt-2 p-2 border border-dark-subtle shadow-sm">
+                <p>
+                    
+                    <strong>
+                        <span class="note-icon" style="margin-right: 5px;">
+                            <i class="fas fa-sticky-note"></i>
+                        </span> 
+                        <label> Approver's Note:</label>
+                    </strong>
+                    <br></br>@Model.ApproverNote
+                </p>
+                <p class="text-success"><strong>Outcome:</strong> @Model.Outcome</p>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="Title" class="col-form-label-sm">Title (Mr/Miss/Mrs)</label>
+
+            <div class="form-floating mt-4 mb-3">
                 <input asp-for="Title" class="form-control" readonly />
+                <label asp-for="Title">Title (Mr/Miss/Mrs/Etc.)</label>
             </div>
 
-            <div class="form-floating py-2">
-                <label asp-for="FirstName" class="col-form-label-sm">First Name</label>
+            <div class="form-floating mb-3">
                 <input asp-for="FirstName" class="form-control" readonly />
+                <label asp-for="FirstName" class="col-form-label-sm">First Name</label>
             </div>
 
             <div class="form-floating py-2">

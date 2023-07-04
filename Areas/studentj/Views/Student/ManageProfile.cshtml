@@ -31,95 +31,95 @@
             <div class="tab-pane fade show active" id="personal-details" role="tabpanel">
                 <form id="profileForm" class="row" method="post" asp-area="StudentJ" asp-controller="Student" asp-action="SaveProfile">
                     @Html.AntiForgeryToken()
-                    <div class="form-floating py-2 col-12 mt-5">
-                        <label asp-for="StudentProfile.Email" class="col-form-label-sm"></label>
-                        <input asp-for="StudentProfile.Email" class="form-control" aria-required="true" readonly />
+                    <div class="form-floating col-12 mt-5 mb-3">                    
+                        <input asp-for="StudentProfile.Email" class="form-control" placeholder="Email" aria-required="true" readonly>
+                        <label asp-for="StudentProfile.Email"></label>
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.FirstName" class="col-form-label-sm">First Name</label>
-                        <input asp-for="StudentProfile.FirstName" class="form-control" aria-required="true" readonly />
+                    <div class="form-floating mb-3 col-6">
+                        <input asp-for="StudentProfile.FirstName" class="form-control" aria-required="true" readonly>
+                        <label asp-for="StudentProfile.FirstName">First Name</label>
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.Surname" class="col-form-label-sm">Surname</label>
-                        <input asp-for="StudentProfile.Surname" class="form-control" aria-required="true" readonly />
+                    <div class="form-floating mb-3 col-6">
+                        <input asp-for="StudentProfile.Surname" class="form-control" aria-required="true" readonly>
+                        <label asp-for="StudentProfile.Surname">Surname</label>
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.Address" class="col-form-label-sm">Address</label>
+                    <div class="form-floating mb-3 col-6">
                         <input asp-for="StudentProfile.Address" class="form-control" aria-required="true" />
+                        <label asp-for="StudentProfile.Address">Address</label>
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.PhoneNumber" class="col-form-label-sm">Phone Number</label>
+                    <div class="form-floating mb-3-2 col-6">
                         <input asp-for="StudentProfile.PhoneNumber" class="form-control" aria-required="true" />
+                        <label asp-for="StudentProfile.PhoneNumber">Phone Number</label>
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.Telephone" class="col-form-label-sm">Telephone</label>
+                    <div class="form-floating mb-3 col-6">
                         <input asp-for="StudentProfile.Telephone" class="form-control" aria-required="true" />
+                        <label asp-for="StudentProfile.Telephone">Telephone</label>
                     </div>
-                    <div class="form-floating py-2 col-6">
+                    <div class="form-floating mb-3 col-6">
                         @if (string.IsNullOrEmpty(Model.StudentProfile.IDNumber))
                         {
-                            <label asp-for="StudentProfile.IDNumber" class="col-form-label-sm">ID/Passport Number</label>
                             <input asp-for="StudentProfile.IDNumber" class="form-control" aria-required="true" />
+                            <label asp-for="StudentProfile.IDNumber">ID/Passport Number</label>
                         }
                         else
                         {
-                            <label asp-for="StudentProfile.IDNumber" class="col-form-label-sm">ID/Passport Number</label>
                             <input asp-for="StudentProfile.IDNumber" class="form-control" aria-required="true" readonly />
+                            <label asp-for="StudentProfile.IDNumber">ID/Passport Number</label>
                         }
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.SelectedRace" class="form-label">Race</label>
+                    <div class="form-floating mb-3 col-6">
                         <select asp-for="StudentProfile.SelectedRace" asp-items="Model.StudentProfile.RaceOptions" class="form-select"></select>
+                        <label asp-for="StudentProfile.SelectedRace" class="form-label">Race</label>
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.SelectedNationality" class="col-form-label-sm">Nationality</label>
+                    <div class="form-floating mb-3 col-6">
                         <select asp-for="StudentProfile.SelectedNationality" asp-items="Model.StudentProfile.NationalityOptions" class="form-select"></select>
+                        <label asp-for="StudentProfile.SelectedNationality">Nationality</label>
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.SelectedCurrentYearOfStudy" class="col-form-label-sm">Current Year of Study</label>
+                    <div class="form-floating mb-3 col-6">
                         <select asp-for="StudentProfile.SelectedCurrentYearOfStudy" asp-items="Model.StudentProfile.CurrentYearOfStudyOptions" class="form-select"></select>
+                        <label asp-for="StudentProfile.SelectedCurrentYearOfStudy">Current Year of Study</label>
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.SelectedFaculty" class="col-form-label-sm">Faculty</label>
+                    <div class="form-floating mb-3 col-6">
                         <select asp-for="StudentProfile.SelectedFaculty" asp-items="Model.StudentProfile.FacultyOptions" class="form-select" id="studentFaculty"></select>
+                        <label asp-for="StudentProfile.SelectedFaculty">Faculty</label>
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.Department" class="col-form-label-sm">Department</label>
-                        <select asp-for="StudentProfile.Department" class="form-select" asp-items="Model.StudentProfile.DepartmentOptions" id="studentDepartment"></select>  
+                    <div class="form-floating mb-3 col-6">
+                        <select asp-for="StudentProfile.Department" class="form-select" asp-items="Model.StudentProfile.DepartmentOptions" id="studentDepartment"></select>
+                        <label asp-for="StudentProfile.Department">Department</label>
                     </div>
 
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.SelectedDriversLicense" class="col-form-label-sm">Drivers License</label>
+                    <div class="form-floating mb-3 col-6">
                         <select asp-for="StudentProfile.SelectedDriversLicense" asp-items="Model.StudentProfile.DriversLicenseOptions" class="form-select"></select>
+                        <label asp-for="StudentProfile.SelectedDriversLicense">Drivers License</label>
                     </div>
-                    <div class="form-floating py-2 col-6">
-                        <label asp-for="StudentProfile.SelectedGender" class="col-form-label-sm">Gender</label>
+                    <div class="form-floating mb-3 col-6">
                         <select asp-for="StudentProfile.SelectedGender" asp-items="Model.StudentProfile.GenderOptions" class="form-select"></select>
+                        <label asp-for="StudentProfile.SelectedGender">Gender</label>
                     </div>
 
-                    <label asp-for="StudentProfile.CareerObjective" class="col-form-label-sm">Career Objective:</label>
-                    <div class="form-floating py-2 col-12">
+                    <div class="form-group mb-3 col-12">
+                        <label asp-for="StudentProfile.CareerObjective" class="col-form-label-sm">Career Objective:</label>
                         <textarea asp-for="StudentProfile.CareerObjective" class="form-control" rows="5"></textarea>   
                     </div>
 
-                    <label asp-for="StudentProfile.Skills" class="col-form-label-sm">Skills:</label>
-                    <div class="form-floating py-2 col-12">
+                    <div class="form-group mb-3 col-12">
+                        <label asp-for="StudentProfile.Skills" class="col-form-label-sm">Skills:</label>
                         <textarea asp-for="StudentProfile.Skills" class="form-control" rows="5"></textarea>
                     </div>
 
-                    <label asp-for="StudentProfile.Achievements" class="col-form-label-sm">Achievements:</label>
-                    <div class="form-floating py-2 col-12">  
+                    <div class="form-group mb-3 col-12">
+                        <label asp-for="StudentProfile.Achievements" class="col-form-label-sm">Achievements:</label>
                        <textarea asp-for="StudentProfile.Achievements" class="form-control" rows="5"></textarea>
                     </div>
 
-                    <label asp-for="StudentProfile.Interests" class="col-form-label-sm">Interests:</label>
-                    <div class="form-floating py-2 col-12">
+                    <div class="form-group mb-4 col-12">
+                        <label asp-for="StudentProfile.Interests" class="col-form-label-sm">Interests:</label>
                         <textarea asp-for="StudentProfile.Interests" class="form-control" rows="5"></textarea>
                     </div>
 
 
-                    <div class="form-floating py-2">
-                        <button type="submit" class="btn btn-primary col-md-12">Save</button>
+                    <div class="form-floating mb-3">
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
