@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rKY6EWJdtoQPaQ6xJkE7EeM3OZlqKA8RvNntIWnwfjg=",
+  "Hash": "dHq0LjlytwqptqAvWupdTzd2fEQ7W4R/lmD+JEd8Njo=",
   "Source": "StudentEmploymentPortal",
   "BasePath": "_content/StudentEmploymentPortal",
   "Mode": "Default",
@@ -1188,6 +1188,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Toast\\toastr.css"
+    },
+    {
+      "Identity": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\wwwroot\\Documents\\1273d63f-35ea-4d33-b638-667323ca06ce_Student Employment Portal Mockup.pdf",
+      "SourceId": "StudentEmploymentPortal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\wwwroot\\",
+      "BasePath": "_content/StudentEmploymentPortal",
+      "RelativePath": "Documents/1273d63f-35ea-4d33-b638-667323ca06ce_Student Employment Portal Mockup.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\1273d63f-35ea-4d33-b638-667323ca06ce_Student Employment Portal Mockup.pdf"
     },
     {
       "Identity": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\wwwroot\\Documents\\7f9411b7-a727-4e6c-960b-8e46dbccd07f_NO_Coverletter_Monocle.pdf",

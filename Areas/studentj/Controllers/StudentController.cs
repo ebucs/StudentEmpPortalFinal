@@ -787,52 +787,87 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
 
         public async Task<IActionResult> StudentApplicationsHistory()
         {
-
-            var studentApplications = new List<StudentApplicationsHistory>();
-            var studentApplicationStatus = "";
-            var viewmodel = new StudentApplicationsHistory();
             var user = await _userManager.GetUserAsync(User);
             var student = await _context.Student.FindAsync(user.Id);
+
+
+
+            // Check if the student doesn't exist
+            if (student == null)
+            {
+                return View();
+            }
+
+
+
             var jobPostsIds = await _context.StudentApplication
-                        .Where(y => y.StudentId == student.StudentId)
-                        .Select(y => y.JobPostId)
-                        .ToListAsync();
+                .Where(y => y.StudentId == student.StudentId)
+                .Select(y => y.JobPostId)
+                .ToListAsync();
+
+
+
+            // Check if no student applications exist
+            if (jobPostsIds.Count == 0)
+            {
+                return View();
+            }
+
+
+
+            var studentApplications = new List<StudentApplicationsHistory>();
+
+
 
             foreach (var id in jobPostsIds)
             {
                 var jobPost = await _context.JobPost.FindAsync(id);
+                if (jobPost == null)
+                {
+                    continue;
+                }
                 var applicationStatus = await _context.StudentApplication
-                                        .Where(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId)
-                                        .Select(a => a.StudentApplicationStatus)
-                                        .FirstOrDefaultAsync();
-                if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.Withdrawn)
+                    .Where(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId)
+                    .Select(a => a.StudentApplicationStatus)
+                    .FirstOrDefaultAsync();
+
+
+
+                string studentApplicationStatus;
+
+
+
+                switch (applicationStatus)
                 {
-                    studentApplicationStatus = "Withdrawn";
+                    case StudentApplication.EnumStudentApplicationStatus.Withdrawn:
+                        studentApplicationStatus = "Withdrawn";
+                        break;
+                    case StudentApplication.EnumStudentApplicationStatus.Rejected:
+                        studentApplicationStatus = "Unsuccessful";
+                        break;
+                    case StudentApplication.EnumStudentApplicationStatus.Interview:
+                        studentApplicationStatus = "Interview";
+                        break;
+                    case StudentApplication.EnumStudentApplicationStatus.Appointed:
+                        studentApplicationStatus = "Successful";
+                        break;
+                    case StudentApplication.EnumStudentApplicationStatus.OnHold:
+                        studentApplicationStatus = "On hold";
+                        break;
+                    default:
+                        studentApplicationStatus = "Pending";
+                        break;
                 }
-                else if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.Rejected)
-                {
-                    studentApplicationStatus = "Unsuccessful";
-                }
-                else if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.Interview)
-                {
-                    studentApplicationStatus = "Interview";
-                }
-                else if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.Appointed)
-                {
-                    studentApplicationStatus = "Scuccessful";
-                }
-                else if (applicationStatus == StudentApplication.EnumStudentApplicationStatus.OnHold)
-                {
-                    studentApplicationStatus = "On hold";
-                }
-                else
-                {
-                    studentApplicationStatus = "Pending";
-                }
+
+
+
                 var applicationId = await _context.StudentApplication
-                                        .Where(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId)
-                                        .Select(a => a.ApplicationId)
-                                        .FirstOrDefaultAsync();
+                    .Where(a => a.StudentId == student.StudentId && a.JobPostId == jobPost.JobPostId)
+                    .Select(a => a.ApplicationId)
+                    .FirstOrDefaultAsync();
+
+
+
                 var viewModel = new StudentApplicationsHistory
                 {
                     StudentApplicationiId = applicationId,
@@ -844,8 +879,13 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                     StudentApplicationStatus = studentApplicationStatus
                 };
 
+
+
                 studentApplications.Add(viewModel);
             }
+
+
+
             return View(studentApplications);
         }
     }
