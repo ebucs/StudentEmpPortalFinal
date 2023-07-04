@@ -15,31 +15,108 @@
 
         <h3 class="section-heading">Job Post</h3>
         <div class="section-content">
-            <p><strong>Job Title:</strong> @Model.JobTitle</p>
-            <p><strong>Job Description:</strong> @Model.JobDescription</p>
-            <p><strong>Department:</strong> @Model.Department</p>
-            <p><strong>Course:</strong> @Model.Course</p>
-            <p><strong>Years of Study Options:</strong> @string.Join(", ", Model.Levels)</p>
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <tbody>
+                        <tr>
+                            <th>Job Title</th>
+                            <td>@Model.JobTitle</td>
+                        </tr>
+                        <tr>
+                            <th>Job Description</th>
+                            <td>@Model.JobDescription</td>
+                        </tr>
+                        <tr>
+                            <th>Department</th>
+                            <td>@Model.Department</td>
+                        </tr>
+                        <tr>
+                            <th>Course</th>
+                            <td>@Model.Course</td>
+                        </tr>
+                        <tr>
+                            <th>Years of Study Options</th>
+                            <td>@string.Join(", ", Model.Levels)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
         <h3 class="section-heading">Student Profile</h3>
         <div class="section-content">
-            <p><strong>First Name:</strong> @Model.FirstName</p>
-            <p><strong>Surname:</strong> @Model.Surname</p>
-            <p><strong>Address:</strong> @Model.Address</p>
-            <p><strong>Career Objective:</strong> @Model.CareerObjective</p>
-            <p><strong>Skills:</strong> @Model.Skills</p>
-            <p><strong>Achievements:</strong> @Model.Achievements</p>
-            <p><strong>Interests:</strong> @Model.Interests</p>
-            <p><strong>ID Number:</strong> @Model.IDNumber</p>
-            <p><strong>Race:</strong> @Model.Race</p>
-            <p><strong>Gender:</strong> @Model.Gender</p>
-            <p><strong>License:</strong> @Model.DriversLicense</p>
-            <p><strong>Nationality:</strong> @Model.Nationality</p>
-            <p><strong>Current Year of Study:</strong> @Model.CurrentYearOfStudy</p>
-            <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
-            <p><strong>Telephone:</strong> @Model.Telephone</p>
-            <p><strong>Email:</strong> @Model.Email</p>
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <tbody>
+                        <tr>
+                            <th>First Name</th>
+                            <td>@Model.FirstName</td>
+                        </tr>
+                        <tr>
+                            <th>Surname</th>
+                            <td>@Model.Surname</td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>@Model.Address</td>
+                        </tr>
+                        <tr>
+                            <th>Career Objective</th>
+                            <td>@Model.CareerObjective</td>
+                        </tr>
+                        <tr>
+                            <th>Skills</th>
+                            <td>@Model.Skills</td>
+                        </tr>
+                        <tr>
+                            <th>Achievements</th>
+                            <td>@Model.Achievements</td>
+                        </tr>
+                        <tr>
+                            <th>Interests</th>
+                            <td>@Model.Interests</td>
+                        </tr>
+                        <tr>
+                            <th>ID Number</th>
+                            <td>@Model.IDNumber</td>
+                        </tr>
+                        <tr>
+                            <th>Race</th>
+                            <td>@Model.Race</td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td>@Model.Gender</td>
+                        </tr>
+                        <tr>
+                            <th>License</th>
+                            <td>@Model.DriversLicense</td>
+                        </tr>
+                        <tr>
+                            <th>Nationality</th>
+                            <td>@Model.Nationality</td>
+                        </tr>
+                        <tr>
+                            <th>Current Year of Study</th>
+                            <td>@Model.CurrentYearOfStudy</td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number</th>
+                            <td>@Model.PhoneNumber</td>
+                        </tr>
+                        <tr>
+                            <th>Telephone</th>
+                            <td>@Model.Telephone</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>@Model.Email</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
         <h3 class="section-heading">Qualifications</h3>
@@ -49,13 +126,32 @@
                 foreach (var qualification in Model.Qualifications)
                 {
                     <div class="qualification-details">
-                        <p><strong>Institution:</strong> @qualification.Institution</p>
-                        <p><strong>Date:</strong> @qualification.Date</p>
-                        <p><strong>Qualification:</strong> @qualification.Qualification</p>
-                        <p><strong>Majors:</strong> @qualification.Majors</p>
+                        <div class="table-responsive">
+                            <table class="custom-table">
+                                <tbody>
+                                    <tr>
+                                        <th>Institution</th>
+                                        <td>@qualification.Institution</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date</th>
+                                        <td>@qualification.Date</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Qualification</th>
+                                        <td>@qualification.Qualification</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Majors</th>
+                                        <td>@qualification.Majors</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                      
                     </div>
-                    <hr>
+                    <hr/>
                 }
             }
             else
@@ -70,13 +166,30 @@
             {
                 foreach (var referee in Model.Referees)
                 {
-                    <div class="referee-details">
-                        <p><strong>Full Name:</strong> @referee.FullName</p>
-                        <p><strong>Job Title:</strong> @referee.JobTitle</p>
-                        <p><strong>Institution:</strong> @referee.Institution</p>
-                        <p><strong>Email:</strong> @referee.Email</p>
+                    <div class="table-responsive">
+                        <table class="custom-table">
+                            <tbody>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <td>@referee.FullName</td>
+                                </tr>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <td>@referee.JobTitle</td>
+                                </tr>
+                                <tr>
+                                    <th>Institution</th>
+                                    <td>@referee.Institution</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>@referee.Email</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <hr>
+
+                    <hr/>
                 }
                 
             }
@@ -92,11 +205,25 @@
             {
                 foreach (var workExperience in Model.WorkExperiences)
                 {
-                    <div class="work-experience-details">
-                        <p><strong>Employer:</strong> @workExperience.Employer</p>
-                        <p><strong>Date:</strong> @workExperience.Date</p>
-                        <p><strong>Job Title:</strong> @workExperience.JobTitle</p>
+                    <div class="table-responsive">
+                        <table class="custom-table">
+                            <tbody>
+                                <tr>
+                                    <th>Employer</th>
+                                    <td>@workExperience.Employer</td>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <td>@workExperience.Date</td>
+                                </tr>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <td>@workExperience.JobTitle</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+
                     <hr />
                 }
                 
@@ -111,23 +238,25 @@
         <div class="section-content">
             @if (Model.DocumentViewModels.Count > 0)
             {
-                <table class="documents-table">
-                    <thead>
-                        <tr>
-                            <th>Document Name</th>
-                            <th>Preview</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var document in Model.DocumentViewModels)
-                        {
+                <div class="table-responsive">
+                    <table class="documents-table ">
+                        <thead>
                             <tr>
-                                <td>@document.DocumentName</td>
-                                <td><a href="@Url.Content("~/Documents/" + document.FilePath)" target="_blank">@document.DocumentName</a></td>
+                                <th>Document Name</th>
+                                <th>Preview</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var document in Model.DocumentViewModels)
+                            {
+                                <tr>
+                                    <td>@document.DocumentName</td>
+                                    <td><a href="@Url.Content("~/Documents/" + document.FilePath)" target="_blank">@document.DocumentName</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             }
             else
             {
@@ -156,11 +285,3 @@
         }
     </script>
 }
-<style>
-    hr {
-        border: none; /* Remove the default border */
-        height: 2px; /* Set the height of the line */
-        background-color: black; /* Set the color of the line */
-        /* Additional styles */
-    }
-</style>

@@ -10,41 +10,84 @@
 <form id="ApproveRecruiter" method="post" asp-controller="Approver" asp-action="PartialRecruiterDetails">
     @Html.AntiForgeryToken()
     <div class="section-content">
-        <p><strong>Title:</strong> @Model.Title</p>
-        <p><strong>First Name:</strong> @Model.FirstName</p>
-        <p><strong>Surname:</strong> @Model.Surname</p>
-        <p><strong>Email:</strong> @Model.Email</p>
-        <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
-        <p><strong>Telephone:</strong> @Model.Telephone</p>
-        <p><strong>Registered Address:</strong> @Model.RegisteredAddress</p>
-        <p><strong>Job Title:</strong> @Model.JobTitle</p>
-        <p><strong>Registration Number:</strong> @Model.RegistrationNumber</p>
-        <p><strong>Registered Name:</strong> @Model.RegisteredName</p>
-        <p><strong>Trading Name:</strong> @Model.TradingName</p>
-        <p><strong>Business Type:</strong> @Model.BusinessType</p>
-
+        <div class="table-responsive">
+            <table class="custom-table">
+                <tbody>
+                    <tr>
+                        <th>Title</th>
+                        <td>@Model.Title</td>
+                    </tr>
+                    <tr>
+                        <th>First Name</th>
+                        <td>@Model.FirstName</td>
+                    </tr>
+                    <tr>
+                        <th>Surname</th>
+                        <td>@Model.Surname</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>@Model.PhoneNumber</td>
+                    </tr>
+                    <tr>
+                        <th>Telephone</th>
+                        <td>@Model.Telephone</td>
+                    </tr>
+                    <tr>
+                        <th>Registered Address</th>
+                        <td>@Model.RegisteredAddress</td>
+                    </tr>
+                    <tr>
+                        <th>Job Title</th>
+                        <td>@Model.JobTitle</td>
+                    </tr>
+                    <tr>
+                        <th>Registration Number</th>
+                        <td>@Model.RegistrationNumber</td>
+                    </tr>
+                    <tr>
+                        <th>Registered Name</th>
+                        <td>@Model.RegisteredName</td>
+                    </tr>
+                    <tr>
+                        <th>Trading Name</th>
+                        <td>@Model.TradingName</td>
+                    </tr>
+                    <tr>
+                        <th>Business Type</th>
+                        <td>@Model.BusinessType</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <!-- Add input fields for adding a note and changing the outcome -->
-        <div class="section-content">
-            <div class="form-floating py-2 col-12 col-md-6">
-                <!-- Adjust the width using col- classes -->
-                <label asp-for="ApproverNote" class="form-label">Add Note</label>
-                <textarea asp-for="ApproverNote" class="form-control" style="height: 150px;"></textarea> <!-- Adjust the height using inline style -->
-            </div>
 
-            <div class="form-floating py-2 col-12 col-md-6">
-                <!-- Adjust the width using col- classes -->
-                <label asp-for="Outcome" class="col-form-label-sm"></label>
-                <select asp-for="Outcome" asp-items="Model.StatusOptions" class="form-select"></select>
-            </div>
+    </div>
 
+    <!-- Add input fields for adding a note and changing the outcome -->
+    <div class="section-content py-2 col-12">
+        <div class="form-group py-2">
+            <!-- Adjust the width using col- classes -->
+            <label asp-for="ApproverNote" class="form-label">Add Note:</label>
+            <textarea asp-for="ApproverNote" class="form-control" style="height: 150px;"></textarea> <!-- Adjust the height using inline style -->
         </div>
 
-        <!-- Add a submit button to save the changes -->
-        <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-            <button class="btn btn-danger close-button" asp-controller="Approver" asp-action="ManageRecruiterRegistration">Close</button>
+        <div class="form-floating mb-3">
+            <select asp-for="Outcome" asp-items="Model.StatusOptions" class="form-select"></select>
+            <label asp-for="Outcome"></label>
         </div>
+
+    </div>
+
+    <!-- Add a submit button to save the changes -->
+    <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button class="btn btn-danger close-button" asp-controller="Approver" asp-action="ManageRecruiterRegistration">Close</button>
+    </div>
+
 </form>
 

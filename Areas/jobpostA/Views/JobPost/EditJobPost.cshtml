@@ -18,31 +18,27 @@
             @if (Model.ApprovalStatus.ToString() == "Queried")
             {
                 <div class="form-floating mb-4">
-
                     <div class="warning-container">
-                        <label class="col-form-label">Approver's Note</label>
+                        <label class="col-form-label">
+                            <span class="note-icon"><i class="fas fa-exclamation-circle"></i></span>
+                            Approver's Note
+                        </label>
                         <textarea class="form-control bg-warning text-dark warning-textarea" readonly>@Model.ApproversNote</textarea>
-
-                        <span class="warning-icon"><i class="fas fa-exclamation-circle"></i></span>
                     </div>
-
                 </div>
             }
             else
             {
                 <div class="form-floating mb-4">
-
                     <div>
-                        <label class="col-form-label">Approver's Note</label>
-                        <textarea class="form-control" readonly>@Model.ApproversNote</textarea>
-
-                        <span class="warning-icon"><i class="fas fa-sticky-note"></i></span>
+                        <label class="col-form-label">
+                            <span class="note-icon"><i class="fas fa-sticky-note"></i></span>
+                            Approver's Note
+                        </label>
+                        <textarea class="form-control" rows="5" readonly>@Model.ApproversNote</textarea>
                     </div>
-
                 </div>
             }
-
-
 
 
             <div class="form-floating mb-4">
@@ -198,7 +194,7 @@
 
             <div class="pt-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-controller="Recruiter" asp-action="RecruiterDashboard" asp-area="RecruiterJ" class="btn btn-danger">Cancel</a>
+                <a href="@Url.Action("ManageJobPosts", "JobPost", new { area = "jobpostA", Model.JobpostId })" class="btn btn-danger">Cancel</a>
             </div>
         </form>
     </div>
@@ -218,12 +214,12 @@
                     departmentElement.replaceWith('<input asp-for="Department" class="form-control" id="department" readonly value="' + '@tradingName' + '" name="Department" />');
                     facultyElement.hide();
                     // Reset the faculty select element to the first option
-                    $("#faculty").val(''); // Reset the value of the select element
+                    //$("#faculty").val(''); // Reset the value of the select element
                 } else {
                     departmentElement.replaceWith('<select asp-for="Department" class="form-select" id="department" name="Department"></select>');
                     facultyElement.show();
                     // Reset the faculty select element to the first option
-                    $("#faculty").val(''); // Reset the value of the select element
+                    //$("#faculty").val(''); // Reset the value of the select element
                 }
             }).trigger("change");
         });

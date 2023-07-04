@@ -125,6 +125,7 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
         }
         public enum EnumWeekHours
         {
+            [Display(Name = "")]
             None,
             [Display(Name = "<2")]
             LessThanTwo,

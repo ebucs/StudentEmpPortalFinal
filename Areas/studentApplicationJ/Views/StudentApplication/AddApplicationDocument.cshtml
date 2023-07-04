@@ -5,48 +5,59 @@
 }
 
 <h1>Add Application Document</h1>
-
+<br />
 <form method="post" enctype="multipart/form-data" asp-area="StudentApplicationJ" asp-controller="StudentApplication" asp-action="AddApplicationDocument">
 
-    <table class="table" id="documentTable">
-        <thead>
-            <tr>
-                <th>Document Name</th>
-                <th>File</th>
-                <th>Preview</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <div class="form-floating">
-                        <input name="DocumentName" class="form-control document-name" aria-required="true" required />
-                        <label class="col-form-label-sm" for="DocumentName">Enter document name</label>
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        <input type="file" name="files" class="form-control document-file" onchange="showFileDetails(this)" accept=".pdf, .doc, .docx" required />
-                        <p class="text-muted file-details"></p>
-                    </div>
-                </td>
-                <td>
-                    <div class="preview-container"></div>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger" onclick="removeDocumentRow(this)">Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="section-content">
+        <div class="table-responsive">
+            <table class="table" id="documentTable">
+                <thead>
+                    <tr>
+                        <th>Document Name</th>
+                        <th>File</th>
+                        <th>Preview</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input name="DocumentName" class="form-control document-name" id="DocumentName" placeholder="Name" aria-required="true" required>
+                                    <label for="DocumentName" class="input-group-text">Enter document Name</label>
+                                </div>
+                            </div>
 
-    <button type="button" class="btn btn-primary" onclick="addDocumentRow()">Add Document</button>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="file" name="files" class="form-control document-file" onchange="showFileDetails(this)" accept=".pdf" required />
+                                <p class="text-muted file-details"></p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="preview-container"></div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="removeDocumentRow(this)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <input type="hidden" name="ApplicationId" value="@ViewData["ApplicationId"]" />
+        <div class="d-flex justify-content-between align-items-center">
+            <button type="button" class="btn btn-primary" onclick="addDocumentRow()">Add Document</button>
+            <div class="d-flex">
+                <input type="hidden" name="ApplicationId" value="@ViewData["ApplicationId"]" />
+                <button type="submit" class="btn btn-primary">Upload All</button>
+                <button type="button" class="btn btn-danger close-button ms-2" onclick="navigateToView()">Cancel</button>
+            </div>
+        </div>
+    </div>
 
-    <button type="submit" class="btn btn-primary">Upload All</button>
-    <button type="button" class="btn btn-danger close-button" onclick="navigateToView()">Cancel</button>
+   
 </form>
 
 @section Scripts {
@@ -59,13 +70,13 @@
 
             if (fileInput.files.length > 0) {
                 var file = fileInput.files[0];
-                fileDetailsDisplay.textContent = "Selected File: " + file.name;
+                //fileDetailsDisplay.textContent = "Selected File: " + file.name;
 
                 var fileURL = URL.createObjectURL(file);
                 var previewLink = document.createElement("a");
                 previewLink.setAttribute("href", fileURL);
                 previewLink.setAttribute("target", "_blank");
-                previewLink.textContent = "Preview Document";
+                previewLink.textContent = file.name;
 
                 if (previewContainer) {
                     previewContainer.innerHTML = "";
@@ -111,7 +122,7 @@
             fileInput.setAttribute("name", "files");
             fileInput.setAttribute("class", "form-control document-file");
             fileInput.setAttribute("onchange", "showFileDetails(this)");
-            fileInput.setAttribute("accept", ".pdf, .doc, .docx");
+            fileInput.setAttribute("accept", ".pdf");
             fileInput.setAttribute("required", "required");
             var fileDetailsP = document.createElement("p");
             fileDetailsP.setAttribute("class", "text-muted file-details");

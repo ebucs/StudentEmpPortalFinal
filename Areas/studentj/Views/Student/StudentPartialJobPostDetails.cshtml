@@ -12,20 +12,60 @@
 
         <div class="section-content">
             <input type="hidden" name="JobPostId" value="@Model.JobPostId" />
-            <p><strong>Job Title:</strong> @Model.JobTitle</p>
-            <p><strong>Location:</strong> @Model.Location</p>
-            <p><strong>Job Description:</strong> @Model.JobDescription</p>
-            <p><strong>Key Responsibilities:</strong> @Model.KeyResponsibilities</p>
-            <p><strong>Job Type:</strong> @Model.JobType</p>
-            @if (Model.JobType.ToString() != "FullTime")
-            {
-                <p><strong>Part-Time Number of Hours:</strong> @Model.PartTimeNumberOfHours</p>
-            }
-            <p><strong>Start Date:</strong> @Model.StartDate.ToString("MM/dd/yyyy")</p>
-            <p><strong>End Date:</strong> @Model.EndDate.ToString("MM/dd/yyyy")</p>
-            <p><strong>Hourly Rate:</strong> @Model.HourlyRate</p>
-            <p><strong>Minimum Requirements:</strong> @Model.MinRequirements</p>
-            <p><strong>Application Instruction:</strong> @Model.ApplicationInstruction</p>
+        <div class="table-responsive">
+            <table class="custom-table">
+                <tbody>
+                    <tr>
+                        <th>Job Title</th>
+                        <td>@Model.JobTitle</td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td>@Model.Location</td>
+                    </tr>
+                    <tr>
+                        <th>Job Description</th>
+                        <td>@Model.JobDescription</td>
+                    </tr>
+                    <tr>
+                        <th>Key Responsibilities</th>
+                        <td>@Model.KeyResponsibilities</td>
+                    </tr>
+                    <tr>
+                        <th>Job Type</th>
+                        <td>@Model.JobType</td>
+                    </tr>
+                    @if (Model.JobType.ToString() != "FullTime")
+                    {
+                        <tr>
+                            <th>Part-Time Number of Hours</th>
+                            <td>@Model.PartTimeNumberOfHours</td>
+                        </tr>
+                    }
+                    <tr>
+                        <th>Start Date</th>
+                        <td>@Model.StartDate.ToString("MM/dd/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <th>End Date</th>
+                        <td>@Model.EndDate.ToString("MM/dd/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <th>Hourly Rate</th>
+                        <td>@Model.HourlyRate</td>
+                    </tr>
+                    <tr>
+                        <th>Minimum Requirements</th>
+                        <td>@Model.MinRequirements</td>
+                    </tr>
+                    <tr>
+                        <th>Application Instruction</th>
+                        <td>@Model.ApplicationInstruction</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
             <p style="font-size: 1.1em; font-weight: bold; color: red;">
                 <strong>Closing Date:</strong> @Model.ClosingDate.ToString("MM/dd/yyyy")
             </p>
