@@ -40,7 +40,18 @@
                         <td>@jobPost.JobType</td>
                         <td>@jobPost.StartDate.ToString("MM/dd/yyyy")</td>
                         <td>@jobPost.EndDate.ToString("MM/dd/yyyy")</td>
-                        <td>@jobPost.ApprovalStatus</td>
+                        @if (jobPost.ApprovalStatus.ToString() == "Withdrawn")
+                        {
+                            <td class="text-danger">@jobPost.ApprovalStatus</td>
+                        }
+                        else if (jobPost.ApprovalStatus.ToString() == "Approved")
+                        {
+                            <td class="text-success">@jobPost.ApprovalStatus</td>
+                        }
+                        else
+                        {
+                            <td>@jobPost.ApprovalStatus</td>
+                        }
                     </tr>
                 }
             </tbody>

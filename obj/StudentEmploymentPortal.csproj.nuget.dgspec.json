@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\A0080350\\Desktop\\ebucs\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj": {}
+    "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\A0080350\\Desktop\\ebucs\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj": {
+    "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\A0080350\\Desktop\\ebucs\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
+        "projectUniqueName": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
         "projectName": "StudentEmploymentPortal",
-        "projectPath": "C:\\Users\\A0080350\\Desktop\\ebucs\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
-        "packagesPath": "C:\\Users\\A0080350\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A0080350\\Desktop\\ebucs\\StudentEmpPortalFinal\\obj\\",
+        "projectPath": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
+        "packagesPath": "C:\\Users\\A0079417\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\A0080350\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\A0079417\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,8 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -100,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

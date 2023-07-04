@@ -38,7 +38,14 @@
                         <td>@recruiter.RegisteredName</td>
                         <td>@recruiter.TradingName</td>
                         <td>@recruiter.RegistrationNumber</td>
-                        <td>@recruiter.OutcomeStatus</td>
+                        @if (recruiter.OutcomeStatus.ToString() == "Approved")
+                        {
+                            <td class="text-success">@recruiter.OutcomeStatus</td>
+                        }
+                        else
+                        {
+                            <td>@recruiter.OutcomeStatus</td>
+                        }
                     </tr>
                 }
             </tbody>
