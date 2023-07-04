@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StudentEmploymentPortal.Areas.Identity;
 using StudentEmploymentPortal.Areas.jobpostA.Models;
+using StudentEmploymentPortal.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,31 +13,46 @@ namespace StudentEmploymentPortal.Areas.studentj.Models
         [Key, ForeignKey(nameof(User))]
         public string StudentId { get; set; }
 
+        [Display(Name = "Driver's License")]
         public driversLicense DriversLicense { get; set; }
 
+        [Display(Name = "Career Objective")]
         public string? CareerObjective { get; set; }
 
+        [Display(Name = "Gender")]
         public gender Gender { get; set; }
 
+        [Display(Name = "Race")]
         public race Race { get; set; }
 
+        [Display(Name = "ID Number")]
+        [RegularExpression(@"^(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([0-9]{2})$", ErrorMessage = "Invalid ID number. It should be a valid date in the format yyMMdd.")]
+        [StringLength(13, MinimumLength = 13, ErrorMessage = "Invalid ID number length.")]
         public string IDNumber { get; set; }
 
+        [Display(Name = "Nationality")]
         public EnumNationality Nationality { get; set; }
 
         [Required(ErrorMessage = "Current year of study is required.")]
+        [Display(Name = "Current Year of Study")]
         public currentYearOfStudy CurrentYearOfStudy { get; set; }
 
-        public EnumFaculty Faculty { get; set; }
+        [Display(Name = "Faculty")]
+        public Faculty Faculty { get; set; }
 
-        public department Department { get; set; }
+        [Display(Name = "Department")]
+        public Department Department { get; set; }
 
+        [Display(Name = "Skills")]
         public string? Skills { get; set; }
 
+        [Display(Name = "Achievements")]
         public string? Achievements { get; set; }
 
+        [Display(Name = "Interests")]
         public string? Interests { get; set; }
 
+        [Display(Name = "Address")]
         public string? Address { get; set; }
 
         // Navigation property

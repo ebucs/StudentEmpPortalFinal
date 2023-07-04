@@ -15,6 +15,7 @@ using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
 using StudentEmploymentPortal.ViewModels.StudentViewModels;
 using StudentEmploymentPortal.Migrations;
 using StudentEmploymentPortal.Areas.studentApplicationJ.Models;
+using StudentEmploymentPortal.Models;
 
 namespace StudentEmploymentPortal.Areas.studentj.Controllers
 {
@@ -81,8 +82,8 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                             SelectedDriversLicense = student.DriversLicense,
                             SelectedNationality = student.Nationality,
                             SelectedCurrentYearOfStudy = student.CurrentYearOfStudy,
-                            SelectedFaculty = student.Faculty,
-                            Department = student.Department,
+                            Faculty = student.Faculty.Name,
+                            Department = student.Department.Name,
 
                             // Non-editable fields
                             FirstName = user.FirstName,
@@ -142,8 +143,8 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                             SelectedDriversLicense = default,
                             SelectedNationality = default,
                             SelectedCurrentYearOfStudy = default,
-                            SelectedFaculty = default,
-                            Department = default,
+                            Faculty = student.Faculty.Name,
+                            Department = student.Department.Name,
 
                             // Non-editable fields
                             FirstName = user.FirstName,
@@ -192,8 +193,8 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                         student.DriversLicense = viewModel.StudentProfile.SelectedDriversLicense;
                         student.Nationality = viewModel.StudentProfile.SelectedNationality;
                         student.CurrentYearOfStudy = viewModel.StudentProfile.SelectedCurrentYearOfStudy;
-                        student.Faculty = viewModel.StudentProfile.SelectedFaculty;
-                        student.Department = viewModel.StudentProfile.Department;
+                        student.Faculty.Name = viewModel.StudentProfile.Faculty;
+                        student.Department.Name = viewModel.StudentProfile.Department;
 
                         // Save the changes
                         await _context.SaveChangesAsync();
@@ -216,7 +217,7 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                             DriversLicense = viewModel.StudentProfile.SelectedDriversLicense,
                             Nationality = viewModel.StudentProfile.SelectedNationality,
                             CurrentYearOfStudy = viewModel.StudentProfile.SelectedCurrentYearOfStudy,
-                            Faculty = viewModel.StudentProfile.SelectedFaculty,
+                            Faculty = viewModel.StudentProfile.Faculty,
                             Department = viewModel.StudentProfile.Department
                         };
 

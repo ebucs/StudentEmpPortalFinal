@@ -6,6 +6,7 @@ using StudentEmploymentPortal.Areas.jobpostA.Models;
 using StudentEmploymentPortal.Areas.recruiterj.Models;
 using StudentEmploymentPortal.Areas.studentApplicationJ.Models;
 using StudentEmploymentPortal.Areas.studentj.Models;
+using StudentEmploymentPortal.Models;
 using StudentEmploymentPortal.ViewModels;
 
 namespace StudentEmploymentPortal.Data
@@ -27,6 +28,8 @@ namespace StudentEmploymentPortal.Data
         public DbSet<Qualification> Qualification { get; set; }
         public DbSet<WorkExperience> WorkExperience { get; set; }
         public DbSet<Referee> Referee { get; set; }
+        public DbSet<Faculty> Faculty { get; set; }
+        public DbSet<Department> Department { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,14 +53,6 @@ namespace StudentEmploymentPortal.Data
                 .HasConversion<string>();
 
             modelBuilder.Entity<Student>()
-                .Property(s => s.Faculty)
-                .HasConversion<string>();
-
-            modelBuilder.Entity<Student>()
-                .Property(s => s.Department)
-                .HasConversion<string>();
-
-            modelBuilder.Entity<Student>()
                 .Property(s => s.DriversLicense)
                 .HasConversion<string>();
 
@@ -77,10 +72,6 @@ namespace StudentEmploymentPortal.Data
 
             modelBuilder.Entity<JobPost>()
                 .Property(s => s.RecruiterType)
-                .HasConversion<string>();
-
-            modelBuilder.Entity<JobPost>()
-                .Property(s => s.Faculty)
                 .HasConversion<string>();
 
             modelBuilder.Entity<JobPost>()

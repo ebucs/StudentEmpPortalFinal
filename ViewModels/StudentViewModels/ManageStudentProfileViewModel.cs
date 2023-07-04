@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using StudentEmploymentPortal.Utility;
-
+using StudentEmploymentPortal.Models;
 
 namespace StudentEmploymentPortal.ViewModels.StudentViewModels
 {
@@ -22,8 +22,8 @@ namespace StudentEmploymentPortal.ViewModels.StudentViewModels
         public Student.driversLicense SelectedDriversLicense { get; set; }
         public Student.EnumNationality SelectedNationality { get; set; }
         public Student.currentYearOfStudy SelectedCurrentYearOfStudy { get; set; }
-        public Student.EnumFaculty SelectedFaculty { get; set; }
-        public Student.department Department { get; set; }
+        public string Faculty { get; set; }
+        public string Department { get; set; }
         public string PhoneNumber { get; set; }
         public string Telephone { get; set; }
         public string Email { get; set; }
