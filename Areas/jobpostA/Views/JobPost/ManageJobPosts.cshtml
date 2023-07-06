@@ -10,8 +10,17 @@
 
 <form method="post" action="">
     <div class="input-group mb-3">
-        <label class="sr-only" for="searchInput">Search</label>
-        <input class="form-control" type="text" name="search" id="searchInput" placeholder="Search">
+        <label class="sr-only" for="filterSelect">Filter By:</label>
+        <div class="input-group-prepend">
+            <span class="input-group-text">Filter By:</span>
+        </div>
+        <select class="form-control" id="filterSelect">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="queried">Queried</option>
+            <option value="approved">Approved</option>
+            <option value="withdrawn">Withdrawn</option>
+        </select>
     </div>
 </form>
 
@@ -116,25 +125,43 @@ else
 </style>
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            $(".job-post-row").click(function () {
-                // Toggle the visibility of job post actions row
-                $(this).next(".job-post-actions-row").toggleClass("d-none");
-            });
-
-            $(".edit-job-post-btn").click(function (event) {
-                event.stopPropagation(); // Prevent row click event from triggering
-                var jobId = $(this).closest(".job-post-row").data("jobid");
-                // Redirect to the edit job post page using the jobId
-                window.location.href = "/JobPost/Edit/" + jobId;
-            });
-
-            $(".withdraw-job-post-btn").click(function () {
-                var jobPostId = $(this).data("jobpostid");
-                // Set the jobPostId value in the hidden form
-                $("#withdrawJobPostForm input[name='jobPostId']").val(jobPostId);
-            });
+   <script>
+    $(document).ready(function () {
+        $(".job-post-row").click(function () {
+            // Toggle the visibility of job post actions row
+            $(this).next(".job-post-actions-row").toggleClass("d-none");
         });
-    </script>
+
+        $(".edit-job-post-btn").click(function (event) {
+            event.stopPropagation(); // Prevent row click event from triggering
+            var jobId = $(this).closest(".job-post-row").data("jobid");
+            // Redirect to the edit job post page using the jobId
+            window.location.href = "/JobPost/Edit/" + jobId;
+        });
+
+        $(".withdraw-job-post-btn").click(function () {
+            var jobPostId = $(this).data("jobpostid");
+            // Set the jobPostId value in the hidden form
+            $("#withdrawJobPostForm input[name='jobPostId']").val(jobPostId);
+        });
+
+        $('#filterSelect').on('change', function () {
+            var selectedFilter = $(this).val();
+            filterRows(selectedFilter);
+        });
+
+        function filterRows(filter) {
+            $('tbody tr').each(function () {
+                var status = $(this).find('td:nth-child(6)').text();
+
+                if (filter === 'all' || status.toLowerCase() === filter.toLowerCase()) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    });
+</script>
+
 }

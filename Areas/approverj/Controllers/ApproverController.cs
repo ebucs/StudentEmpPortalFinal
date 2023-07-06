@@ -7,6 +7,7 @@ using StudentEmploymentPortal.Data;
 using StudentEmploymentPortal.Areas.recruiterj.Models;
 using StudentEmploymentPortal.ViewModels.RecruiterViewModels;
 using StudentEmploymentPortal.Areas.jobpostA.Models;
+using StudentEmploymentPortal.ViewModels;
 
 namespace StudentEmploymentPortal.Areas.approverj.Controllers
 {
@@ -271,6 +272,48 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
             return RedirectToAction("ManageRecruiterJobPosts");
         }
 
+        public IActionResult RecruiterTypeJobPostsGraph()
+        {
+            // Retrieve the earliest and latest dates from the table
+            var earliestDate = _context.JobPost.Min(j => j.StartDate);
+            var latestDate = _context.JobPost.Max(j => j.EndDate);
+
+            // Calculate the start date by subtracting 12 months from the latest date
+            var startDate = latestDate.AddMonths(-12);
+
+            // Retrieve the counts of internal and external job posts within the last 12 months
+            var jobPostCounts = _context.JobPost
+                .Where(j => j.StartDate >= startDate && j.EndDate <= latestDate)
+                .GroupBy(j => j.RecruiterType)
+                .Select(g => new { RecruiterType = g.Key, Count = g.Count() })
+                .ToList();
+
+            // Prepare the data for the chart
+            var labels = new List<string>();
+            var data = new List<int>();
+
+            // If the query returned both internal and external counts, populate the data accordingly
+            foreach (var jobPostCount in jobPostCounts)
+            {
+                if (jobPostCount.RecruiterType == JobPost.EnumRecruiterType.Internal)
+                    labels.Add("Internal");
+                else if (jobPostCount.RecruiterType == JobPost.EnumRecruiterType.External)
+                    labels.Add("External");
+
+                data.Add(jobPostCount.Count);
+            }
+
+            // Create a new instance of BarChartViewModel and populate it with the data and dates
+            var viewModel = new BarChartViewModel
+            {
+                Labels = labels,
+                Data = data,
+                StartDate = startDate,
+                EndDate = latestDate
+            };
+
+            return View(viewModel);
+        }
 
 
     }

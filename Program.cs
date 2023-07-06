@@ -1,3 +1,4 @@
+using Bogus;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddMvc().AddRazorRuntimeCompilation();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+
 
 var app = builder.Build();
 

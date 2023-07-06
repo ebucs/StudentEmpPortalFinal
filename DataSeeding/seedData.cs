@@ -4,6 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using StudentEmploymentPortal.Data;
 using StudentEmploymentPortal.Utility;
 using StudentEmploymentPortal.Areas.Identity;
+using Bogus;
+using Microsoft.EntityFrameworkCore;
+using StudentEmploymentPortal.Areas.jobpostA.Models;
 
 namespace StudentEmploymentPortal.DataSeeding
 {
@@ -21,6 +24,7 @@ namespace StudentEmploymentPortal.DataSeeding
                 await SeedRolesAsync(roleManager);
                 await SeedApproverAsync(userManager);
                 await SeedAdminAsync(userManager);
+                await SeedJobPostsAsync(dbContext);
 
                 // Perform other data seeding if needed
             }
@@ -96,5 +100,76 @@ namespace StudentEmploymentPortal.DataSeeding
                 }
             }
         }
+
+        private static async Task SeedJobPostsAsync(ApplicationDbContext dbContext)
+        {
+            var recruiters = await dbContext.Recruiter.ToListAsync();
+
+            var faker = new Faker();
+
+            var jobPostFaker = new Faker<JobPost>()
+                .RuleFor(j => j.JobTitle, f => f.Name.JobTitle())
+                .RuleFor(j => j.Location, f => f.Address.City())
+                .RuleFor(j => j.JobDescription, f => f.Lorem.Paragraph())
+                .RuleFor(j => j.KeyResponsibilities, f => f.Lorem.Paragraph())
+                .RuleFor(j => j.JobType, f => f.PickRandom<JobPost.EnumJobType>())
+                .RuleFor(j => j.StartDate, f => f.Date.Future())
+                .RuleFor(j => j.EndDate, (f, j) => f.Date.Between(j.StartDate, j.StartDate.AddDays(30)))
+                .RuleFor(j => j.HourlyRate, f => f.Random.Number(10, 50))
+                .RuleFor(j => j.MinRequirements, f => f.Lorem.Paragraph())
+                .RuleFor(j => j.ApplicationInstruction, f => f.Lorem.Paragraph())
+                .RuleFor(j => j.ClosingDate, (f, j) => f.Date.Between(j.StartDate.AddDays(1), j.StartDate.AddDays(10)))
+                .RuleFor(j => j.ContactPerson, f => f.Person.FullName)
+                .RuleFor(j => j.Email, (f, j) => f.Internet.Email(j.ContactPerson))
+                .RuleFor(j => j.ContactNo, f => f.Phone.PhoneNumber())
+                .RuleFor(j => j.ApprovalStatus, JobPost.EnumApprovalStatus.Pending)
+                .RuleFor(j => j.Approved, false)
+                .RuleFor(j => j.RecruiterType, f => f.PickRandom<JobPost.EnumRecruiterType>())
+                .RuleFor(j => j.Faculty, f => f.PickRandom<JobPost.EnumFaculty>())
+                .RuleFor(j => j.Department, f => f.Random.Word())
+                .RuleFor(j => j.PartTimeNumberOfHours, (f, j) =>
+                {
+                    if (j.JobType == JobPost.EnumJobType.PartTime)
+                    {
+                        return f.PickRandom<JobPost.EnumWeekHours>();
+                    }
+                    else
+                    {
+                        return JobPost.EnumWeekHours.None;
+                    }
+                });
+
+            foreach (var recruiter in recruiters)
+            {
+                var jobPostsExist = dbContext.JobPost.Any(j => j.RecruiterId == recruiter.RecruiterId);
+
+                if (!jobPostsExist)
+                {
+                    var jobPosts = jobPostFaker.Generate(10); // Generate 10 fake JobPost instances
+
+                    foreach (var jobPost in jobPosts)
+                    {
+                        jobPost.RecruiterId = recruiter.RecruiterId;
+                        jobPost.YearsOfStudy = new YearsOfStudy
+                        {
+                            IsFirstYear = faker.Random.Bool(),
+                            IsSecondYear = faker.Random.Bool(),
+                            IsThirdYear = faker.Random.Bool(),
+                            IsHonours = faker.Random.Bool(),
+                            IsGraduates = faker.Random.Bool(),
+                            IsMasters = faker.Random.Bool(),
+                            IsPhD = faker.Random.Bool(),
+                            IsPostdoc = faker.Random.Bool()
+                        };
+                    }
+
+                    await dbContext.JobPost.AddRangeAsync(jobPosts);
+                }
+            }
+
+            await dbContext.SaveChangesAsync();
+        }
+
+
     }
 }

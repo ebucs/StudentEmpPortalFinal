@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj": {}
+    "C:\\Users\\User\\Downloads\\StudentEmpPortalFinal-20230705T142533Z-001\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj": {
+    "C:\\Users\\User\\Downloads\\StudentEmpPortalFinal-20230705T142533Z-001\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Downloads\\StudentEmpPortalFinal-20230705T142533Z-001\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
         "projectName": "StudentEmploymentPortal",
-        "projectPath": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
-        "packagesPath": "C:\\Users\\A0079417\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A0079417\\OneDrive - University of Witwatersrand\\Desktop\\STUDENT EMPLOYMENT PORTAL\\StudentEmpPortalFinal\\obj\\",
+        "projectPath": "C:\\Users\\User\\Downloads\\StudentEmpPortalFinal-20230705T142533Z-001\\StudentEmpPortalFinal\\StudentEmploymentPortal.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Downloads\\StudentEmpPortalFinal-20230705T142533Z-001\\StudentEmpPortalFinal\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\A0079417\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -41,6 +46,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Bogus": {
+              "target": "Package",
+              "version": "[34.0.2, )"
+            },
+            "Chart.js": {
+              "target": "Package",
+              "version": "[3.7.1, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.15, )"

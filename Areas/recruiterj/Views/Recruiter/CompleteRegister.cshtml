@@ -14,7 +14,7 @@
 
 
             <div class="form-floating py-2">
-                <label asp-for="Title" class="col-form-label-sm">Title (Mr/Miss/Mrs)</label>
+                <label asp-for="Title" class="col-form-label-sm">Title (Mr/Miss/Mrs/Dr/Etc.)</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
@@ -85,12 +85,16 @@
                 <label class="form-check-label" asp-for="ConfirmDetails">
                     I confirm that the information provided above is true to the best of my knowledge.
                 </label>
+                <span asp-validation-for="ConfirmDetails" class="text-danger"></span>
             </div>
 
             <div class="form-floating py-2">
-                <button type="submit" class="btn btn-primary col-md-12">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>
     </div>
 </div>
-<partial name="_ValidationScriptsPartial" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

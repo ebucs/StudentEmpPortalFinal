@@ -70,7 +70,7 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
 
                             if (StudentApplication != null)
                             {
-                                return RedirectToAction("AddApplicationDocument", "StudentApplication", new { area = "StudentApplicationJ", id = StudentApplication.ApplicationId });
+                                return RedirectToAction("AddApplicationDocument", "StudentApplication", new { area = "StudentApplicationJ", id = StudentApplication.ApplicationId, pageName = "None" });
                             }
                         }
                     }
@@ -82,8 +82,11 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
         }
 
 
-        public IActionResult AddApplicationDocument(string id)
+        public IActionResult AddApplicationDocument(string id, string pageName)
         {
+
+
+            ViewData["pageName"] = pageName;
             ViewData["ApplicationId"] = id;
             return View();
         }
@@ -136,7 +139,7 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
 
 
 
-        public async Task<IActionResult> PartialStudentApplicationDetails(string id)
+        public async Task<IActionResult> PartialStudentApplicationDetails(string id, string studentApplicationStatus)
         {
             var jobPostId = await _context.StudentApplication
                        .Where(y => y.ApplicationId == id)
@@ -162,7 +165,8 @@ namespace StudentEmploymentPortal.Areas.studentApplicationJ.Controllers
 
 
             };
-
+            ViewData["studentApplicationId"] = id;
+            ViewData["studentApplicationStatus"] = studentApplicationStatus;
             return PartialView(viewModel);
 
         }

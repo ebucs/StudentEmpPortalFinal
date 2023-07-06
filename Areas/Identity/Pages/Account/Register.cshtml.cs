@@ -106,7 +106,7 @@ namespace StudentEmploymentPortal.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             //extras
-            [Required(ErrorMessage = "First name is required.")]
+            [Required(ErrorMessage = "First Name is required.")]
             [MaxLength(50)]
             public string FirstName { get; set; }
 
@@ -117,7 +117,9 @@ namespace StudentEmploymentPortal.Areas.Identity.Pages.Account
             
             public string Telephone { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Phone Number field required")]
+            [MaxLength(10)]
+            [RegularExpression(@"^(?:\+27|0)[1-9]\d{8}$", ErrorMessage = "Invalid Phone Number.")]
             public string PhoneNumber { get; set; }
 
             public string Address { get; set; }

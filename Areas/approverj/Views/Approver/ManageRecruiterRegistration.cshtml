@@ -10,8 +10,16 @@
 
 <form method="post" action="">
     <div class="input-group mb-3">
-        <label class="sr-only" for="searchInput">Search</label>
-        <input class="form-control" type="text" name="search" id="searchInput" placeholder="Search">
+        <label class="sr-only" for="filterSelect">Filter By:</label>
+        <div class="input-group-prepend">
+            <span class="input-group-text">Filter By:</span>
+        </div>
+        <select class="form-control" id="filterSelect">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+        </select>
     </div>
 </form>
 
@@ -55,4 +63,27 @@
 else
 {
     <p>No pending registrations found.</p>
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#filterSelect').on('change', function () {
+                var selectedFilter = $(this).val();
+                filterRows(selectedFilter);
+            });
+
+            function filterRows(filter) {
+                $('tbody tr').each(function () {
+                    var status = $(this).find('td:nth-child(5)').text();
+
+                    if (filter === 'all' || status.toLowerCase() === filter.toLowerCase()) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+    </script>
 }

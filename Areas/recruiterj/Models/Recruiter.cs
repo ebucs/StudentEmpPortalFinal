@@ -11,12 +11,15 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Models
         [Key, ForeignKey(nameof(User))]
         public string RecruiterId { get; set; }
 
+        [Display(Name = "Titel")]
         [Required(ErrorMessage = "Title is required.")]
         public string Title { get; set; }
 
+        [Display(Name = "Job Title")]
         [Required(ErrorMessage = "Job title is required.")]
         public string JobTitle { get; set; }
 
+        [Display(Name = "Registration Number")]
         [Required(ErrorMessage = "Registration number is required.")]
         public string RegistrationNumber { get; set; }
 
@@ -29,9 +32,11 @@ namespace StudentEmploymentPortal.Areas.recruiterj.Models
         [Required(ErrorMessage = "Business type is required.")]
         public string BusinessType { get; set; }
 
-        [Required(ErrorMessage = "Registered address is required.")]
+        [Required(ErrorMessage = "Registered Address is required.")]
         public string RegisteredAddress { get; set; }
 
+        [Display(Name = "Confirm Details")]
+        [Required(ErrorMessage ="Must accept that your information is entered correctly")]
         public bool ConfirmDetails { get; set; }
 
         public bool Approved { get; set; }

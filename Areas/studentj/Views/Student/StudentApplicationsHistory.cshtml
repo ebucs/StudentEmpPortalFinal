@@ -32,14 +32,21 @@
             <tbody>
                 @foreach (var studentApplication in Model)
                 {
-                    <tr onclick="openPartialView('@Url.Action("PartialStudentApplicationDetails", "StudentApplication", new { area = "StudentApplicationJ", id = studentApplication.StudentApplicationiId })')">
+                    <tr onclick="openPartialView('@Url.Action("PartialStudentApplicationDetails", "StudentApplication", new { area = "StudentApplicationJ", id = studentApplication.StudentApplicationiId , studentApplicationStatus = studentApplication.StudentApplicationStatus})')">
 
                         <td>@studentApplication.JobTitle</td>
                         <td>@studentApplication.Department</td>
                         <td>@studentApplication.JobType</td>
                         <td>@studentApplication.StartDate.ToString("MM/dd/yyyy")</td>
                         <td>@studentApplication.EndDate.ToString("MM/dd/yyyy")</td>
-                        <td>@studentApplication.StudentApplicationStatus</td>
+                        @if (studentApplication.StudentApplicationStatus.ToString() == "Application Incomplete")
+                        {
+                            <td class="text-danger">@studentApplication.StudentApplicationStatus</td>
+                        }
+                        else
+                        {
+                            <td>@studentApplication.StudentApplicationStatus</td>
+                        }
                     </tr>
                 }
             </tbody>

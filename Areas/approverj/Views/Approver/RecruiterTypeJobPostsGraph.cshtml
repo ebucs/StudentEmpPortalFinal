@@ -1,0 +1,55 @@
+﻿@model StudentEmploymentPortal.ViewModels.BarChartViewModel
+
+<h2>Job Posts by Recruiter Type</h2>
+
+<p>Start Date: @Model.StartDate.ToShortDateString()</p>
+<p>End Date: @Model.EndDate.ToShortDateString()</p>
+
+<canvas id="jobPostChart"></canvas>
+
+@section scripts {
+    <script>
+        // Get the data from the model
+        var labels = @Html.Raw(Json.Serialize(Model.Labels));
+        var data = @Html.Raw(Json.Serialize(Model.Data));
+
+        // Create the chart
+        var ctx = document.getElementById('jobPostChart').getContext('2d');
+        var chartData = {
+            labels: labels,
+            datasets: [{
+                label: 'View Data',
+                data: data,
+                backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'], // Set different colors for internal and external
+                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'], // Set different border colors for internal and external
+                borderWidth: 1
+            }]
+        };
+
+        // Wait for the document to load before creating the chart
+        document.addEventListener('DOMContentLoaded', function () {
+            new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Recruiter Type' // X-axis label
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            precision: 0,
+                            title: {
+                                display: true,
+                                text: 'Number of Job Posts' // Y-axis label
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

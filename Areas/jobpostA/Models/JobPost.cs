@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentEmploymentPortal.Areas.recruiterj.Models;
-
+using System.ComponentModel;
 
 namespace StudentEmploymentPortal.Areas.jobpostA.Models
 {
@@ -39,8 +39,8 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
         [Required(ErrorMessage = "Location field is required.")]
         public string Location { get; set; }
 
+        [Required(ErrorMessage = "Job Description is required.")]
         [Display(Name = "Job Description")]
-        [Required(ErrorMessage = "Job Description field is required.")]
         public string JobDescription { get; set; }
 
         [Required(ErrorMessage = "Key Responsibilities field is required.")]
@@ -49,8 +49,12 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
         [Required(ErrorMessage = "Full time or Part time field is required.")]
         public EnumJobType JobType { get; set; }
 
+        //[Required(ErrorMessage = "Part time number of hours field is required.")]
+        //public EnumWeekHours? PartTimeNumberOfHours { get; set; }
+
         [Required(ErrorMessage = "Part time number of hours field is required.")]
-        public EnumWeekHours? PartTimeNumberOfHours { get; set; }
+        public EnumWeekHours PartTimeNumberOfHours { get; set; }
+
 
         [Required(ErrorMessage = "Start date field is required.")]
         [Column(TypeName = "Date")]
@@ -60,7 +64,8 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
         [Column(TypeName = "Date")]
         public DateTime EndDate { get; set; }
 
-        [Required(ErrorMessage = "Hourly Rate field is required.")]
+        [Required(ErrorMessage = "{0} field is required.")]
+        [Display(Name = "Hourly Rate")]
         public int HourlyRate { get; set; }
 
         [Required(ErrorMessage = "Nationality field is required.")]
@@ -82,7 +87,9 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
         [Required(ErrorMessage = "Email field is required.")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Contact No field is required.")]
+        [Required(ErrorMessage = "Contact Number field required")]
+        //[MaxLength(10)]
+        //[RegularExpression(@"^(?:\+27|0)[1-9]\d{8}$", ErrorMessage = "Invalid Phone Number.")]
         public string ContactNo { get; set; }
 
         public EnumApprovalStatus ApprovalStatus { get; set; }
@@ -171,6 +178,7 @@ namespace StudentEmploymentPortal.Areas.jobpostA.Models
 
         public enum EnumFaculty
         {
+            [Display(Name = "")]
             NA,
             [Display(Name = "Commerce, Law and Management")]
             CommerceLawAndManagement,

@@ -866,6 +866,13 @@ namespace StudentEmploymentPortal.Areas.studentj.Controllers
                     .Select(a => a.ApplicationId)
                     .FirstOrDefaultAsync();
 
+                var applicationDocument = await _context.ApplicationDocument.FirstOrDefaultAsync(s => s.StudentApplicationId == applicationId);
+
+
+                if (applicationDocument == null)
+                {
+                    studentApplicationStatus = "Application Incomplete";
+                }
 
 
                 var viewModel = new StudentApplicationsHistory

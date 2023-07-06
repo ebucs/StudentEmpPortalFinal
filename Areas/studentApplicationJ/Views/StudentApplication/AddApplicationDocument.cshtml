@@ -52,7 +52,22 @@
             <div class="d-flex">
                 <input type="hidden" name="ApplicationId" value="@ViewData["ApplicationId"]" />
                 <button type="submit" class="btn btn-primary">Upload All</button>
-                <button type="button" class="btn btn-danger close-button ms-2" onclick="navigateToView()">Cancel</button>
+
+               
+                @if (ViewData["pageName"].ToString() == "StudentpplicationHistory")
+                {
+
+                    <a class="btn btn-danger close-button ms-2"
+                       asp-controller="Student"
+                       asp-action="StudentApplicationsHistory"
+                       asp-area="StudentJ">Upload later</a>
+                }
+                else
+                {
+                   
+                    <button type="button" class="btn btn-danger close-button ms-2" onclick="navigateToView()">Upload later</button>
+                }
+               
             </div>
         </div>
     </div>

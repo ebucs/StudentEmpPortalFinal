@@ -73,6 +73,16 @@
     <div class="input-fields">
         <!-- Add a submit button to save the changes -->
         <div class="button-container">
+        @if (ViewData["studentApplicationStatus"].ToString() == "Application Incomplete")
+        {
+
+                <a class="btn btn-success close-button"
+                   asp-controller="StudentApplication"
+                   asp-action="AddApplicationDocument"
+                   asp-area="StudentApplicationJ"
+                   asp-route-id="@ViewData["studentApplicationId"]"
+                   asp-route-pageName="StudentpplicationHistory">Upload Documents</a>
+        }
 
             <button class="btn btn-danger close-button" asp-controller="Student" asp-action="StudentApplicationsHistory" asp-area="StudentJ">Close</button>
         </div>
