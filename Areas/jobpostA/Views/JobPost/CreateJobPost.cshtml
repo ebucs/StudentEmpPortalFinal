@@ -5,12 +5,13 @@
     var tradingName = ViewBag.TradingName;
 }
 
-<h1 class="pt-4">@ViewData["Title"]</h1>
 
-<hr class="col-md-7" />
 
 <div class="row pt-4">
-    <div class="col-md-7">
+    <div class="col-md-8 mx-auto section-content">
+        <h1 class="pt-4 text-center">@ViewData["Title"]</h1>
+
+        <hr />
         <form id="jobPostForm" method="post" asp-controller="JobPost" asp-action="SaveJobPost">
             @Html.AntiForgeryToken()
 
@@ -165,7 +166,7 @@
                 <span asp-validation-for="ContactNo" class="text-danger"></span>
             </div>
 
-            <div class="pt-3">
+            <div class="d-flex justify-content-between mt-4">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-controller="Recruiter" asp-action="RecruiterDashboard" asp-area="RecruiterJ" class="btn btn-danger">Cancel</a>
             </div>

@@ -3,12 +3,13 @@
     ViewData["Title"] = "Complete Registration For Approval";
 }
 
-<h1 class="pt-4">@ViewData["Title"]</h1>
 
-<hr class="col-md-7" />
 
 <div class="row pt-4">
-    <div class="col-md-7">
+    <div class="col-md-8 mx-auto section-content">
+        <h1 class="pt-4">@ViewData["Title"]</h1>
+
+        <hr  />
         <form id="registerForm" method="post" asp-controller="Recruiter" asp-action="SaveRecruiter">
             @Html.AntiForgeryToken()
 

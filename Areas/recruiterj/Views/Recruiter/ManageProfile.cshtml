@@ -3,12 +3,11 @@
     ViewData["Title"] = "Update Profile";
 }
 
-<h1 class="pt-4">@ViewData["Title"]</h1>
-
-<hr class="col-md-7" />
-
 <div class="row pt-4">
-    <div class="col-md-7">
+    <div class="col-md-8 mx-auto section-content">
+        <h1 class="pt-4">@ViewData["Title"]</h1>
+
+        <hr  />
         <form id="updateform" method="post" asp-controller="Recruiter" asp-action="ManageProfile">
             @Html.AntiForgeryToken()
 
@@ -93,8 +92,12 @@
                 <span asp-validation-for="BusinessType" class="text-danger"></span>
             </div>
 
-            <div class="form-floating py-2">
-                <button type="submit" class="btn btn-primary col-md-12">Save</button>
+            <div class="form-floating py-2 d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary ">Save</button>
+                <a class="btn btn-danger close-button ms-2"
+                   asp-controller="Recruiter"
+                   asp-action="RecruiterDashboard"
+                   asp-area="RecruiterJ">Cancel</a>
             </div>
         </form>
     </div>

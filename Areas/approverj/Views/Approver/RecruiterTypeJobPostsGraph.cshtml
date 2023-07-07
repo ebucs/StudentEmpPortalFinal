@@ -2,41 +2,45 @@
 
 <h2>Job Posts by Recruiter Type</h2>
 
-<p>Start Date: @Model.StartDate.ToShortDateString()</p>
-<p>End Date: @Model.EndDate.ToShortDateString()</p>
+<p>Start Date: @Model.StartDate?.ToShortDateString()</p>
+<p>End Date: @Model.EndDate?.ToShortDateString()</p>
 
 <canvas id="jobPostChart"></canvas>
 
+<h2>Hourly Rates by Department</h2>
+
+<canvas id="hourlyRatesChart"></canvas>
+
 @section scripts {
     <script>
-        // Get the data from the model
-        var labels = @Html.Raw(Json.Serialize(Model.Labels));
-        var data = @Html.Raw(Json.Serialize(Model.Data));
+        // Get the data for the job posts chart from the model
+        var recruiterTypeLabels = @Html.Raw(Json.Serialize(Model.RecruiterTypeLabels));
+        var recruiterTypeData = @Html.Raw(Json.Serialize(Model.RecruiterTypeData));
 
-        // Create the chart
-        var ctx = document.getElementById('jobPostChart').getContext('2d');
-        var chartData = {
-            labels: labels,
+        // Create the job posts chart
+        var ctx1 = document.getElementById('jobPostChart').getContext('2d');
+        var jobPostChartData = {
+            labels: recruiterTypeLabels,
             datasets: [{
                 label: 'View Data',
-                data: data,
+                data: recruiterTypeData,
                 backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'], // Set different colors for internal and external
                 borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'], // Set different border colors for internal and external
                 borderWidth: 1
             }]
         };
 
-        // Wait for the document to load before creating the chart
+        // Wait for the document to load before creating the job posts chart
         document.addEventListener('DOMContentLoaded', function () {
-            new Chart(ctx, {
+            new Chart(ctx1, {
                 type: 'bar',
-                data: chartData,
+                data: jobPostChartData,
                 options: {
                     scales: {
                         x: {
                             title: {
                                 display: true,
-                                text: 'Recruiter Type' // X-axis label
+                                text: 'Recruiter Type' // X-axis label for job posts chart
                             }
                         },
                         y: {
@@ -44,7 +48,50 @@
                             precision: 0,
                             title: {
                                 display: true,
-                                text: 'Number of Job Posts' // Y-axis label
+                                text: 'Number of Job Posts' // Y-axis label for job posts chart
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Get the data for the hourly rates chart from the model
+        var hourlyRatesLabels = @Html.Raw(Json.Serialize(Model.HourlyRatesLabels));
+        var hourlyRatesData = @Html.Raw(Json.Serialize(Model.HourlyRatesData));
+
+        // Create the hourly rates chart
+        var ctx2 = document.getElementById('hourlyRatesChart').getContext('2d');
+        var hourlyRatesChartData = {
+            labels: hourlyRatesLabels,
+            datasets: [{
+                label: 'View Data',
+                data: hourlyRatesData,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Wait for the document to load before creating the hourly rates chart
+        document.addEventListener('DOMContentLoaded', function () {
+            new Chart(ctx2, {
+                type: 'bar',
+                data: hourlyRatesChartData,
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Department' // X-axis label for hourly rates chart
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            precision: 0,
+                            title: {
+                                display: true,
+                                text: 'Average Hourly Rate' // Y-axis label for hourlyrates chart
                             }
                         }
                     }

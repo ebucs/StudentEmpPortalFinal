@@ -272,6 +272,7 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
             return RedirectToAction("ManageRecruiterJobPosts");
         }
 
+      
         public IActionResult RecruiterTypeJobPostsGraph()
         {
             // Retrieve the earliest and latest dates from the table
@@ -288,26 +289,45 @@ namespace StudentEmploymentPortal.Areas.approverj.Controllers
                 .Select(g => new { RecruiterType = g.Key, Count = g.Count() })
                 .ToList();
 
-            // Prepare the data for the chart
-            var labels = new List<string>();
-            var data = new List<int>();
+            // Prepare the data for the recruiter type chart
+            var recruiterTypeLabels = new List<string>();
+            var recruiterTypeData = new List<int>();
 
             // If the query returned both internal and external counts, populate the data accordingly
             foreach (var jobPostCount in jobPostCounts)
             {
                 if (jobPostCount.RecruiterType == JobPost.EnumRecruiterType.Internal)
-                    labels.Add("Internal");
+                    recruiterTypeLabels.Add("Internal");
                 else if (jobPostCount.RecruiterType == JobPost.EnumRecruiterType.External)
-                    labels.Add("External");
+                    recruiterTypeLabels.Add("External");
 
-                data.Add(jobPostCount.Count);
+                recruiterTypeData.Add(jobPostCount.Count);
             }
 
-            // Create a new instance of BarChartViewModel and populate it with the data and dates
+            // Retrieve the distinct departments from the table
+            var departments = _context.JobPost.Select(j => j.Department).Distinct().ToList();
+
+            // Prepare the data for the hourly rates by department chart
+            var hourlyRatesLabels = departments;
+            var hourlyRatesData = new List<int>();
+
+            foreach (var department in departments)
+            {
+                // Calculate the average hourly rate for each department
+                var averageHourlyRate = _context.JobPost
+                    .Where(j => j.Department == department)
+                    .Average(j => j.HourlyRate);
+
+                hourlyRatesData.Add((int)averageHourlyRate);
+            }
+
+            // Create a new instance of the combined view model and populate it with the data
             var viewModel = new BarChartViewModel
             {
-                Labels = labels,
-                Data = data,
+                RecruiterTypeLabels = recruiterTypeLabels,
+                RecruiterTypeData = recruiterTypeData,
+                HourlyRatesLabels = hourlyRatesLabels,
+                HourlyRatesData = hourlyRatesData,
                 StartDate = startDate,
                 EndDate = latestDate
             };
